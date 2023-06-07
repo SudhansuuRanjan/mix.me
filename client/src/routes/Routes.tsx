@@ -1,13 +1,10 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Artists, Profile, Playlists, Recent, Track, Playlist, Artist, Recommendations } from '../pages';
+import { Artists, Profile, Playlists, Recent, Track,Tracks, Playlist, Artist, Recommendations } from '../pages';
 import NavBar from '../components/NavBar';
 
-interface AppRoutesProps {
 
-}
-
-const AppRoutes: FunctionComponent<AppRoutesProps> = () => {
+const AppRoutes: FunctionComponent = () => {
     return (
         <Router>
             <div className='flex lg:flex-row md:flex-row flex-col-reverse'>
@@ -18,7 +15,8 @@ const AppRoutes: FunctionComponent<AppRoutesProps> = () => {
                         <Route path="/recent" element={<Recent />} />
                         <Route path="/playlists" element={<Playlists />} />
                         <Route path="/playlists/:playlistId" element={<Playlist />} />
-                        <Route path="/tracks/:trackId" element={<Track />} />
+                        <Route path="/track/:trackId" element={<Track />} />
+                        <Route path="/tracks" element={<Tracks />} />
                         <Route path="/artists" element={<Artists />} />
                         <Route path="/artists/:artistId" element={<Artist />} />
                         <Route path="/recommendations/:playlistId" element={<Recommendations />} />

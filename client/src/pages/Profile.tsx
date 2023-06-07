@@ -38,7 +38,7 @@ const Profile: FunctionComponent = () => {
                             <img src={user.images[0].url} className="h-36 w-36 rounded-full" alt="Avatar" />
                         </div>
                         <div className="text-center">
-                            <a href={`https://open.spotify.com/user/${user.id}`} target="_blank"><p className="text-5xl font-black my-3 hover:text-green-500">{user.display_name}</p></a>
+                            <a href={`https://open.spotify.com/user/${user.id}`} target="_blank"><p className="lg:text-5xl md:text-4xl text-3xl font-black my-3 hover:text-green-500">{user.display_name}</p></a>
                             <div className="flex justify-center gap-6 items-center mt-3">
                                 <div>
                                     <p className="text-xl font-semibold text-green-500">{user.followers.total}</p>
@@ -67,25 +67,25 @@ const Profile: FunctionComponent = () => {
 
                     {/* Top Tracks */}
 
-                    <div className="m-auto w-full px-16 my-16">
+                    <div className="m-auto w-full lg:px-16 md:px-16 px-5 my-16">
                         <div className="flex justify-between">
                             <div>
-                                <p className="text-2xl font-semibold">Top Tracks</p>
+                                <p className="lg:text-2xl md:text-2xl text-xl font-semibold">Top Tracks</p>
                                 <p className="text-gray-400">Your top tracks of all time</p>
                             </div>
                             <Link to="/tracks">
-                                <button className="text-white border px-6 py-2 rounded-full text-xs hover:text-black hover:bg-white">
+                                <button className="text-white border px-5 py-2 rounded-full text-xs hover:text-black hover:bg-white">
                                     SEE MORE
                                 </button>
                             </Link>
                         </div>
 
-                        <div className="flex flex-wrap gap-10 my-10">
+                        <div className="flex flex-wrap lg:gap-10 md:gap-8 gap-5 my-10">
                             {topTracks && topTracks.items.slice(0, 12).map((track: any, i: number) => (
                                 <Link key={i} to={`/track/${track.id}`}>
-                                    <div key={i} className=" w-44">
+                                    <div key={i} className=" lg:w-44 md:w-44 w-40">
                                         <div className="track-card">
-                                            <img src={track.album.images[1] ? track.album.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="h-44 w-44 rounded-md" alt="Album Cover" />
+                                            <img src={track.album.images[1] ? track.album.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="lg:h-44 md:h-44 h-40 lg:w-44 md:w-44 w-40 rounded-md" alt="Album Cover" />
                                         </div>
                                         <p className="text-base font-semibold mt-2">{i + 1 + ". " + (track.name ? track.name : 'Track Unavailable')}</p>
                                         <p className="text-sm text-gray-400">{track.artists.length > 0 ? track.artists.map((artist: any, i: number) => (
@@ -101,7 +101,7 @@ const Profile: FunctionComponent = () => {
 
                     {/* Top Artists */}
 
-                    <div className="m-auto w-full px-16 my-16">
+                    <div className="m-auto w-full lg:px-16 md:px-16 px-5 my-16">
                         <div className="flex justify-between">
                             <div>
                                 <p className="text-2xl font-semibold">Top Artists</p>
@@ -114,12 +114,12 @@ const Profile: FunctionComponent = () => {
                             </Link>
                         </div>
 
-                        <div className="flex flex-wrap gap-10 my-10">
+                        <div className="flex flex-wrap lg:gap-10 md:gap-8 gap-5 my-10">
                             {topArtists && topArtists.items.slice(0, 12).map((artist: any, i: number) => (
                                 <Link key={i} to={`/artist/${artist.id}`}>
-                                    <div className=" w-44">
+                                    <div className="lg:w-44 md:w-44 w-40">
                                         <div className="artist-card">
-                                            <img src={artist.images[1] ? artist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="h-44 w-44 rounded-full" alt="Album Cover" />
+                                            <img src={artist.images[1] ? artist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="lg:h-44 md:h-44 h-40 lg:w-44 md:w-44 w-40 rounded-full" alt="Album Cover" />
                                         </div>
                                         <p className="text-lg text-center font-semibold mt-3">{i + 1 + ". " + (artist.name ? artist.name : 'Artist Unavailable')}</p>
                                         <p className="text-xs mt-2 text-center text-gray-500">{artist.genres.length > 0 ? artist.genres.map((genre: any, i: number) => (
@@ -134,7 +134,7 @@ const Profile: FunctionComponent = () => {
 
                     {/* Playlists */}
 
-                    <div className="m-auto w-full px-16 my-16">
+                    <div className="m-auto w-full lg:px-16 md:px-16 px-5 my-16">
                         <div className="flex justify-between">
                             <div>
                                 <p className="text-2xl font-semibold">Playlists</p>
@@ -147,12 +147,12 @@ const Profile: FunctionComponent = () => {
                             </Link>
                         </div>
 
-                        <div className="flex flex-wrap gap-10 my-10">
+                        <div className="flex flex-wrap lg:gap-10 md:gap-8 gap-5 my-10">
                             {playlists && playlists.items.slice(0, 10).map((playlist: any, i: number) => (
-                                <div key={i} className="w-52">
+                                <div key={i} className="lg:w-52 md:w-52 w-44">
                                     <Link to={`/playlist/${playlist.id}`}>
                                         <div className="track-card">
-                                            <img src={playlist.images[0].url ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="h-52 w-52 rounded-md" alt="Album Cover" />
+                                            <img src={playlist.images[0].url ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="lg:h-52 md:h-52 h-44 lg:w-52 md:w-52 w-44 rounded-md" alt="Album Cover" />
                                         </div>
                                     </Link>
                                     <p className="text-base font-semibold mt-2">{(playlist.name ? playlist.name : 'Playlist Unavailable')}</p>
