@@ -1,4 +1,11 @@
-const generateRandomString = (length: number) => {
+/**
+ * @param length generate random string of length n
+ * @returns random string
+ * @description generates a random string of length n
+ * @example generateRandomString(16) // returns "X6xs5f8s5f8s5f8s"
+ * @example generateRandomString(32) // returns "X6xs5f8s5f8s5f8s5f8s5f8s5f8s5f8s"
+ */
+export const generateRandomString = (length: number) => {
     let result = '';
     const characters =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -9,5 +16,3 @@ const generateRandomString = (length: number) => {
 
     return result;
 }
-
-export { generateRandomString };

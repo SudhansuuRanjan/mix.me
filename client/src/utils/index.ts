@@ -28,10 +28,11 @@ export const getHashParams = (): { [key: string]: string } => {
  * @returns formatted number
  */
 export const formatDuration = (millis: number): string => {
-    const minutes: number = Math.floor(millis / 60000);
-    const seconds: string = ((millis % 60000) / 1000).toFixed(0);
-    return `${minutes}:${seconds < '10' ? '0' : ''}${seconds}`;
+  const minutes: number = Math.floor(millis / 60000);
+  const seconds: string = ((millis % 60000) / 1000).toFixed(0).padStart(2, '0');
+  return `${minutes}:${seconds}`;
 };
+
 
 
 /**
@@ -126,3 +127,23 @@ export const catchErrors = (fn: any) =>
             console.error(err);
         });
     };
+
+
+export function getRelativeTime(timestamp: string) {
+    var currentTime: any = new Date();
+    var previousTime: any = new Date(timestamp);
+    var elapsed = Math.floor((currentTime - previousTime) / 1000); // Elapsed time in seconds
+
+    if (elapsed < 60) {
+        return elapsed + ' sec ago';
+    } else if (elapsed < 3600) {
+        var minutes = Math.floor(elapsed / 60);
+        return minutes + ' min ago';
+    } else if (elapsed < 86400) {
+        var hours = Math.floor(elapsed / 3600);
+        return hours + ' hrs ago';
+    } else {
+        var days = Math.floor(elapsed / 86400);
+        return days + ' days ago';
+    }
+}
