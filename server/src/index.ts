@@ -152,3 +152,5 @@ app.get('/refresh_token', (req: Request, res: Response) => {
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT} 🚀.`);
 });
+
+export default app;
