@@ -4,42 +4,42 @@
 
 @font-face {
     font-family: "Circular Std";
-    src: url("./fonts/CircularStd-Book.woff"),
+    src: url("./fonts/CircularStd-Book.woff") format('woff');
 }
 
 @font-face {
     font-family: "Circular Std";
-    src: url("./fonts/CircularStd-Book.woff2"),
+    src: url("./fonts/CircularStd-Book.woff2") format('woff2');
 }
 
 @font-face {
     font-family: "Circular Std";
-    src: url("./fonts/CircularStd-Black.woff"),
+    src: url("./fonts/CircularStd-Black.woff") format('woff');
 }
 
 @font-face {
     font-family: "Circular Std";
-    src: url("./fonts/CircularStd-Black.woff2"),
+    src: url("./fonts/CircularStd-Black.woff2") format('woff2');
 }
 
 @font-face {
     font-family: "Circular Std";
-    src: url("./fonts/CircularStd-Bold.woff"),
+    src: url("./fonts/CircularStd-Bold.woff") format('woff');
 }
 
 @font-face {
     font-family: "Circular Std";
-    src: url("./fonts/CircularStd-Bold.woff2"),
+    src: url("./fonts/CircularStd-Bold.woff2") format('woff2');
 }
 
 @font-face {
     font-family: "Circular Std";
-    src: url("./fonts/CircularStd-Medium.woff"),
+    src: url("./fonts/CircularStd-Medium.woff") format('woff');
 }
 
 @font-face {
     font-family: "Circular Std";
-    src: url("./fonts/CircularStd-Medium.woff2");
+    src: url("./fonts/CircularStd-Medium.woff2") format('woff2');
 }
 
 * {
