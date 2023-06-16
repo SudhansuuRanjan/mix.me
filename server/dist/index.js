@@ -88,7 +88,7 @@ app.get('/callback', (req, res) => {
                     console.log(body);
                 });
                 // The access token allows you to make requests to the Spotify API’s endpoints on the user’s behalf.
-                res.redirect('http://localhost:5173/#' +
+                res.redirect(`${process.env.FRONTEND_URL}/#` +
                     querystring_1.default.stringify({
                         access_token: access_token,
                         refresh_token: refresh_token
