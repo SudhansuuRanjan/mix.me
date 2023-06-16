@@ -32,7 +32,7 @@ const Recommendations: FunctionComponent = () => {
             const { data: playlst } = await createPlaylist(userId, prompt("Enter a name for your new playlist") ?? `Recommended Songs for ${playlist.name}`);
             const playlstId = playlst.id;
             const trackUris = recommendations.map(({ uri }: any) => uri);
-            const { data: snapshot_id } = await addTracksToPlaylist(playlstId, trackUris);
+            await addTracksToPlaylist(playlstId, trackUris);
             setNewPlaylist(playlstId);
             alert("Playlist created successfully!");
             navigate(`/playlist/${playlstId}`);
