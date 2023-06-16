@@ -2,11 +2,13 @@ import { FunctionComponent} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Artists, Profile, Playlists, Recent, Track,Tracks, Playlist, Artist, Recommendations, Album, LikedSongs } from '../pages';
 import NavBar from '../components/NavBar';
+import ScrollToTop from '../hooks/useScrollToTop';
 
 
 const AppRoutes: FunctionComponent = () => {
     return (
         <Router>
+            <ScrollToTop />
             <div className='flex lg:flex-row md:flex-row flex-col-reverse'>
                <div className='w-24'><NavBar /></div> 
                 <div className='w-full'>
