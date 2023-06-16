@@ -34,7 +34,7 @@ const Track: FunctionComponent = () => {
                     </div>
                     <div>
                         <p className="lg:text-4xl md:text-3xl text-2xl font-bold">{track.name}</p>
-                        <p className="lg:text-2xl text-xl font-semibold text-gray-400 lg:my-3 md:my-2 my-1">By {track.album.artists.map((artist: any, i: number) => (
+                        <p className="lg:text-xl text-xl font-semibold text-gray-400 lg:my-3 md:my-2 my-1">By {track.album.artists.map((artist: any, i: number) => (
                             <React.Fragment key={artist.id}>
                                 {i > 0 && ', '}
                                 <Link className="hover:underline text-gray-400 hover:text-green-500" to={`/artist/${artist.id}`}>

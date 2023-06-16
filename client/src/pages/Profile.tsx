@@ -37,7 +37,7 @@ const Profile: FunctionComponent = () => {
                             <img src={user.images[0].url} className="h-36 w-36 rounded-full" alt="Avatar" />
                         </div>
                         <div className="text-center">
-                            <a href={`https://open.spotify.com/user/${user.id}`} target="_blank"><p className="lg:text-5xl md:text-4xl text-3xl font-black my-3 hover:text-green-500">{user.display_name}</p></a>
+                            <a href={`https://open.spotify.com/user/${user.id}`} target="_blank"><p className="lg:text-5xl md:text-4xl text-3xl font-bold my-3 hover:text-green-500">{user.display_name}</p></a>
                             <div className="flex justify-center gap-6 items-center mt-3">
                                 <div>
                                     <p className="text-xl font-semibold text-green-500">{user.followers.total}</p>
