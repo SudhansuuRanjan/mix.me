@@ -79,7 +79,7 @@ const Profile: FunctionComponent = () => {
                             </Link>
                         </div>
 
-                        <div className="flex flex-wrap items-center justify-center lg:gap-10 md:gap-8 gap-7 my-10">
+                        <div className="flex flex-wrap items-center justify-evenly lg:gap-10 md:gap-8 gap-7 my-10">
                             {topTracks && topTracks.slice(0, 12).map((track: any, i: number) => (
                                 <Link key={i} to={track.name ? `/track/${track.id}` : ''}>
                                     <div key={i} className=" lg:w-44 md:w-44 w-40">
@@ -113,7 +113,7 @@ const Profile: FunctionComponent = () => {
                             </Link>
                         </div>
 
-                        <div className="flex flex-wrap justify-center items-center lg:gap-10 md:gap-8 gap-7 my-10">
+                        <div className="flex flex-wrap justify-evenly items-center lg:gap-10 md:gap-8 gap-7 my-10">
                             {topArtists && topArtists.items.slice(0, 12).map((artist: any, i: number) => (
                                 <Link key={i} to={`/artist/${artist.id}`}>
                                     <div className="lg:w-44 md:w-44 w-40">
@@ -146,7 +146,7 @@ const Profile: FunctionComponent = () => {
                             </Link>
                         </div>
 
-                        <div className="flex flex-wrap justify-center items-center lg:gap-10 md:gap-8 gap-7 my-10">
+                        <div className="flex flex-wrap justify-evenly items-center lg:gap-10 md:gap-8 gap-7 my-10">
                             {playlists && playlists.items.slice(0, 10).map((playlist: any, i: number) => (
                                 <div key={i} className="lg:w-52 md:w-52 w-40">
                                     <Link to={`/playlist/${playlist.id}`}>
