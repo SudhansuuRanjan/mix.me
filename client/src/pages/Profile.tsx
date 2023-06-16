@@ -81,7 +81,7 @@ const Profile: FunctionComponent = () => {
 
                         <div className="flex flex-wrap items-center justify-center lg:gap-10 md:gap-8 gap-7 my-10">
                             {topTracks && topTracks.slice(0, 12).map((track: any, i: number) => (
-                                <Link key={i} to={`/track/${track.id}`}>
+                                <Link key={i} to={track.name ? `/track/${track.id}` : ''}>
                                     <div key={i} className=" lg:w-44 md:w-44 w-40">
                                         <div className="track-card">
                                             <img src={track.album.images[1] ? track.album.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="lg:h-44 md:h-44 h-40 lg:w-44 md:w-44 w-40 rounded-md" alt="Album Cover" />

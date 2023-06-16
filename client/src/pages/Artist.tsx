@@ -82,7 +82,7 @@ const Artist: FunctionComponent = () => {
                 <div className="m-auto w-full lg:px-24 md:px-12 px-6 my-16 text-white">
                     <div className="flex items-center justify-center flex-col">
                         <img src={artist.images[0].url} alt={artist.name} className="lg:h-64 md:h-52 w-48 lg:w-64 md:w-52 h-48 rounded-full" />
-                        <a href={artist.external_urls.spotify} target="_blank" className="lg:text-6xl md:text-5xl text-4xl font-black my-7 hover:text-green-500">{artist.name}</a>
+                        <a href={artist.external_urls.spotify} target="_blank" className="lg:text-6xl md:text-5xl text-4xl font-bold my-7 hover:text-green-500">{artist.name}</a>
                         <div className="mb-7">
                             <button onClick={handleFollow} className="text-white border px-9 py-2.5 rounded-full text-sm hover:text-black hover:bg-white">
                                 {
