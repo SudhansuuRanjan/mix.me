@@ -96,3 +96,9 @@
     cursor: pointer;
     font-size: 1.5rem;
 }
+
+.truncat {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

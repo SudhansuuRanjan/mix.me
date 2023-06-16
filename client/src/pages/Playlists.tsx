@@ -28,12 +28,12 @@ const Playlists: FunctionComponent = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-wrap gap-10 my-10">
+                <div className="flex flex-wrap justify-center items-center gap-10 my-10">
                     {playlists && playlists.items.map((playlist: any, i: number) => (
-                        <div key={i} className="w-52">
+                        <div key={i} className="lg:w-52 md:w-48 w-36">
                             <Link to={`/playlist/${playlist.id}`}>
                                 <div className="track-card">
-                                    <img src={playlist.images[0].url ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="h-52 w-52 rounded-md" alt="Album Cover" />
+                                    <img src={playlist.images[0].url ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="lg:h-52 md:h-48 h-36 lg:w-52 md:w-48 w-36 rounded-md" alt="Album Cover" />
                                 </div>
                             </Link>
                             <p className="text-base font-semibold mt-2">{(playlist.name ? playlist.name : 'Playlist Unavailable')}</p>

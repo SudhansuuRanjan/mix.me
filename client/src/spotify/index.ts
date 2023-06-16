@@ -105,30 +105,46 @@ export const getPlaylists = () => axios.get('https://api.spotify.com/v1/me/playl
 /**
  * Get a User's Top Artists
  * https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/
+ * @param timeRange
  */
-export const getTopArtistsShort = () =>
-    axios.get('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=short_term', {
-        headers,
-    });
-export const getTopArtistsMedium = () =>
-    axios.get('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=medium_term', {
-        headers,
-    });
-export const getTopArtistsLong = () =>
-    axios.get('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=long_term', { headers });
+export const getTopArtists = (timeRange: string) =>
+    axios.get(`https://api.spotify.com/v1/me/top/artists?limit=50&time_range=${timeRange}`, { headers });
+
+// Get a Artist's Top Tracks
+// https://developer.spotify.com/documentation/web-api/reference/artists/get-artists-top-tracks/
+export const getArtistTopTracks = (artistId: string) =>
+    axios.get(`https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=IN`, { headers });
+
+// Get a Artist's Playlists
+// https://developer.spotify.com/documentation/web-api/reference/artists/get-artists-albums/
+export const getArtistAlbums = (artistId: string) =>
+    axios.get(`https://api.spotify.com/v1/artists/${artistId}/albums?market=IN`, { headers });
+
+// Get an Album
+// https://developer.spotify.com/documentation/web-api/reference/albums/get-album/
+export const getAlbum = (albumId: string) =>
+    axios.get(`https://api.spotify.com/v1/albums/${albumId}`, { headers });
+
+// Get an Album's Tracks
+// https://developer.spotify.com/documentation/web-api/reference/albums/get-albums-tracks/
+export const getAlbumTracks = (albumId: string) =>
+    axios.get(`https://api.spotify.com/v1/albums/${albumId}/tracks`, { headers });
+
+
+// Get liked songs
+// https://developer.spotify.com/documentation/web-api/reference/library/get-users-saved-tracks/
+export const getLikedSongs = (limit: number, offset: number) =>
+    axios.get(`https://api.spotify.com/v1/me/tracks?limit=${limit}&market=IN&offset=${offset}`, { headers });
+
+
 
 /**
  * Get a User's Top Tracks
  * https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/
+ * @param timeRange
  */
-export const getTopTracksShort = () =>
-    axios.get('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term', { headers });
-export const getTopTracksMedium = () =>
-    axios.get('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term', {
-        headers,
-    });
-export const getTopTracksLong = () =>
-    axios.get('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=long_term', { headers });
+export const getTopTracks = (timeRange: string) =>
+    axios.get(`https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=${timeRange}`, { headers });
 
 /**
  * Get an Artist
@@ -140,10 +156,21 @@ export const getArtist = (artistId: string) =>
 /**
  * Follow an Artist
  * https://developer.spotify.com/documentation/web-api/reference/follow/follow-artists-users/
+ * @param artistId
  */
 export const followArtist = (artistId: string) => {
     const url = `https://api.spotify.com/v1/me/following?type=artist&ids=${artistId}`;
     return axios({ method: 'put', url, headers });
+};
+
+/**
+ * Unfollow an Artist
+ * https://developer.spotify.com/documentation/web-api/reference/follow/follow-artists-users/
+ * @param artistId
+*/
+export const unfollowArtist = (artistId: string) => {
+    const url = `https://api.spotify.com/v1/me/following?type=artist&ids=${artistId}`;
+    return axios({ method: 'delete', url, headers });
 };
 
 /**
@@ -193,18 +220,28 @@ export const followPlaylist = (playlistId: string) => {
 };
 
 /**
+ * Unfollow a Playlist
+ * @param playlistId 
+ * @returns 
+ */
+export const unfollowPlaylist = (playlistId: string) => {
+    const url = `https://api.spotify.com/v1/playlists/${playlistId}/followers`;
+    return axios({ method: 'delete', url, headers });
+};
+
+// Delete a Playlist
+// https://developer.spotify.com/documentation/web-api/reference/playlists/remove-tracks-playlist/
+export const deletePlaylist = (playlistId: string) => {
+    const url = `https://api.spotify.com/v1/playlists/${playlistId}/followers`;
+    return axios({ method: 'delete', url, headers });
+};
+
+/**
  * Get a Playlist
  * https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlist/
  */
 export const getPlaylist = (playlistId: string) =>
     axios.get(`https://api.spotify.com/v1/playlists/${playlistId}`, { headers });
-
-/**
- * Get a Playlist's Tracks
- * https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlists-tracks/
- */
-export const getPlaylistTracks = (playlistId: string) =>
-    axios.get(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, { headers });
 
 /**
  * Return a comma separated string of track IDs from the given array of tracks
@@ -261,7 +298,7 @@ export const getTrackAudioFeatures = (trackId: string) =>
 
 export const getUserInfo = () =>
     axios
-        .all([getUser(), getFollowing(), getPlaylists(), getTopArtistsLong(), getTopTracksLong()])
+        .all([getUser(), getFollowing(), getPlaylists(), getTopArtists('long_term'), getTopTracks('long_term')])
         .then(
             axios.spread((user, followedArtists, playlists, topArtists, topTracks) => ({
                 user: user.data,
@@ -282,3 +319,8 @@ export const getTrackInfo = (trackId: string) =>
                 audioFeatures: audioFeatures.data,
             })),
         );
+
+export const getAlbumInfo = (albumId: string) =>
+    axios
+        .all([getAlbum(albumId), getAlbumTracks(albumId)])
+        .then(axios.spread((album, tracks) => ({ album, tracks })));

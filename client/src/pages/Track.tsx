@@ -17,7 +17,7 @@ const Track: FunctionComponent = () => {
     useEffect(() => {
         const fetchData = async () => {
             const data = await getTrackInfo(trackId);
-            console.log(data);
+            // console.log(data);
             setTrack(data.track);
             setAudioFeatures(data.audioFeatures);
             setAudioAnalysis(data.audioAnalysis);
@@ -55,7 +55,7 @@ const Track: FunctionComponent = () => {
 
 
                  <div className="my-16">
-                        <div className="grid text-gray-300 mb-32 w-full mb-0 text-center border border-t-gray-500 border-l-gray-500 border-b-0 border-r-0 lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)]">
+                        <div className="grid text-gray-300 w-full mb-0 text-center border border-t-gray-500 border-l-gray-500 border-b-0 border-r-0 lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)]">
 
                             <div className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
                                 <div className="text-3xl font-bold">{formatDuration(audioFeatures.duration_ms)}</div>

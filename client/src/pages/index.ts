@@ -7,6 +7,8 @@ import Tracks from "./Tracks";
 import Playlist from "./Playlist";
 import Artist from "./Artist";
 import Recommendations from "./Recommendations";
+import Album from "./Album";
+import LikedSongs from "./LikedSongs";
 
 
-export { Artists, Profile, Playlists, Recent, Track, Playlist, Artist, Recommendations, Tracks };
+export { Artists, Profile, Playlists, Recent, Track, Playlist, Artist, Recommendations, Tracks, Album, LikedSongs };

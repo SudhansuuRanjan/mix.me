@@ -2,16 +2,15 @@ import { FunctionComponent, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getUserInfo, logout } from "../spotify";
 import { catchErrors } from "../utils";
-import { userData, followArtistData, playlistData, topArtistsData, topTracksData } from "../temp/index";
 import Loader from "../components/Loader";
 
 
 const Profile: FunctionComponent = () => {
-    const [user, setUser] = useState<any>(userData);
-    const [followedArtists, setFollowedArtists] = useState(followArtistData);
-    const [playlists, setPlaylists] = useState<any>(playlistData);
-    const [topArtists, setTopArtists] = useState(topArtistsData);
-    const [topTracks, setTopTracks] = useState(topTracksData);
+    const [user, setUser] = useState<any>(null);
+    const [followedArtists, setFollowedArtists] = useState<any>(null);
+    const [playlists, setPlaylists] = useState<any>(null);
+    const [topArtists, setTopArtists] = useState<any>(null);
+    const [topTracks, setTopTracks] = useState<any>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,16 +19,16 @@ const Profile: FunctionComponent = () => {
             setFollowedArtists(followedArtists);
             setPlaylists(playlists);
             setTopArtists(topArtists);
-            setTopTracks(topTracks);
-            console.log(user, followedArtists, playlists, topArtists, topTracks);
+            setTopTracks(topTracks.items);
+            // console.log(user, followedArtists, playlists, topArtists, topTracks);
         };
-        // catchErrors(fetchData());
+        catchErrors(fetchData());
     }, []);
 
     const totalPlaylists = playlists ? playlists.total : 0;
 
     return (
-        <div className="w-full">
+        <div className="w-full pb-16">
             {!user ? <Loader /> : (
                 <div className="m-auto w-full flex flex-col items-center justify-center">
                     {/* profile */}
@@ -80,8 +79,8 @@ const Profile: FunctionComponent = () => {
                             </Link>
                         </div>
 
-                        <div className="flex flex-wrap lg:gap-10 md:gap-8 gap-5 my-10">
-                            {topTracks && topTracks.items.slice(0, 12).map((track: any, i: number) => (
+                        <div className="flex flex-wrap items-center justify-center lg:gap-10 md:gap-8 gap-7 my-10">
+                            {topTracks && topTracks.slice(0, 12).map((track: any, i: number) => (
                                 <Link key={i} to={`/track/${track.id}`}>
                                     <div key={i} className=" lg:w-44 md:w-44 w-40">
                                         <div className="track-card">
@@ -114,7 +113,7 @@ const Profile: FunctionComponent = () => {
                             </Link>
                         </div>
 
-                        <div className="flex flex-wrap lg:gap-10 md:gap-8 gap-5 my-10">
+                        <div className="flex flex-wrap justify-center items-center lg:gap-10 md:gap-8 gap-7 my-10">
                             {topArtists && topArtists.items.slice(0, 12).map((artist: any, i: number) => (
                                 <Link key={i} to={`/artist/${artist.id}`}>
                                     <div className="lg:w-44 md:w-44 w-40">
@@ -147,12 +146,12 @@ const Profile: FunctionComponent = () => {
                             </Link>
                         </div>
 
-                        <div className="flex flex-wrap lg:gap-10 md:gap-8 gap-5 my-10">
+                        <div className="flex flex-wrap justify-center items-center lg:gap-10 md:gap-8 gap-7 my-10">
                             {playlists && playlists.items.slice(0, 10).map((playlist: any, i: number) => (
-                                <div key={i} className="lg:w-52 md:w-52 w-44">
+                                <div key={i} className="lg:w-52 md:w-52 w-40">
                                     <Link to={`/playlist/${playlist.id}`}>
                                         <div className="track-card">
-                                            <img src={playlist.images[0].url ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="lg:h-52 md:h-52 h-44 lg:w-52 md:w-52 w-44 rounded-md" alt="Album Cover" />
+                                            <img src={playlist.images[0].url ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="lg:h-52 md:h-52 h-40 lg:w-52 md:w-52 w-40 rounded-md" alt="Album Cover" />
                                         </div>
                                     </Link>
                                     <p className="text-base font-semibold mt-2">{(playlist.name ? playlist.name : 'Playlist Unavailable')}</p>

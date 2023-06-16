@@ -1,6 +1,6 @@
 import { FunctionComponent} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Artists, Profile, Playlists, Recent, Track,Tracks, Playlist, Artist, Recommendations } from '../pages';
+import { Artists, Profile, Playlists, Recent, Track,Tracks, Playlist, Artist, Recommendations, Album, LikedSongs } from '../pages';
 import NavBar from '../components/NavBar';
 
 
@@ -14,11 +14,13 @@ const AppRoutes: FunctionComponent = () => {
                         <Route path="/" element={<Profile />} />
                         <Route path="/recent" element={<Recent />} />
                         <Route path="/playlists" element={<Playlists />} />
-                        <Route path="/playlists/:playlistId" element={<Playlist />} />
+                        <Route path="/playlist/:playlistId" element={<Playlist />} />
                         <Route path="/track/:trackId" element={<Track />} />
                         <Route path="/tracks" element={<Tracks />} />
                         <Route path="/artists" element={<Artists />} />
-                        <Route path="/artists/:artistId" element={<Artist />} />
+                        <Route path="/artist/:artistId" element={<Artist />} />
+                        <Route path="/album/:albumId" element={<Album />} />
+                        <Route path='/liked' element={<LikedSongs/>}/>
                         <Route path="/recommendations/:playlistId" element={<Recommendations />} />
                     </Routes>
                 </div>
