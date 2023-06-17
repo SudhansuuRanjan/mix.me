@@ -16,6 +16,7 @@ const Artist: FunctionComponent = () => {
     useEffect(() => {
         const fetchData = async () => {
             const { data } = await getArtist(artistId);
+            document.title = `${data.name} • SpotiStat`;
             // console.log(data);
             setArtist(data);
         };
@@ -92,17 +93,17 @@ const Artist: FunctionComponent = () => {
                         </div>
                         <div className="flex flex-wrap justify-center mt-4 gap-24">
                             <div className="flex flex-col items-center">
-                                <p className="text-blue-500 lg:text-3xl md:3xl text-2xl font-extrabold">{formatWithCommas(artist.followers.total)}</p>
+                                <p className="text-blue-500 lg:text-3xl md:3xl text-2xl font-bold">{formatWithCommas(artist.followers.total)}</p>
                                 <p className="text-gray-500">FOLLOWERS</p>
                             </div>
                             <div className="flex flex-col items-center">
-                                <p className="text-blue-500 lg:text-3xl md:3xl text-2xl font-extrabold">{artist.popularity}%</p>
+                                <p className="text-blue-500 lg:text-3xl md:3xl text-2xl font-bold">{artist.popularity}%</p>
                                 <p className="text-gray-500">POPULARITY</p>
                             </div>
                         </div>
                         <div className="my-10">
                             <div>
-                                <p className="text-blue-500 lg:text-2xl md:2xl text-xl text-center font-extrabold">{artist.genres.length > 0 ? artist.genres.map((genre: any, i: number) => (
+                                <p className="text-blue-500 lg:text-2xl md:2xl text-xl text-center font-bold">{artist.genres.length > 0 ? artist.genres.map((genre: any, i: number) => (
                                     genre + (i < artist.genres.length - 1 ? ', ' : '')
                                 )) : 'Unavailable'}</p>
                                 <p className="text-gray-500 text-center">GENRES</p>
@@ -110,8 +111,8 @@ const Artist: FunctionComponent = () => {
                         </div>
                     </div>
 
-                    <div className="pt-10">
-                        <p className="text-3xl font-extrabold">Top Tracks</p>
+                    <div className="pt-8">
+                        <p className="lg:text-3xl text-2xl font-bold">Top Tracks</p>
                     </div>
 
                     {!topTracks ? <Loader /> : <div>
@@ -133,12 +134,12 @@ const Artist: FunctionComponent = () => {
                     <div className="pt-10">
                         <p className="text-3xl font-extrabold">Albums</p>
                     </div>
-                    <div className="flex flex-wrap items-center justify-center gap-10 my-10">
+                    <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
                     {albums && albums.map((album: any, i: number) => (
-                        <div key={i} className="lg:w-52 md:w-48 w-36">
+                        <div key={i}>
                             <Link to={`/album/${album.id}`}>
                                 <div className="track-card">
-                                    <img src={album.images[1].url ? album.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="lg:h-52 md:h-48 h-36 lg:w-52 md:w-48 w-36 rounded-md" alt="Album Cover" />
+                                    <img src={album.images[1].url ? album.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />
                                 </div>
                             </Link>
                             <p className="text-base font-semibold mt-2">{(album.name ? album.name : 'Playlist Unavailable')}</p>

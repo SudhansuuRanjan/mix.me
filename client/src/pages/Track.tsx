@@ -19,6 +19,7 @@ const Track: FunctionComponent = () => {
             const data = await getTrackInfo(trackId);
             // console.log(data);
             setTrack(data.track);
+            document.title = `${data.track.name} • SpotiStat`;
             setAudioFeatures(data.audioFeatures);
             setAudioAnalysis(data.audioAnalysis);
         };
@@ -28,13 +29,13 @@ const Track: FunctionComponent = () => {
     return (
         <div>
             {!track ? <Loader /> : <div className="m-auto w-full lg:px-24 md:px-12 px-6 my-16 text-white">
-                <div className="flex lg:gap-10 md:gap-7 gap-5">
+                <div className="flex lg:flex-row md:flex-row flex-col lg:gap-10 md:gap-7 gap-5">
                     <div>
-                        <img className="lg:h-56 md:h-56 h-32 lg:w-56 md:w-56 w-32" src={track.album.images[0].url} alt="Album Artwork" />
+                        <img className="lg:h-56 md:h-56 h-56 lg:w-56 md:w-56 w-56" src={track.album.images[0].url} alt="Album Artwork" />
                     </div>
                     <div>
                         <p className="lg:text-4xl md:text-3xl text-2xl font-bold">{track.name}</p>
-                        <p className="lg:text-xl text-xl font-semibold text-gray-400 lg:my-3 md:my-2 my-1">By {track.album.artists.map((artist: any, i: number) => (
+                        <p className="lg:text-xl md:text-xl text-lg font-semibold text-gray-400 lg:my-3 md:my-2 my-1">By {track.album.artists.map((artist: any, i: number) => (
                             <React.Fragment key={artist.id}>
                                 {i > 0 && ', '}
                                 <Link className="hover:underline text-gray-400 hover:text-green-500" to={`/artist/${artist.id}`}>

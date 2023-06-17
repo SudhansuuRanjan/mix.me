@@ -1,10 +1,6 @@
 import { FunctionComponent } from "react";
 
-interface LoginProps {
-
-}
-
-const Login: FunctionComponent<LoginProps> = () => {
+const Login: FunctionComponent = () => {
     return (
         <div className="flex-col min-h-screen flex items-center justify-center">
             <h1 className="text-4xl font-semibold">SpotiStat</h1>

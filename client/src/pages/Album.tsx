@@ -21,7 +21,7 @@ export default function Album(): React.ReactNode {
             // console.log(album.data, tracks.data);
         };
         catchErrors(fetchData());
-    }, [])
+    }, [albumId])
 
 
 
@@ -33,9 +33,9 @@ export default function Album(): React.ReactNode {
                         <div className="flex flex-col md:flex-row gap-7">
                             <img className="w-52 h-52 rounded-lg" src={album.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : album.images[0]?.url} alt={album.name} />
                             <div className="flex flex-col">
-                                <p className="text-4xl font-semibold my-1">{album.name}</p>
+                                <p className="lg:text-4xl md:text-3xl text-2xl font-semibold my-1">{album.name}</p>
                                 <p className="text-gray-400 text-medium text-lg mt-1 max-w-md">{album.label}</p>
-                                <div className='text-green-500 mt-1'>
+                                <div className='text-green-500 mt-1 lg:text-base md:text-base text-sm'>
                                     {
                                         album.artists.map((artist: any, i: number) => (
                                             <React.Fragment key={artist.id}>
@@ -60,7 +60,7 @@ export default function Album(): React.ReactNode {
                 }
 
                 <div>
-                    <p className='text-3xl font-semibold mt-20'>Tracks</p>
+                    <p className='lg:text-3xl md:text-2xl text-xl font-semibold mt-20'>Tracks</p>
                 </div>
 
                 {

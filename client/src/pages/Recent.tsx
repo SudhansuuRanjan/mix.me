@@ -7,6 +7,7 @@ import '../App.css'
 
 
 const Recent: FunctionComponent = () => {
+    document.title = `Recent • SpotiStat`;
     const [recentlyPlayed, setRecentlyPlayed] = useState<any>(null);
 
     useEffect(() => {
@@ -20,11 +21,11 @@ const Recent: FunctionComponent = () => {
 
     return (
         <div>
-            {!recentlyPlayed ? <Loader /> : <div className="m-auto w-full lg:px-24 md:px-12 px-6 my-16 text-white">
+            {!recentlyPlayed ? <Loader /> : <div className="m-auto w-full lg:px-24 md:px-12 px-6 mt-8 mb-16 text-white">
                 <div className="flex justify-between">
                     <div>
-                        <p className="text-3xl font-bold">Recent streams</p>
-                        <p className="text-gray-400">Your recently played tracks</p>
+                        <p className="lg:text-3xl md:text-2xl text-xl font-bold">Recent streams</p>
+                        <p className="text-gray-400 lg:text-base md:text-base text-sm">Your recently played tracks</p>
                     </div>
                 </div>
 

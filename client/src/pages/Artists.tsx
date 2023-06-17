@@ -6,6 +6,7 @@ import Loader from "../components/Loader";
 type TimeRange = "short_term" | "medium_term" | "long_term";
 
 const Artists: FunctionComponent = (): React.ReactNode => {
+    document.title = `Top Artists • SpotiStat`;
     const [timeRange, setTimeRange] = useState<TimeRange>('short_term');
     const [topArtists, setTopArtists] = useState<any>(null);
 
@@ -18,6 +19,11 @@ const Artists: FunctionComponent = (): React.ReactNode => {
         catchErrors(fetchData());
     }, [timeRange])
 
+    const handleChange = (e: any) => {
+        setTimeRange(e.target.value);
+        setTopArtists(null);
+    }
+
 
 
     return (
@@ -25,30 +31,21 @@ const Artists: FunctionComponent = (): React.ReactNode => {
             <div className="flex justify-between  items-center">
                 <div>
                     <p className="lg:text-2xl md:text-2xl text-xl font-semibold">Top Artists</p>
-                    <p className="text-gray-500 lg:text-base md:text-base text-sm">Your top artists</p>
+                    <p className="text-gray-500 lg:text-base md:text-base text-xs">Your top artists</p>
                 </div>
-                <div className="flex lg:gap-6 md:gap-5 gap-2 lg:text-base md:text-base text-sm">
-                    <button onClick={() => {
-                        setTimeRange("short_term");
-                        setTopArtists(null);
-                    }} className={`text-gray-500 hover:text-white ${timeRange === 'short_term' && 'underline text-white'}`}>Last 4 Weeks</button>
-                    <button onClick={() => {
-                        setTimeRange("medium_term");
-                        setTopArtists(null);
-                    }} className={`text-gray-500 hover:text-white ${timeRange === 'medium_term' && 'underline text-white'}`}>Last 6 Months</button>
-                    <button onClick={() => {
-                        setTimeRange("long_term");
-                        setTopArtists(null);
-                    }} className={`text-gray-500 hover:text-white ${timeRange === 'long_term' && 'underline text-white'}`}>All Time</button>
-                </div>
+                <select onChange={handleChange} name="term" id="term" className="bg-transparent text-gray-300 border-none  outline-none">
+                    <option className="bg-gray-900 border-none p-1 text-white" value="short_term">Last 4 Weeks</option>
+                    <option className="bg-gray-900 border-none p-1 text-white" value="medium_term">Last 6 Months</option>
+                    <option className="bg-gray-900 border-none p-1 text-white" value="long_term">All Time</option>
+                </select>
             </div>
 
-            {!topArtists ? <Loader /> : <div className="flex flex-wrap lg:gap-8 md:gap-8 gap-5 my-10 justify-center">
+            {!topArtists ? <Loader /> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
                 {topArtists && topArtists.map((artist: any, i: number) => (
                     <Link key={i} to={`/artist/${artist.id}`}>
-                        <div className="lg:w-44 md:w-44 w-32">
-                            <div className="artist-card">
-                                <img src={artist.images[1] ? artist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="lg:h-44 md:h-44 h-32 lg:w-44 md:w-44 w-32 rounded-full" alt="Album Cover" />
+                        <div>
+                            <div className="artist-card aspect-square overflow-hidden rounded-full">
+                                <img src={artist.images[1] ? artist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-full" alt="Album Cover" />
                             </div>
                             <p className="text-lg text-center font-semibold mt-3">{i + 1 + ". " + (artist.name ? artist.name : 'Artist Unavailable')}</p>
                             <p className="text-xs mt-2 text-center text-gray-500">{artist.genres.length > 0 ? artist.genres.map((genre: any, i: number) => (

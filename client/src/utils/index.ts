@@ -130,28 +130,28 @@ export const catchErrors = (fn: any) =>
 
 
 export function getRelativeTime(timestamp: string) {
-    var currentTime: any = new Date();
-    var previousTime: any = new Date(timestamp);
-    var elapsed = Math.floor((currentTime - previousTime) / 1000); // Elapsed time in seconds
+    const currentTime: any = new Date();
+    const previousTime: any = new Date(timestamp);
+    const elapsed = Math.floor((currentTime - previousTime) / 1000); // Elapsed time in seconds
 
     if (elapsed < 60) {
         return elapsed + ' sec ago';
     } else if (elapsed < 3600) {
-        var minutes = Math.floor(elapsed / 60);
+        let minutes = Math.floor(elapsed / 60);
         return minutes + ' min ago';
     } else if (elapsed < 86400) {
-        var hours = Math.floor(elapsed / 3600);
+        let hours = Math.floor(elapsed / 3600);
         return hours + ' hrs ago';
     } else {
-        var days = Math.floor(elapsed / 86400);
+        let days = Math.floor(elapsed / 86400);
         return days + ' days ago';
     }
 }
 
 export function dateToYMD(date:any) {
-    var strArray=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    var d = date.getDate();
-    var m = strArray[date.getMonth()];
-    var y = date.getFullYear();
+    const strArray=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const d = date.getDate();
+    const m = strArray[date.getMonth()];
+    const y = date.getFullYear();
     return m +" " +  (d <= 9 ? '0' + d : d) +  ', ' + y;
 }

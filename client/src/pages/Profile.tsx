@@ -16,6 +16,7 @@ const Profile: FunctionComponent = () => {
         const fetchData = async () => {
             const { user, followedArtists, playlists, topArtists, topTracks } = await getUserInfo();
             setUser(user);
+            document.title = `${user.display_name} • SpotiStat`;
             setFollowedArtists(followedArtists);
             setPlaylists(playlists);
             setTopArtists(topArtists);
@@ -79,12 +80,12 @@ const Profile: FunctionComponent = () => {
                             </Link>
                         </div>
 
-                        <div className="flex flex-wrap items-center justify-evenly lg:gap-10 md:gap-8 gap-7 my-10">
+                        <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
                             {topTracks && topTracks.slice(0, 12).map((track: any, i: number) => (
                                 <Link key={i} to={track.name ? `/track/${track.id}` : ''}>
-                                    <div key={i} className=" lg:w-44 md:w-44 w-40">
-                                        <div className="track-card">
-                                            <img src={track.album.images[1] ? track.album.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="lg:h-44 md:h-44 h-40 lg:w-44 md:w-44 w-40 rounded-md" alt="Album Cover" />
+                                    <div key={i} className="">
+                                        <div className="track-card aspect-square overflow-hidden">
+                                            <img src={track.album.images[1] ? track.album.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className=" rounded-md" alt="Album Cover" />
                                         </div>
                                         <p className="text-base font-semibold mt-2">{i + 1 + ". " + (track.name ? track.name : 'Track Unavailable')}</p>
                                         <p className="text-sm text-gray-400">{track.artists.length > 0 ? track.artists.map((artist: any, i: number) => (
@@ -113,12 +114,12 @@ const Profile: FunctionComponent = () => {
                             </Link>
                         </div>
 
-                        <div className="flex flex-wrap justify-evenly items-center lg:gap-10 md:gap-8 gap-7 my-10">
+                        <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
                             {topArtists && topArtists.items.slice(0, 12).map((artist: any, i: number) => (
                                 <Link key={i} to={`/artist/${artist.id}`}>
-                                    <div className="lg:w-44 md:w-44 w-40">
-                                        <div className="artist-card">
-                                            <img src={artist.images[1] ? artist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="lg:h-44 md:h-44 h-40 lg:w-44 md:w-44 w-40 rounded-full" alt="Album Cover" />
+                                    <div>
+                                        <div className="artist-card aspect-square overflow-hidden rounded-full">
+                                            <img src={artist.images[1] ? artist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-full" alt="Album Cover" />
                                         </div>
                                         <p className="text-lg text-center font-semibold mt-3">{i + 1 + ". " + (artist.name ? artist.name : 'Artist Unavailable')}</p>
                                         <p className="text-xs mt-2 text-center text-gray-500">{artist.genres.length > 0 ? artist.genres.map((genre: any, i: number) => (
@@ -146,12 +147,12 @@ const Profile: FunctionComponent = () => {
                             </Link>
                         </div>
 
-                        <div className="flex flex-wrap justify-evenly items-center lg:gap-10 md:gap-8 gap-7 my-10">
+                        <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
                             {playlists && playlists.items.slice(0, 10).map((playlist: any, i: number) => (
-                                <div key={i} className="lg:w-52 md:w-52 w-40">
+                                <div key={i}>
                                     <Link to={`/playlist/${playlist.id}`}>
                                         <div className="track-card">
-                                            <img src={playlist.images[0].url ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="lg:h-52 md:h-52 h-40 lg:w-52 md:w-52 w-40 rounded-md" alt="Album Cover" />
+                                            <img src={playlist.images[0].url ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />
                                         </div>
                                     </Link>
                                     <p className="text-base font-semibold mt-2">{(playlist.name ? playlist.name : 'Playlist Unavailable')}</p>

@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 const Recommendations: FunctionComponent = () => {
+    document.title = `Recommendations • SpotiStat`;
     const navigate = useNavigate();
     const [playlist, setPlaylist] = useState<any>(null);
     const [recommendations, setRecommendations] = useState<any>(null);
@@ -23,7 +24,7 @@ const Recommendations: FunctionComponent = () => {
         };
 
         catchErrors(fetchData());
-    }, []);
+    }, [playlistId]);
 
     const handleCreatePlaylist = async () => {
         try {

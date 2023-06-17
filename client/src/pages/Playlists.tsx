@@ -7,6 +7,7 @@ import Loader from "../components/Loader";
 
 const Playlists: FunctionComponent = () => {
     const [playlists, setPlaylists] = useState<any>([]);
+    document.title = `Playlists • SpotiStat`;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,20 +21,20 @@ const Playlists: FunctionComponent = () => {
 
     return (
         <div className="m-auto w-full flex flex-col items-center justify-center">
-            {playlists.length == 0 ? <Loader/> : <div className="m-auto w-full px-24 my-16 text-white">
+            {playlists.length == 0 ? <Loader/> : <div className="m-auto w-full lg:px-24 md:px-12 px-6 mt-8 mb-16 text-white">
                 <div className="flex justify-between">
                     <div>
-                        <p className="text-3xl font-semibold">Playlists</p>
-                        <p className="text-gray-400">Your playlists</p>
+                        <p className="lg:text-3xl md:text-2xl text-xl font-semibold">Playlists</p>
+                        <p className="text-gray-400 lg:text-base md:text-base text-sm">Your playlists</p>
                     </div>
                 </div>
 
-                <div className="flex flex-wrap justify-center items-center gap-10 my-10">
+                <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
                     {playlists && playlists.items.map((playlist: any, i: number) => (
-                        <div key={i} className="lg:w-52 md:w-48 w-36">
+                        <div key={i}>
                             <Link to={`/playlist/${playlist.id}`}>
                                 <div className="track-card">
-                                    <img src={playlist.images[0].url ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="lg:h-52 md:h-48 h-36 lg:w-52 md:w-48 w-36 rounded-md" alt="Album Cover" />
+                                    <img src={playlist.images[0].url ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />
                                 </div>
                             </Link>
                             <p className="text-base font-semibold mt-2">{(playlist.name ? playlist.name : 'Playlist Unavailable')}</p>
