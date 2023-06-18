@@ -21,13 +21,14 @@ const Bar = ({ delay, height }: { delay?: string, height: string }) => (
 
 const Loader = () => (
     <Container>
-        <Bars>
+        {/* <Bars>
             <Bar delay="250ms" height="1rem" />
             <Bar delay="715ms" height="2rem" />
             <Bar delay="475ms" height="1.6rem"/>
             <Bar delay="25ms" height="1.2rem"/>
             <Bar delay="190ms" height="0.3rem"/>
-        </Bars>
+        </Bars> */}
+        <img src='./images/loader2.webp' className='h-24' alt='loader'/>
     </Container>
 );
 
