@@ -6,18 +6,18 @@ const Container = ({ children }: { children: React.ReactNode }) => (
     </div>
 );
 
-const Bars = ({ children }: { children: React.ReactNode }) => (
-    <div className="flex justify-center items-end overflow-hidden w-100px min-w-100px h-50px mx-auto z-2 relative left-0 right-0">
-        {children}
-    </div>
-);
+// const Bars = ({ children }: { children: React.ReactNode }) => (
+//     <div className="flex justify-center items-end overflow-hidden w-100px min-w-100px h-50px mx-auto z-2 relative left-0 right-0">
+//         {children}
+//     </div>
+// );
 
-const Bar = ({ delay, height }: { delay?: string, height: string }) => (
-    <div
-        className="w-3 h-1 m-0.5 bg-gray-500 animate-pulse"
-        style={{ animationDelay: delay || '0ms' , height: height }}
-    />
-);
+// const Bar = ({ delay, height }: { delay?: string, height: string }) => (
+//     <div
+//         className="w-3 h-1 m-0.5 bg-gray-500 animate-pulse"
+//         style={{ animationDelay: delay || '0ms' , height: height }}
+//     />
+// );
 
 const Loader = () => (
     <Container>
