@@ -145,9 +145,12 @@ const Artist: FunctionComponent = () => {
                             <p className="text-base font-semibold mt-2">{(album.name ? album.name : 'Playlist Unavailable')}</p>
                             <p className="text-xs text-green-500 my-1">By {
                                 album.artists.map((artist: any, i: number) => (
-                                    <Link className="underline text-green-500" to={`/artist/${artist.id}`}>
-                                       { artist.name + (i < album.artists.length - 1 ? ', ' : '')}
+                                    <>
+                                    <Link className="hover:underline text-green-500" to={`/artist/${artist.id}`}>
+                                       { artist.name}
                                     </Link>
+                                    {(i < album.artists.length - 1 ? ', ' : '')}
+                                    </>
                                 ))
                             }</p>
                             <p className="text-sm text-gray-500">{album.total_tracks} {

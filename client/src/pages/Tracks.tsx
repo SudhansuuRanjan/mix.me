@@ -44,7 +44,7 @@ const Tracks: FunctionComponent = (): React.ReactNode => {
                     <p className="lg:text-2xl md:text-2xl text-xl font-semibold">Top Tracks</p>
                     <p className="text-gray-500 lg:text-base md:text-base text-xs">Your top tracks</p>
                 </div>
-                <select onChange={handleChange} name="term" id="term" className="bg-transparent text-gray-300 border-none  outline-none">
+                <select onChange={handleChange} name="term" id="term" className="bg-transparent cursor-pointer text-gray-300 border-none  outline-none">
                     <option className="bg-gray-900 border-none p-1 text-white" value="short_term">Last 4 Weeks</option>
                     <option className="bg-gray-900 border-none p-1 text-white" value="medium_term">Last 6 Months</option>
                     <option className="bg-gray-900 border-none p-1 text-white" value="long_term">All Time</option>
