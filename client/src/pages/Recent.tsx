@@ -19,6 +19,18 @@ const Recent: FunctionComponent = () => {
         catchErrors(fetchData());
     }, []);
 
+    const getPlayableSong = () => {
+        let idx = 0;
+        while (idx < 10) {
+            if (recentlyPlayed.items[idx].track.preview_url) {
+                // console.log(topTracks[idx].preview_url);
+                return recentlyPlayed.items[idx].track.preview_url;
+            } else {
+                idx++;
+            }
+        }
+    }
+
     return (
         <div>
             {!recentlyPlayed ? <Loader /> : <div className="m-auto w-full lg:px-24 md:px-12 px-6 mt-8 mb-16 text-white">
@@ -30,6 +42,9 @@ const Recent: FunctionComponent = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-5 my-10">
+                    <audio autoPlay loop>
+                        <source src={getPlayableSong()}></source>
+                    </audio>
                     {recentlyPlayed.items.map((recent: any, i: number) => (
                         <Track key={i} trackId={recent.track.id} trackAlbum={recent.track.album.name} trackArtists={recent.track.album.artists} trackDuration={recent.track.duration_ms} trackPlayedAt={recent.played_at} trackImage={recent.track.album.images[2].url} trackName={recent.track.name} tractAlbumId={recent.track.album.id} />
                     ))}

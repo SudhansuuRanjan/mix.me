@@ -93,22 +93,22 @@ const Profile: FunctionComponent = () => {
 
                         <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
                             {topTracks && topTracks.slice(0, 15).map((track: any, i: number) => (
-                                <Link key={i} to={track.name ? `/track/${track.id}` : ''}>
-                                    <div key={i} className="">
-                                        <div className="track-card aspect-square overflow-hidden">
+                                <div key={i}>
+                                    <div className="">
+                                        <Link to={track.name ? `/track/${track.id}` : ''} className="track-card aspect-square overflow-hidden">
                                             <img loading='lazy' src={track.album.images[1] ? track.album.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className=" rounded-md" alt="Album Cover" />
-                                        </div>
-                                        <p className="text-base font-semibold mt-2">{i + 1 + ". " + (track.name ? track.name : 'Track Unavailable')}</p>
+                                        </Link>
+                                        <Link to={track.name ? `/track/${track.id}` : ''} className="text-base font-semibold mt-2">{i + 1 + ". " + (track.name ? track.name : 'Track Unavailable')}</Link>
                                         <p className="text-sm">{track.artists.length > 0 ? track.artists.map((artist: any, i: number) => (
-                                            <>
+                                            <span key={i}>
                                             <Link className="text-gray-400 hover:text-green-500 hover:underline" to={`/artist/${artist.id}`}>{artist.name}</Link> 
                                             {
                                                 (i < track.artists.length - 1 ? ", " : "")
                                             }
-                                            </>
+                                            </span>
                                         )) : 'Unavailable'}</p>
                                     </div>
-                                </Link>
+                                </div>
                             ))}
                         </div>
 
@@ -168,7 +168,7 @@ const Profile: FunctionComponent = () => {
                                 <div key={i}>
                                     <Link to={`/playlist/${playlist.id}`}>
                                         <div className="track-card">
-                                            <img loading='lazy' src={playlist.images[0].url ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />
+                                            <img loading='lazy' src={playlist.images.length !== 0 ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />
                                         </div>
                                     </Link>
                                     <p className="text-base font-semibold mt-2">{(playlist.name ? playlist.name : 'Playlist Unavailable')}</p>

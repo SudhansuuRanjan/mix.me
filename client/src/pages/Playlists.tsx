@@ -34,7 +34,7 @@ const Playlists: FunctionComponent = () => {
                         <div key={i}>
                             <Link to={`/playlist/${playlist.id}`}>
                                 <div className="track-card">
-                                    <img src={playlist.images[0].url ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />
+                                    <img src={playlist.images.length !== 0 ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />
                                 </div>
                             </Link>
                             <p className="text-base font-semibold mt-2">{(playlist.name ? playlist.name : 'Playlist Unavailable')}</p>

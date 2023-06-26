@@ -3,7 +3,7 @@ import { getArtist, doesUserFollowArtist, followArtist, unfollowArtist, getArtis
 import Loader from "../components/Loader";
 import { catchErrors, formatWithCommas } from "../utils";
 import Track from "../components/Track";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 
 const Artist: FunctionComponent = () => {
@@ -11,7 +11,7 @@ const Artist: FunctionComponent = () => {
     const [userFollows, setUserFollows] = useState<boolean>(false);
     const [topTracks, setTopTracks] = useState<any>(null);
     const [albums, setAlbums] = useState<any>(null);
-    const artistId = window.location.pathname.split("/")[2];
+    const { artistId } : any = useParams();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,7 +21,7 @@ const Artist: FunctionComponent = () => {
             setArtist(data);
         };
         catchErrors(fetchData());
-    }, []);
+    }, [artistId]);
 
     useEffect(() => {
         const fetchArtistTopTracks = async () => {
@@ -30,7 +30,7 @@ const Artist: FunctionComponent = () => {
             // console.log(data.tracks);
         }
         catchErrors(fetchArtistTopTracks());
-    }, [])
+    }, [artistId])
 
     useEffect(() => {
         const fetchUserFollows = async () => {
@@ -38,7 +38,7 @@ const Artist: FunctionComponent = () => {
             setUserFollows(data[0]);
         }
         catchErrors(fetchUserFollows());
-    }, [])
+    }, [artistId])
 
     useEffect(() => {
         const fetchArtistAlbums = async () => {
@@ -47,7 +47,7 @@ const Artist: FunctionComponent = () => {
             // console.log(data.items);
         }
         catchErrors(fetchArtistAlbums());
-    }, [])
+    }, [artistId])
 
     const handleFollow = async () => {
         try {
@@ -117,7 +117,7 @@ const Artist: FunctionComponent = () => {
 
                     {!topTracks ? <Loader /> : <div>
                         <div className="my-5">
-                            <audio autoPlay>
+                            <audio autoPlay loop>
                                 <source src={getPlayableSong()}></source>
                             </audio>
                         </div>
@@ -135,29 +135,29 @@ const Artist: FunctionComponent = () => {
                         <p className="text-3xl font-extrabold">Albums</p>
                     </div>
                     <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
-                    {albums && albums.map((album: any, i: number) => (
-                        <div key={i}>
-                            <Link to={`/album/${album.id}`}>
-                                <div className="track-card">
-                                    <img src={album.images[1].url ? album.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />
-                                </div>
-                            </Link>
-                            <p className="text-base font-semibold mt-2">{(album.name ? album.name : 'Playlist Unavailable')}</p>
-                            <p className="text-xs text-green-500 my-1">By {
-                                album.artists.map((artist: any, i: number) => (
-                                    <>
-                                    <Link className="hover:underline text-green-500" to={`/artist/${artist.id}`}>
-                                       { artist.name}
-                                    </Link>
-                                    {(i < album.artists.length - 1 ? ', ' : '')}
-                                    </>
-                                ))
-                            }</p>
-                            <p className="text-sm text-gray-500">{album.total_tracks} {
-                                album.total_tracks > 1 ? 'SONGS' : 'SONG'
-                            }</p>
-                        </div>
-                    ))}
+                        {albums && albums.map((album: any, i: number) => (
+                            <div key={i}>
+                                <Link to={`/album/${album.id}`}>
+                                    <div className="track-card">
+                                        <img src={album.images[1].url ? album.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />
+                                    </div>
+                                </Link>
+                                <p className="text-base font-semibold mt-2">{(album.name ? album.name : 'Playlist Unavailable')}</p>
+                                <p className="text-xs text-green-500 my-1">By {
+                                    album.artists.map((artist: any, i: number) => (
+                                        <span key={i}>
+                                            <Link className="hover:underline text-green-500" to={`/artist/${artist.id}`}>
+                                                {artist.name}
+                                            </Link>
+                                            {(i < album.artists.length - 1 ? ', ' : '')}
+                                        </span>
+                                    ))
+                                }</p>
+                                <p className="text-sm text-gray-500">{album.total_tracks} {
+                                    album.total_tracks > 1 ? 'SONGS' : 'SONG'
+                                }</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             }

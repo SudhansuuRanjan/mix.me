@@ -27,7 +27,7 @@ const Artists: FunctionComponent = (): React.ReactNode => {
 
 
     return (
-        <div className="m-auto w-full lg:px-24 md:px-16 px-6 py-12 pb-32 text-white">
+        <div className="m-auto w-full lg:px-24 md:px-16 px-6 pt-8 py-12 pb-32 text-white">
             <div className="flex justify-between  items-center">
                 <div>
                     <p className="lg:text-2xl md:text-2xl text-xl font-semibold">Top Artists</p>
