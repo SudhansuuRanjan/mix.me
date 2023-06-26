@@ -17,7 +17,7 @@ const Track: FunctionComponent = () => {
     useEffect(() => {
         const fetchData = async () => {
             const data = await getTrackInfo(trackId);
-            // console.log(data);
+            console.log(data.audioFeatures);
             setTrack(data.track);
             document.title = `${data.track.name} • SpotiStat`;
             setAudioFeatures(data.audioFeatures);
@@ -26,10 +26,25 @@ const Track: FunctionComponent = () => {
         catchErrors(fetchData());
     }, [trackId]);
 
+    const getPlayableSong = () => {
+        let idx = 0;
+        while (idx < 10) {
+            if (track.preview_url) {
+                // console.log(topTracks[idx].preview_url);
+                return track.preview_url;
+            } else {
+                idx++;
+            }
+        }
+    }
+
     return (
         <div>
             {!track ? <Loader /> : <div className="m-auto w-full lg:px-24 md:px-12 px-6 my-16 text-white">
                 <div className="flex lg:flex-row md:flex-row flex-col lg:gap-10 md:gap-7 gap-5">
+                    <audio loop autoPlay>
+                            <source src={getPlayableSong()}></source>
+                        </audio>
                     <div>
                         <img className="lg:h-56 md:h-56 h-56 lg:w-56 md:w-56 w-56" src={track.album.images[0].url} alt="Album Artwork" />
                     </div>

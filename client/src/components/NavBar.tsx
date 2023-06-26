@@ -15,54 +15,54 @@ const NavBar = () => {
             <div className='flex lg:flex-col md:flex-col flex-row items-center justify-between my-5 w-full'>
                 <NavLink className="w-full" style={{ textDecoration: "none" }} to="/">
                     {({ isActive }: { isActive: boolean }) => (
-                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
-                            <FaUser size={20} />
-                            <p className='text-xs'>Profile</p>
+                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
+                            <FaUser  />
+                            <p className='lg:text-xs md:text-xs text-[0.6rem]'>Profile</p>
                         </div>
                     )}
                 </NavLink>
 
                 <NavLink className="w-full" style={{ textDecoration: "none" }} to="/artists">
                     {({ isActive }: { isActive: boolean }) => (
-                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
-                            <IoMdMicrophone size={20} />
-                            <p className='text-xs'>Top Artists</p>
+                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
+                            <IoMdMicrophone  />
+                            <p className='lg:text-xs md:text-xs text-[0.6rem]'>Top Artists</p>
                         </div>
                     )}
                 </NavLink>
 
                 <NavLink className="w-full" style={{ textDecoration: "none" }} to="/tracks">
                     {({ isActive }: { isActive: boolean }) => (
-                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
-                            <MdAudiotrack size={20} />
-                            <p className='text-xs'>Top Tracks</p>
+                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl  ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
+                            <MdAudiotrack />
+                            <p className='lg:text-xs md:text-xs text-[0.6rem]'>Top Tracks</p>
                         </div>
                     )}
                 </NavLink>
 
                 <NavLink className="w-full" style={{ textDecoration: "none" }} to="/recent">
                     {({ isActive }: { isActive: boolean }) => (
-                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
-                            <FaHistory size={20} />
-                            <p className='text-xs'>Recent</p>
+                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl  ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
+                            <FaHistory />
+                            <p className='lg:text-xs md:text-xs text-[0.6rem]'>Recent</p>
                         </div>
                     )}
                 </NavLink>
 
                 <NavLink className="w-full" style={{ textDecoration: "none" }} to="/playlists">
                     {({ isActive }: { isActive: boolean }) => (
-                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
-                            <TbPlaylist size={20} />
-                            <p className='text-xs'>Playlists</p>
+                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
+                            <TbPlaylist  />
+                            <p className='lg:text-xs md:text-xs text-[0.6rem]'>Playlists</p>
                         </div>
                     )}
                 </NavLink>
 
                 <NavLink className="w-full lg:block md:block hidden" style={{ textDecoration: "none" }} to="/liked">
                     {({ isActive }: { isActive: boolean }) => (
-                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
-                            <AiFillHeart size={20} />
-                            <p className='text-xs'>Liked</p>
+                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
+                            <AiFillHeart  />
+                            <p className='lg:text-xs md:text-xs text-[0.6rem]'>Liked</p>
                         </div>
                     )}
                 </NavLink>
