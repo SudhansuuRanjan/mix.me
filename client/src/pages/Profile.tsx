@@ -46,7 +46,7 @@ const Profile: FunctionComponent = () => {
                     {/* profile */}
                     <div className="m-auto mt-16 flex flex-col items-center justify-center">
                         <div>
-                            <img src={user.images[0].url} className="lg:h-44 h-36 w-36 lg:w-44 rounded-full" alt="Avatar" />
+                            <img src={user.images.length !== 0 ? user.images[0].url : "https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg"} className="lg:h-44 h-36 w-36 lg:w-44 rounded-full" alt="Avatar" />
                         </div>
                         <div className="text-center">
                             <a href={`https://open.spotify.com/user/${user.id}`} target="_blank"><p className="lg:text-5xl md:text-4xl text-3xl font-bold my-3 hover:text-green-500">{user.display_name}</p></a>
@@ -92,7 +92,7 @@ const Profile: FunctionComponent = () => {
                         </div>
 
                         <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
-                            {topTracks && topTracks.slice(0, 15).map((track: any, i: number) => (
+                            {topTracks && (topTracks.length === 0 ? <p className="text-center w-full py-16">No items.</p> : topTracks.slice(0, 15).map((track: any, i: number) => (
                                 <div key={i}>
                                     <div className="">
                                         <Link to={track.name ? `/track/${track.id}` : ''}>
@@ -111,7 +111,7 @@ const Profile: FunctionComponent = () => {
                                         )) : 'Unavailable'}</p>
                                     </div>
                                 </div>
-                            ))}
+                            )))}
                         </div>
 
                     </div>
@@ -133,7 +133,7 @@ const Profile: FunctionComponent = () => {
                         </div>
 
                         <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
-                            {topArtists && topArtists.items.slice(0, 15).map((artist: any, i: number) => (
+                            {topArtists && (topArtists.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : topArtists.items.slice(0, 15).map((artist: any, i: number) => (
                                 <Link key={i} to={`/artist/${artist.id}`}>
                                     <div>
                                         <div className="artist-card aspect-square overflow-hidden rounded-full">
@@ -145,7 +145,7 @@ const Profile: FunctionComponent = () => {
                                         )) : 'Unavailable'}</p>
                                     </div>
                                 </Link>
-                            ))}
+                            )))}
                         </div>
 
                     </div>
@@ -166,7 +166,7 @@ const Profile: FunctionComponent = () => {
                         </div>
 
                         <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
-                            {playlists && playlists.items.slice(0, 10).map((playlist: any, i: number) => (
+                            {playlists && (playlists.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : playlists.items.slice(0, 10).map((playlist: any, i: number) => (
                                 <div key={i}>
                                     <Link to={`/playlist/${playlist.id}`}>
                                         <div className="track-card">
@@ -174,10 +174,10 @@ const Profile: FunctionComponent = () => {
                                         </div>
                                     </Link>
                                     <p className="text-base font-semibold mt-2">{(playlist.name ? playlist.name : 'Playlist Unavailable')}</p>
-                                    <p className="text-xs text-green-500 my-1">By <a className="underline hover:text-blue-400" target="_blank" href={playlist.owner.external_urls.spotify}>{playlist.owner.display_name}</a></p>
+                                    <p className="text-xs text-green-500 my-1">By <a className="underline hover:text-blue-400" target="_blank" href={playlist.owner.external_urls.spotify}>{playlist.owner.display_name.length > 16 ? playlist.owner.display_name.substring(0,16)+"..":playlist.owner.display_name}</a></p>
                                     <p className="text-sm text-gray-500">{playlist.tracks.total} TRACKS</p>
                                 </div>
-                            ))}
+                            )))}
                         </div>
                     </div>
 
@@ -196,9 +196,9 @@ const Profile: FunctionComponent = () => {
                         </div>
 
                         <div className="flex flex-wrap gap-5 my-10">
-                            {likedSongs && likedSongs.slice(0, 10).map((recent: any, i: number) => (
+                            {likedSongs && (likedSongs.length === 0 ? <p className="text-center w-full py-16">No items.</p> : likedSongs.slice(0, 10).map((recent: any, i: number) => (
                                 <Track key={i} trackId={recent.track.id} trackAlbum={recent.track.album.name} trackArtists={recent.track.album.artists} trackDuration={recent.track.duration_ms} trackPlayedAt={recent.played_at} trackImage={recent.track.album.images[2].url} trackName={recent.track.name} tractAlbumId={recent.track.album.id} />
-                            ))}
+                            )))}
                         </div>
 
                     </div>

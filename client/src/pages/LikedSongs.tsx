@@ -53,7 +53,7 @@ const LikedSongs: FunctionComponent = () => {
     const getPlayableSong = () => {
         let idx = 0;
         while (idx < 10) {
-            if (likedSongs[idx].track.preview_url) {
+            if (likedSongs.length !== 0 && likedSongs[idx].track.preview_url) {
                 // console.log(topTracks[idx].preview_url);
                 return likedSongs[idx].track.preview_url;
             } else {
@@ -67,13 +67,13 @@ const LikedSongs: FunctionComponent = () => {
             {!likedSongs ? (
                 <Loader />
             ) : (
-                <div className="m-auto w-full lg:px-24 md:px-12 px-6 my-16 text-white">
+                <div className="m-auto w-full lg:px-24 md:px-16 px-6 pt-8 py-12 pb-32 text-white">
                     <div className="flex justify-between">
                         <div>
-                            <p className="lg:text-3xl md:text-3xl text-2xl font-bold">
+                            <p className="lg:text-2xl md:text-2xl text-xl font-semibold">
                                 Liked Songs
                             </p>
-                            <p className="text-gray-400">Your favourite tracks</p>
+                            <p className="text-gray-500 lg:text-base md:text-base text-xs">Your favourite tracks</p>
                         </div>
                     </div>
 
@@ -81,7 +81,7 @@ const LikedSongs: FunctionComponent = () => {
                         <audio loop autoPlay>
                             <source src={getPlayableSong()}></source>
                         </audio>
-                        {likedSongs.map((recent: any, i: number) => (
+                        {likedSongs.length === 0 ? <p className="text-center w-full py-16">No items.</p> :likedSongs.map((recent: any, i: number) => (
                             <Track
                                 key={i}
                                 trackId={recent.track.id}

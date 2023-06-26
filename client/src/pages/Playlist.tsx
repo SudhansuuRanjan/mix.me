@@ -13,6 +13,7 @@ const Playlist: FunctionComponent = () => {
     const [isFollowing, setIsFollowing] = useState<boolean | null>(null);
     const [playlist, setPlaylist] = useState<any>(null);
     const [tracks, setTracks] = useState<any>(null);
+    const [user, setUser] = useState<any>(null);
     const playlistId = window.location.pathname.split("/")[2];
 
     useEffect(() => {
@@ -21,7 +22,7 @@ const Playlist: FunctionComponent = () => {
             setPlaylist(data);
             document.title = `${data.name} • SpotiStat`;
             setTracks(data.tracks.items);
-            // console.log(data);
+            console.log(data);
         };
 
         catchErrors(fetchData());
@@ -31,6 +32,8 @@ const Playlist: FunctionComponent = () => {
         const fetchData = async () => {
             const { data } = await getUser();
             const userId = data.id;
+            setUser(data);
+            console.log(data);
             const { data: following } = await doesUserFollowPlaylist(playlistId, userId);
             setIsFollowing(following[0]);
         };
@@ -82,14 +85,14 @@ const Playlist: FunctionComponent = () => {
                                             <Link to={`/recommendations/${playlist.id}`}>
                                                 <button className="bg-gray-800 hover:bg-gray-700 text-white rounded-full text-xs px-4 py-1.5">Get Recomendations</button>
                                             </Link>
-                                            <button onClick={async () => {
+                                            {user && playlist && user.id === playlist.owner.id && <button onClick={async () => {
                                                 if(confirm("Are you sure you want to delete this playlist?")){
                                                     await deletePlaylist(playlistId);
                                                     navigate('/playlists');
                                                 }
                                             }} className="text-red-500 px-4 py-1.5 -ml-1">
                                                 <FaTrash size={18}/>
-                                            </button>
+                                            </button>}
                                         </div>
 
                                     </div>

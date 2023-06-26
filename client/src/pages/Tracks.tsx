@@ -23,7 +23,7 @@ const Tracks: FunctionComponent = (): React.ReactNode => {
     const getPlayableSong = () => {
         let idx = 0;
         while (idx < 50) {
-            if (topTracks[idx].preview_url) {
+            if (topTracks.length !== 0 && topTracks[idx].preview_url) {
                 return topTracks[idx].preview_url;
             } else {
                 idx++;
@@ -59,7 +59,7 @@ const Tracks: FunctionComponent = (): React.ReactNode => {
                 </div>
 
                 <div className="flex flex-wrap gap-7 my-10">
-                    {topTracks.map((track: any, i: number) => (
+                    {topTracks.length === 0 ? <p className="text-center w-full py-16">No items.</p> : topTracks.map((track: any, i: number) => (
                         <Track key={i} trackId={track.id} trackAlbum={track.album.name} trackArtists={track.album.artists} trackDuration={track.duration_ms} trackPlayedAt={""} trackImage={track.album.images[2]?.url} trackName={'#' + (i + 1) + " " + track.name} tractAlbumId={track.album.id} />
                     ))}
                 </div>

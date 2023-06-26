@@ -41,7 +41,7 @@ const Artists: FunctionComponent = (): React.ReactNode => {
             </div>
 
             {!topArtists ? <Loader /> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
-                {topArtists && topArtists.map((artist: any, i: number) => (
+                {topArtists.length === 0 ? <p className="text-center w-full py-16">No items.</p> : topArtists.map((artist: any, i: number) => (
                     <Link key={i} to={`/artist/${artist.id}`}>
                         <div>
                             <div className="artist-card aspect-square overflow-hidden rounded-full">
