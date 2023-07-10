@@ -1,63 +1,63 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getUserInfo, logout, getLikedSongs } from "../spotify";
-import { catchErrors } from "../utils";
 import Loader from "../components/Loader";
 import Track from "../components/Track";
+import { useQuery } from "@tanstack/react-query";
+import ErrorFallback from '../components/ErrorFallback'
 
 
 const Profile: FunctionComponent = () => {
-    const [user, setUser] = useState<any>(null);
-    const [followedArtists, setFollowedArtists] = useState<any>(null);
-    const [likedSongs, setLikedSongs] = useState<any>(null);
-    const [playlists, setPlaylists] = useState<any>(null);
-    const [topArtists, setTopArtists] = useState<any>(null);
-    const [topTracks, setTopTracks] = useState<any>(null);
+
+    const { data, isLoading, isError, refetch } = useQuery({
+        queryKey: ['profile'],
+        staleTime: 1000 * 60 * 60 * 24,
+        queryFn: async () => {
+            const res = await getUserInfo();
+            return {
+                user: res.user,
+                followedArtists: res.followedArtists,
+                playlists: res.playlists,
+                topArtists: res.topArtists,
+                topTracks: res.topTracks.items
+            };
+        }
+    })
 
     useEffect(() => {
-        const fetchData = async () => {
-            const { user, followedArtists, playlists, topArtists, topTracks } = await getUserInfo();
-            setUser(user);
-            document.title = `${user.display_name} • SpotiStat`;
-            setFollowedArtists(followedArtists);
-            setPlaylists(playlists);
-            setTopArtists(topArtists);
-            setTopTracks(topTracks.items);
-            // console.log(user, followedArtists, playlists, topArtists, topTracks);
-        };
-        catchErrors(fetchData());
-    }, []);
+        document.title = `${isLoading ? "Profile" : data?.user.display_name} • SpotiStat`;
+    }, [data?.user]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const { data } = await getLikedSongs(20, 0);
-            // console.log(data);
-            setLikedSongs(data.items);
-        };
-        catchErrors(fetchData());
-    }, []);
+    const { data: likedSongs, isLoading: likedSongsLoading, isError: likedSongsError, refetch: refetchLikedSongs } = useQuery({
+        queryKey: ['liked-songs'],
+        staleTime: 1000 * 60 * 60 * 24,
+        queryFn: async () => {
+            const res = await getLikedSongs(20, 0);
+            return res.data.items;
+        }
+    })
 
-    const totalPlaylists = playlists ? playlists.total : 0;
+    const totalPlaylists = data?.playlists ? data?.playlists.total : 0;
 
     return (
         <div className="w-full pb-16">
-            {!user ? <Loader /> : (
+            {isLoading ? <Loader /> : isError ? <ErrorFallback refetch={refetch} /> : (
                 <div className="m-auto w-full flex flex-col items-center justify-center">
                     {/* profile */}
                     <div className="m-auto mt-16 flex flex-col items-center justify-center">
                         <div>
-                            <img src={user.images.length !== 0 ? user.images[0].url : "https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg"} className="lg:h-44 h-36 w-36 lg:w-44 rounded-full" alt="Avatar" />
+                            <img src={data?.user.images.length !== 0 ? data?.user.images[1].url : "https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg"} className="lg:h-44 h-36 w-36 lg:w-44 rounded-full" alt="Avatar" />
                         </div>
                         <div className="text-center">
-                            <a href={`https://open.spotify.com/user/${user.id}`} target="_blank"><p className="lg:text-5xl md:text-4xl text-3xl font-bold my-3 hover:text-green-500">{user.display_name}</p></a>
+                            <a href={`https://open.spotify.com/user/${data?.user.id}`} target="_blank"><p className="lg:text-5xl md:text-4xl text-3xl font-bold my-3 hover:text-green-500">{data?.user.display_name}</p></a>
                             <div className="flex justify-center gap-6 items-center mt-3">
                                 <div>
-                                    <p className="text-xl font-semibold text-green-500">{user.followers.total}</p>
+                                    <p className="text-xl font-semibold text-green-500">{data?.user.followers.total}</p>
                                     <p className="text-sm text-gray-500">FOLLOWERS</p>
                                 </div>
 
                                 <div>
-                                    <p className="text-xl font-semibold text-green-500">{followedArtists && followedArtists.artists.items.length}</p>
+                                    <p className="text-xl font-semibold text-green-500">{data?.followedArtists && data?.followedArtists.artists.items.length}</p>
                                     <p className="text-sm text-gray-500">FOLLOWING</p>
                                 </div>
 
@@ -92,7 +92,7 @@ const Profile: FunctionComponent = () => {
                         </div>
 
                         <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
-                            {topTracks && (topTracks.length === 0 ? <p className="text-center w-full py-16">No items.</p> : topTracks.slice(0, 15).map((track: any, i: number) => (
+                            {data?.topTracks && (data?.topTracks.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data?.topTracks.slice(0, 15).map((track: any, i: number) => (
                                 <div key={i}>
                                     <div className="">
                                         <Link to={track.name ? `/track/${track.id}` : ''}>
@@ -133,7 +133,7 @@ const Profile: FunctionComponent = () => {
                         </div>
 
                         <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
-                            {topArtists && (topArtists.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : topArtists.items.slice(0, 15).map((artist: any, i: number) => (
+                            {data?.topArtists && (data?.topArtists.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data?.topArtists.items.slice(0, 15).map((artist: any, i: number) => (
                                 <Link key={i} to={`/artist/${artist.id}`}>
                                     <div>
                                         <div className="artist-card aspect-square overflow-hidden rounded-full">
@@ -166,7 +166,7 @@ const Profile: FunctionComponent = () => {
                         </div>
 
                         <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
-                            {playlists && (playlists.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : playlists.items.slice(0, 10).map((playlist: any, i: number) => (
+                            {data?.playlists && (data?.playlists.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data?.playlists.items.slice(0, 10).map((playlist: any, i: number) => (
                                 <div key={i}>
                                     <Link to={`/playlist/${playlist.id}`}>
                                         <div className="track-card">
@@ -174,7 +174,7 @@ const Profile: FunctionComponent = () => {
                                         </div>
                                     </Link>
                                     <p className="text-base font-semibold mt-2">{(playlist.name ? playlist.name : 'Playlist Unavailable')}</p>
-                                    <p className="text-xs text-green-500 my-1">By <a className="underline hover:text-blue-400" target="_blank" href={playlist.owner.external_urls.spotify}>{playlist.owner.display_name.length > 16 ? playlist.owner.display_name.substring(0,16)+"..":playlist.owner.display_name}</a></p>
+                                    <p className="text-xs text-green-500 my-1">By <a className="underline hover:text-blue-400" target="_blank" href={playlist.owner.external_urls.spotify}>{playlist.owner.display_name.length > 16 ? playlist.owner.display_name.substring(0, 16) + ".." : playlist.owner.display_name}</a></p>
                                     <p className="text-sm text-gray-500">{playlist.tracks.total} TRACKS</p>
                                 </div>
                             )))}
@@ -196,7 +196,7 @@ const Profile: FunctionComponent = () => {
                         </div>
 
                         <div className="flex flex-wrap gap-5 my-10">
-                            {likedSongs && (likedSongs.length === 0 ? <p className="text-center w-full py-16">No items.</p> : likedSongs.slice(0, 10).map((recent: any, i: number) => (
+                            {likedSongsLoading ? <Loader /> : likedSongsError ? <ErrorFallback refetch={refetchLikedSongs} /> : (likedSongs.length === 0 ? <p className="text-center w-full py-16">No items.</p> : likedSongs.slice(0, 10).map((recent: any, i: number) => (
                                 <Track key={i} trackId={recent.track.id} trackAlbum={recent.track.album.name} trackArtists={recent.track.album.artists} trackDuration={recent.track.duration_ms} trackPlayedAt={recent.played_at} trackImage={recent.track.album.images[2].url} trackName={recent.track.name} tractAlbumId={recent.track.album.id} />
                             )))}
                         </div>

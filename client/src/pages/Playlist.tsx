@@ -1,50 +1,50 @@
-import { FunctionComponent, useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { FunctionComponent, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getPlaylist, doesUserFollowPlaylist, followPlaylist, unfollowPlaylist, getUser, deletePlaylist } from "../spotify";
-import { catchErrors, formatWithCommas } from "../utils";
+import { formatWithCommas } from "../utils";
 import Loader from "../components/Loader";
 import Track from "../components/Track";
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { FaTrash } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
+import ErrorFallback from '../components/ErrorFallback'
+import { QueryClient } from "@tanstack/react-query";
 
 
 const Playlist: FunctionComponent = () => {
     const navigate = useNavigate();
-    const [isFollowing, setIsFollowing] = useState<boolean | null>(null);
-    const [playlist, setPlaylist] = useState<any>(null);
-    const [tracks, setTracks] = useState<any>(null);
-    const [user, setUser] = useState<any>(null);
-    const playlistId = window.location.pathname.split("/")[2];
+    const queryClient = new QueryClient();
+    const { playlistId } = useParams() as { playlistId: string };
+
+    const { data, isLoading: playListLoading, isError, refetch } = useQuery({
+        queryKey: ['playlist', playlistId],
+        staleTime: 1000 * 60 * 60 * 24,
+        queryFn: async () => {
+            const res = await getPlaylist(playlistId);
+            return { playlist: res.data, tracks: res.data.tracks.items };
+        }
+    })
+
+    const { data: userData, isLoading, refetch: refetchFollowing } =
+        useQuery({
+            queryKey: ["user", playlistId],
+            staleTime: 1000 * 60 * 60 * 24,
+            queryFn: async () => {
+                const res1 = await getUser();
+                const userId = res1.data.id;
+                const res2 = await doesUserFollowPlaylist(playlistId, userId);
+                return { user: res1.data, following: res2.data[0] }
+            }
+        })
 
     useEffect(() => {
-        const fetchData = async () => {
-            const { data } = await getPlaylist(playlistId);
-            setPlaylist(data);
-            document.title = `${data.name} • SpotiStat`;
-            setTracks(data.tracks.items);
-            console.log(data);
-        };
-
-        catchErrors(fetchData());
-    }, [playlistId]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const { data } = await getUser();
-            const userId = data.id;
-            setUser(data);
-            console.log(data);
-            const { data: following } = await doesUserFollowPlaylist(playlistId, userId);
-            setIsFollowing(following[0]);
-        };
-
-        catchErrors(fetchData());
-    }, [playlistId]);
+        document.title = `${playListLoading ? "Playlist" : data?.playlist.name} • SpotiStat`;
+    },[data?.playlist])
 
     const handleFollowPlaylist = async () => {
         try {
             await followPlaylist(playlistId);
-            setIsFollowing(true);
+            refetchFollowing()
         } catch (error) {
             console.log(error);
         }
@@ -53,7 +53,7 @@ const Playlist: FunctionComponent = () => {
     const handleUnfollowPlaylist = async () => {
         try {
             await unfollowPlaylist(playlistId);
-            setIsFollowing(false);
+            refetchFollowing()
         } catch (error) {
             console.log(error);
         }
@@ -64,34 +64,35 @@ const Playlist: FunctionComponent = () => {
             <div className="m-auto w-full lg:px-24 md:px-12 px-6 my-16 text-white">
 
                 {
-                    !playlist ? <Loader /> :
+                    playListLoading ? <Loader /> : isError ? <ErrorFallback refetch={refetch} /> :
                         <div className="flex flex-col md:flex-row gap-7">
                             <div className="flex flex-col gap-3">
                                 <div className="flex lg:flex-row md:flex-row flex-col gap-4">
-                                    <img className="w-52 h-52 rounded-lg" src={playlist.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : playlist.images[0]?.url} alt={playlist.name} />
+                                    <img className="w-52 h-52 rounded-lg" src={data?.playlist.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : data?.playlist.images[0]?.url} alt={data?.playlist.name} />
                                     <div className="flex flex-col">
-                                        <p className="lg:text-4xl md:text-3xl text-2xl font-semibold my-1">{playlist.name}</p>
-                                        <p className="text-gray-400 lg:text-base md:text-base text-sm mt-1 max-w-md">{playlist.description}</p>
+                                        <p className="lg:text-4xl md:text-3xl text-2xl font-semibold my-1">{data?.playlist.name}</p>
+                                        <p className="text-gray-400 lg:text-base md:text-base text-sm mt-1 max-w-md">{data?.playlist.description}</p>
                                         <div className="flex items-center text-white my-2">
                                             <div>
-                                                {isFollowing ? <AiFillHeart onClick={handleUnfollowPlaylist} className="text-pink-500 cursor-pointer" size={24} /> : <AiOutlineHeart onClick={handleFollowPlaylist} className="text-pink-500 cursor-pointer" size={24} />}
+                                                {userData?.following ? <AiFillHeart onClick={handleUnfollowPlaylist} className="text-pink-500 cursor-pointer" size={24} /> : <AiOutlineHeart onClick={handleFollowPlaylist} className="text-pink-500 cursor-pointer" size={24} />}
                                             </div>&nbsp;·&nbsp;
-                                            <a href="" className="text-green-500 hover:underline text-sm">By {playlist.owner.display_name}</a> &nbsp;·&nbsp;
-                                            <p className="text-gray-200 hover:text-gray-400 text-sm font-medium">{formatWithCommas(playlist.followers.total)} Likes</p> &nbsp;·&nbsp;
-                                            <p className="text-gray-200 hover:text-gray-400 text-sm font-medium">{playlist.tracks.total} Songs</p>
+                                            <a href="" className="text-green-500 hover:underline text-sm">By {data?.playlist.owner.display_name}</a> &nbsp;·&nbsp;
+                                            <p className="text-gray-200 hover:text-gray-400 text-sm font-medium">{formatWithCommas(data?.playlist.followers.total)} Likes</p> &nbsp;·&nbsp;
+                                            <p className="text-gray-200 hover:text-gray-400 text-sm font-medium">{data?.playlist.tracks.total} Songs</p>
                                         </div>
                                         <div className="flex items-center gap-2 mt-3">
-                                            <Link target="_blank" to={"https://open.spotify.com/playlist/" + playlist.id}><button className="bg-green-500 hover:bg-green-600 text-white rounded-full text-xs px-4 py-1.5">Play on Spotify</button></Link>
-                                            <Link to={`/recommendations/${playlist.id}`}>
+                                            <Link target="_blank" to={"https://open.spotify.com/playlist/" + data?.playlist.id}><button className="bg-green-500 hover:bg-green-600 text-white rounded-full text-xs px-4 py-1.5">Play on Spotify</button></Link>
+                                            <Link to={`/recommendations/${data?.playlist.id}`}>
                                                 <button className="bg-gray-800 hover:bg-gray-700 text-white rounded-full text-xs px-4 py-1.5">Get Recomendations</button>
                                             </Link>
-                                            {user && playlist && user.id === playlist.owner.id && <button onClick={async () => {
-                                                if(confirm("Are you sure you want to delete this playlist?")){
+                                            {!isLoading && data?.playlist && userData?.user.id === data?.playlist.owner.id && <button onClick={async () => {
+                                                if (confirm("Are you sure you want to delete this playlist?")) {
                                                     await deletePlaylist(playlistId);
                                                     navigate('/playlists');
+                                                    queryClient.invalidateQueries(['playlists']);
                                                 }
                                             }} className="text-red-500 px-4 py-1.5 -ml-1">
-                                                <FaTrash size={18}/>
+                                                <FaTrash size={18} />
                                             </button>}
                                         </div>
 
@@ -107,9 +108,9 @@ const Playlist: FunctionComponent = () => {
                     <p className="lg:text-3xl text-2xl font-semibold mt-12">Tracks</p>
                 </div>
                 {
-                    !tracks ? <Loader /> :
+                    playListLoading ? <Loader /> :
                         <div className="flex flex-wrap gap-4 my-10">
-                            {tracks.map((track: any, i: number) => (
+                            {data?.tracks.map((track: any, i: number) => (
                                 <Track key={i} trackId={track.track.id} trackAlbum={track.track.album.name} trackArtists={track.track.album.artists} trackDuration={track.track.duration_ms} trackPlayedAt={""} trackImage={track.track.album.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : track.track.album.images[2]?.url} trackName={track.track.name === "" ? "Unavailable" : track.track.name} tractAlbumId={track.track.album.id} />
                             ))}
                         </div>

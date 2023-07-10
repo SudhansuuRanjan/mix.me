@@ -1,30 +1,28 @@
 import { FunctionComponent, useState, useEffect } from "react";
 import { getTopTracks } from "../spotify";
 import Loader from "../components/Loader";
-import { catchErrors } from "../utils";
 import Track from "../components/Track";
-
 type TimeRange = "short_term" | "medium_term" | "long_term";
+import { useQuery } from "@tanstack/react-query";
+import ErrorFallback from '../components/ErrorFallback'
 
 const Tracks: FunctionComponent = (): React.ReactNode => {
-    document.title = `Top Tracks • SpotiStat`;
     const [timeRange, setTimeRange] = useState<TimeRange>('short_term');
-    const [topTracks, setTopTracks] = useState<any>(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const { data } = await getTopTracks(timeRange);
-            // console.log(data.items);
-            setTopTracks(data.items);
-        };
-        catchErrors(fetchData());
-    }, [timeRange]);
+    const { data, isError, isLoading, refetch } = useQuery({
+        staleTime: 1000 * 60 * 20,
+        queryKey: ['top-tracks', timeRange],
+        queryFn: async () => {
+            const res = await getTopTracks(timeRange);
+            return res.data.items;
+        },
+    });
 
     const getPlayableSong = () => {
         let idx = 0;
         while (idx < 50) {
-            if (topTracks.length !== 0 && topTracks[idx].preview_url) {
-                return topTracks[idx].preview_url;
+            if (data.length !== 0 && data[idx].preview_url) {
+                return data[idx].preview_url;
             } else {
                 idx++;
             }
@@ -33,8 +31,11 @@ const Tracks: FunctionComponent = (): React.ReactNode => {
 
     const handleChange = (e: any) => {
         setTimeRange(e.target.value);
-        setTopTracks(null);
     }
+
+    useEffect(() => {
+        document.title = `Top Tracks • SpotiStat`;
+    }, [])
 
 
     return (
@@ -51,19 +52,20 @@ const Tracks: FunctionComponent = (): React.ReactNode => {
                 </select>
             </div>
 
-            {!topTracks ? <Loader /> : <div>
-                <div className="my-5">
-                    <audio autoPlay>
-                        <source src={getPlayableSong()}></source>
-                    </audio>
-                </div>
+            {isLoading ? <Loader /> : isError ? <ErrorFallback refetch={refetch} />
+                : <div>
+                    <div className="my-5">
+                        <audio autoPlay>
+                            <source src={getPlayableSong()}></source>
+                        </audio>
+                    </div>
 
-                <div className="flex flex-wrap gap-7 my-10">
-                    {topTracks.length === 0 ? <p className="text-center w-full py-16">No items.</p> : topTracks.map((track: any, i: number) => (
-                        <Track key={i} trackId={track.id} trackAlbum={track.album.name} trackArtists={track.album.artists} trackDuration={track.duration_ms} trackPlayedAt={""} trackImage={track.album.images[2]?.url} trackName={'#' + (i + 1) + " " + track.name} tractAlbumId={track.album.id} />
-                    ))}
+                    <div className="flex flex-wrap gap-7 my-10">
+                        {data.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data.map((track: any, i: number) => (
+                            <Track key={i} trackId={track.id} trackAlbum={track.album.name} trackArtists={track.album.artists} trackDuration={track.duration_ms} trackPlayedAt={""} trackImage={track.album.images[2]?.url} trackName={'#' + (i + 1) + " " + track.name} tractAlbumId={track.album.id} />
+                        ))}
+                    </div>
                 </div>
-            </div>
             }
         </div>
     );

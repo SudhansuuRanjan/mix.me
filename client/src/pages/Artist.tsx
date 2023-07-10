@@ -1,68 +1,62 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { getArtist, doesUserFollowArtist, followArtist, unfollowArtist, getArtistTopTracks, getArtistAlbums } from "../spotify";
 import Loader from "../components/Loader";
-import { catchErrors, formatWithCommas } from "../utils";
+import { formatWithCommas } from "../utils";
 import Track from "../components/Track";
 import { Link, useParams } from "react-router-dom";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import ErrorFallback from '../components/ErrorFallback'
 
 
 const Artist: FunctionComponent = () => {
-    const [artist, setArtist] = useState<any>(null);
-    const [userFollows, setUserFollows] = useState<boolean>(false);
-    const [topTracks, setTopTracks] = useState<any>(null);
-    const [albums, setAlbums] = useState<any>(null);
-    const { artistId } : any = useParams();
+    const { artistId }: any = useParams();
+
+    const { data: artist, isLoading: artistLoading, isError: artistError, refetch: artistRefetch } = useQuery({
+        queryKey: ['artist', artistId],
+        staleTime: 1000 * 60 * 60 * 24,
+        queryFn: async () => {
+            const res = await getArtist(artistId);
+            return res.data;
+        },
+    });
+
+    const { data: userFollows, isLoading: userFollowsLoading, refetch: userFollowsRefetch } = useQuery({
+        queryKey: ['user-follows', artistId],
+        staleTime: 1000 * 60 * 60 * 24,
+        queryFn: async () => {
+            const res = await doesUserFollowArtist(artistId);
+            return res.data[0];
+        },
+    });
+
+    const { data: topTracks, isLoading: artistTopTracksLoading, isError: artistTopTracksError, refetch:topTracksRefetch } = useQuery({
+        queryKey: ['artist-top-tracks', artistId],
+        staleTime: 1000 * 60 * 60 * 24,
+        queryFn: async () => {
+            const res = await getArtistTopTracks(artistId);
+            return res.data.tracks;
+        }
+    })
+
+    const { data: albums, isLoading: artistAlbumsLoading, isError: artistAlbumsError, refetch:albumsRefetch } = useQuery({
+        queryKey: ['artist-albums', artistId],
+        staleTime: 1000 * 60 * 30,
+        queryFn: async () => {
+            const res = await getArtistAlbums(artistId);
+            return res.data.items;
+        }
+    })
 
     useEffect(() => {
-        const fetchData = async () => {
-            const { data } = await getArtist(artistId);
-            document.title = `${data.name} • SpotiStat`;
-            // console.log(data);
-            setArtist(data);
-        };
-        catchErrors(fetchData());
-    }, [artistId]);
+        document.title = `${artistLoading ? "Artist" : artist.name} • SpotiStat`;
+    }, [artist])
 
-    useEffect(() => {
-        const fetchArtistTopTracks = async () => {
-            const { data } = await getArtistTopTracks(artistId);
-            setTopTracks(data.tracks);
-            // console.log(data.tracks);
+    const handleFollow = useMutation({
+        mutationFn: async () => userFollows ? await unfollowArtist(artistId) : await followArtist(artistId),
+        onSuccess: () => {
+            userFollowsRefetch();
         }
-        catchErrors(fetchArtistTopTracks());
-    }, [artistId])
-
-    useEffect(() => {
-        const fetchUserFollows = async () => {
-            const { data } = await doesUserFollowArtist(artistId);
-            setUserFollows(data[0]);
-        }
-        catchErrors(fetchUserFollows());
-    }, [artistId])
-
-    useEffect(() => {
-        const fetchArtistAlbums = async () => {
-            const { data } = await getArtistAlbums(artistId);
-            setAlbums(data.items);
-            // console.log(data.items);
-        }
-        catchErrors(fetchArtistAlbums());
-    }, [artistId])
-
-    const handleFollow = async () => {
-        try {
-            if (userFollows) {
-                await unfollowArtist(artistId);
-                setUserFollows(false);
-            } else {
-                await followArtist(artistId);
-                setUserFollows(true);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-        return;
-    }
+    })
 
     const getPlayableSong = () => {
         let idx = 0;
@@ -79,15 +73,15 @@ const Artist: FunctionComponent = () => {
 
     return (
         <div>
-            {!artist ? <Loader /> :
+            {artistLoading ? <Loader /> : artistError ? <ErrorFallback refetch={artistRefetch} /> :
                 <div className="m-auto w-full lg:px-24 md:px-12 px-6 my-16 text-white">
                     <div className="flex items-center justify-center flex-col">
                         <img src={artist.images[0].url} alt={artist.name} className="lg:h-64 md:h-52 w-48 lg:w-64 md:w-52 h-48 rounded-full" />
                         <a href={artist.external_urls.spotify} target="_blank" className="lg:text-6xl md:text-5xl text-4xl font-bold my-7 hover:text-green-500">{artist.name}</a>
                         <div className="mb-7">
-                            <button onClick={handleFollow} className="text-white border px-9 py-2.5 rounded-full text-sm hover:text-black hover:bg-white">
+                            <button onClick={() => handleFollow.mutate()} className="text-white border px-9 py-2.5 rounded-full text-sm hover:text-black hover:bg-white">
                                 {
-                                    userFollows ? 'FOLLOWING' : 'FOLLOW'
+                                    !userFollowsLoading && userFollows ? 'FOLLOWING' : 'FOLLOW'
                                 }
                             </button>
                         </div>
@@ -115,19 +109,20 @@ const Artist: FunctionComponent = () => {
                         <p className="lg:text-3xl text-2xl font-bold">Top Tracks</p>
                     </div>
 
-                    {!topTracks ? <Loader /> : <div>
-                        <div className="my-5">
-                            <audio autoPlay loop>
-                                <source src={getPlayableSong()}></source>
-                            </audio>
-                        </div>
+                    {
+                        artistTopTracksLoading ? <Loader /> : artistTopTracksError ? <ErrorFallback refetch={topTracksRefetch} /> : <div>
+                            <div className="my-5">
+                                <audio autoPlay loop>
+                                    <source src={getPlayableSong()}></source>
+                                </audio>
+                            </div>
 
-                        <div className="flex flex-wrap gap-7 my-10">
-                            {topTracks.map((track: any, i: number) => (
-                                <Track key={i} trackId={track.id} trackAlbum={track.album.name} trackArtists={track.album.artists} trackDuration={track.duration_ms} trackPlayedAt={""} trackImage={track.album.images[2]?.url} trackName={'#' + (i + 1) + " " + track.name} tractAlbumId={track.album.id} />
-                            ))}
+                            <div className="flex flex-wrap gap-7 my-10">
+                                {topTracks.map((track: any, i: number) => (
+                                    <Track key={i} trackId={track.id} trackAlbum={track.album.name} trackArtists={track.album.artists} trackDuration={track.duration_ms} trackPlayedAt={""} trackImage={track.album.images[2]?.url} trackName={'#' + (i + 1) + " " + track.name} tractAlbumId={track.album.id} />
+                                ))}
+                            </div>
                         </div>
-                    </div>
                     }
 
 
@@ -135,7 +130,7 @@ const Artist: FunctionComponent = () => {
                         <p className="text-3xl font-extrabold">Albums</p>
                     </div>
                     <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
-                        {albums && albums.map((album: any, i: number) => (
+                        {artistAlbumsLoading ? <Loader /> : artistAlbumsError ? <ErrorFallback refetch={albumsRefetch} /> : albums.map((album: any, i: number) => (
                             <div key={i}>
                                 <Link to={`/album/${album.id}`}>
                                     <div className="track-card">

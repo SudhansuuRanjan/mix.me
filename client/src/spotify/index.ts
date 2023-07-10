@@ -94,13 +94,13 @@ export const getFollowing = () =>
  * https://developer.spotify.com/documentation/web-api/reference/player/get-recently-played/
  */
 export const getRecentlyPlayed = () =>
-    axios.get('https://api.spotify.com/v1/me/player/recently-played', { headers });
+    axios.get('https://api.spotify.com/v1/me/player/recently-played?limit=50', { headers });
 
 /**
  * Get a List of Current User's Playlists
  * https://developer.spotify.com/documentation/web-api/reference/playlists/get-a-list-of-current-users-playlists/
  */
-export const getPlaylists = () => axios.get('https://api.spotify.com/v1/me/playlists', { headers });
+export const getPlaylists = () => axios.get('https://api.spotify.com/v1/me/playlists?limit=50', { headers });
 
 /**
  * Get a User's Top Artists

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
-    <div className="flex items-center justify-center w-full h-screen">
+    <div className="flex items-center justify-center w-full h-[24rem]">
         {children}
     </div>
 );

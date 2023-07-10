@@ -1,30 +1,30 @@
 import { FunctionComponent, useState, useEffect } from "react";
 import { getTopArtists } from "../spotify";
-import { catchErrors } from "../utils";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 type TimeRange = "short_term" | "medium_term" | "long_term";
+import { useQuery } from "@tanstack/react-query";
+import ErrorFallback from '../components/ErrorFallback'
 
 const Artists: FunctionComponent = (): React.ReactNode => {
-    document.title = `Top Artists • SpotiStat`;
     const [timeRange, setTimeRange] = useState<TimeRange>('short_term');
-    const [topArtists, setTopArtists] = useState<any>(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const { data } = await getTopArtists(timeRange);
-            // console.log(data.items);
-            setTopArtists(data.items);
-        };
-        catchErrors(fetchData());
-    }, [timeRange])
+    const { data, isError, isLoading, refetch } = useQuery({
+        staleTime: 1000 * 60 * 20,
+        queryKey: ['top-artists', timeRange],
+        queryFn: async () => {
+            const res = await getTopArtists(timeRange);
+            return res.data;
+        },
+    });
 
     const handleChange = (e: any) => {
         setTimeRange(e.target.value);
-        setTopArtists(null);
     }
 
-
+    useEffect(() => {
+        document.title = `Top Artists • SpotiStat`;
+    }, [])
 
     return (
         <div className="m-auto w-full lg:px-24 md:px-16 px-6 pt-8 py-12 pb-32 text-white">
@@ -40,21 +40,23 @@ const Artists: FunctionComponent = (): React.ReactNode => {
                 </select>
             </div>
 
-            {!topArtists ? <Loader /> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
-                {topArtists.length === 0 ? <p className="text-center w-full py-16">No items.</p> : topArtists.map((artist: any, i: number) => (
-                    <Link key={i} to={`/artist/${artist.id}`}>
-                        <div>
-                            <div className="artist-card aspect-square overflow-hidden rounded-full">
-                                <img src={artist.images[1] ? artist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-full" alt="Album Cover" />
-                            </div>
-                            <p className="text-lg text-center font-semibold mt-3">{i + 1 + ". " + (artist.name ? artist.name : 'Artist Unavailable')}</p>
-                            <p className="text-xs mt-2 text-center text-gray-500">{artist.genres.length > 0 ? artist.genres.map((genre: any, i: number) => (
-                                genre + (i < artist.genres.length - 1 ? ", " : "")
-                            )) : 'Unavailable'}</p>
-                        </div>
-                    </Link>
-                ))}
-            </div>}
+            { isLoading ? <Loader /> 
+                    : isError ? <ErrorFallback refetch={refetch} />
+                : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
+                        {data.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data.items.map((artist: any, i: number) => (
+                            <Link key={i} to={`/artist/${artist.id}`}>
+                                <div>
+                                    <div className="artist-card aspect-square overflow-hidden rounded-full">
+                                        <img src={artist.images[1] ? artist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-full" alt="Album Cover" />
+                                    </div>
+                                    <p className="text-lg text-center font-semibold mt-3">{i + 1 + ". " + (artist.name ? artist.name : 'Artist Unavailable')}</p>
+                                    <p className="text-xs mt-2 text-center text-gray-500">{artist.genres.length > 0 ? artist.genres.map((genre: any, i: number) => (
+                                        genre + (i < artist.genres.length - 1 ? ", " : "")
+                                    )) : 'Unavailable'}</p>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>}
         </div>
     );
 }
