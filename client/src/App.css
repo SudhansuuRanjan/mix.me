@@ -80,7 +80,7 @@
 }
 
 .track-card:hover::before {
-    content: "@";
+    content: "↗";
     position: absolute;
     inset: 0;
     width: 100%;
@@ -94,7 +94,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 .truncat {

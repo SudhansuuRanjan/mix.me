@@ -34,8 +34,8 @@ const Playlists: FunctionComponent = () => {
                         {data.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data.items.map((playlist: any, i: number) => (
                             <div key={i}>
                                 <Link to={`/playlist/${playlist.id}`}>
-                                    <div className="track-card">
-                                        <img src={playlist.images.length !== 0 ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />
+                                    <div className="track-card bg-gray-950 rounded-md">
+                                        <img height={400} width={400} src={playlist.images.length !== 0 ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />
                                     </div>
                                 </Link>
                                 <p className="text-base font-semibold mt-2">{(playlist.name ? playlist.name : 'Playlist Unavailable')}</p>

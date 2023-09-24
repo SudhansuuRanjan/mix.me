@@ -13,7 +13,7 @@ const Artist: FunctionComponent = () => {
 
     const { data: artist, isLoading: artistLoading, isError: artistError, refetch: artistRefetch } = useQuery({
         queryKey: ['artist', artistId],
-        staleTime: 1000 * 60 * 60 * 24,
+        staleTime: Infinity,
         queryFn: async () => {
             const res = await getArtist(artistId);
             return res.data;
@@ -29,18 +29,18 @@ const Artist: FunctionComponent = () => {
         },
     });
 
-    const { data: topTracks, isLoading: artistTopTracksLoading, isError: artistTopTracksError, refetch:topTracksRefetch } = useQuery({
+    const { data: topTracks, isLoading: artistTopTracksLoading, isError: artistTopTracksError, refetch: topTracksRefetch } = useQuery({
         queryKey: ['artist-top-tracks', artistId],
-        staleTime: 1000 * 60 * 60 * 24,
+        staleTime: Infinity,
         queryFn: async () => {
             const res = await getArtistTopTracks(artistId);
             return res.data.tracks;
         }
     })
 
-    const { data: albums, isLoading: artistAlbumsLoading, isError: artistAlbumsError, refetch:albumsRefetch } = useQuery({
+    const { data: albums, isLoading: artistAlbumsLoading, isError: artistAlbumsError, refetch: albumsRefetch } = useQuery({
         queryKey: ['artist-albums', artistId],
-        staleTime: 1000 * 60 * 30,
+        staleTime: Infinity,
         queryFn: async () => {
             const res = await getArtistAlbums(artistId);
             return res.data.items;

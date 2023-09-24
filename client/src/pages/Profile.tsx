@@ -96,11 +96,13 @@ const Profile: FunctionComponent = () => {
                                 <div key={i}>
                                     <div className="">
                                         <Link to={track.name ? `/track/${track.id}` : ''}>
-                                            <div className="track-card aspect-square overflow-hidden">
-                                                <img loading='lazy' src={track.album.images[1] ? track.album.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className=" rounded-md" alt="Album Cover" />
+                                            <div className="track-card aspect-square overflow-hidden bg-gray-950 rounded-md">
+                                                <img height={400} width={400} loading='lazy' src={track.album.images[1] ? track.album.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className=" rounded-md" alt="Album Cover" />
                                             </div>
                                         </Link>
-                                        <Link to={track.name ? `/track/${track.id}` : ''} className="text-base font-semibold mt-2">{i + 1 + ". " + (track.name ? track.name : 'Track Unavailable')}</Link>
+                                        <Link to={track.name ? `/track/${track.id}` : ''} className="text-base font-semibold pt-2">
+                                            <p className="pt-2">{i + 1 + ". " + (track.name ? track.name : 'Track Unavailable')}</p>
+                                        </Link>
                                         <p className="text-sm">{track.artists.length > 0 ? track.artists.map((artist: any, i: number) => (
                                             <span key={i}>
                                                 <Link className="text-gray-400 hover:text-green-500 hover:underline" to={`/artist/${artist.id}`}>{artist.name}</Link>
@@ -169,8 +171,8 @@ const Profile: FunctionComponent = () => {
                             {data?.playlists && (data?.playlists.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data?.playlists.items.slice(0, 10).map((playlist: any, i: number) => (
                                 <div key={i}>
                                     <Link to={`/playlist/${playlist.id}`}>
-                                        <div className="track-card">
-                                            <img loading='lazy' src={playlist.images.length !== 0 ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />
+                                        <div className="track-card bg-gray-950 rounded-md">
+                                            <img height={400} width={400} loading='lazy' src={playlist.images.length !== 0 ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />
                                         </div>
                                     </Link>
                                     <p className="text-base font-semibold mt-2">{(playlist.name ? playlist.name : 'Playlist Unavailable')}</p>

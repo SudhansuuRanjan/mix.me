@@ -23,9 +23,14 @@ const LikedSongs: FunctionComponent = () => {
 
     const handleScroll = () => {
         if (typeof window !== 'undefined') {
-            const isAtBottom =
-                window.innerHeight + window.scrollY >= document.body.offsetHeight;
-            if (isAtBottom) {
+            // Calculate the distance from the top to the bottom of the page
+            const pageHeight = document.documentElement.scrollHeight;
+            // Calculate the current position of the bottom of the viewport
+            const bottomOfViewport = window.innerHeight + window.scrollY;
+
+            // Check if we have reached the bottom of the page
+            if (bottomOfViewport >= pageHeight - 100) {
+                // Increment the current page number
                 setCurrentPage((prevPage) => prevPage + 1);
             }
         }
@@ -54,7 +59,6 @@ const LikedSongs: FunctionComponent = () => {
         let idx = 0;
         while (idx < 10) {
             if (likedSongs.length !== 0 && likedSongs[idx].track.preview_url) {
-                // console.log(topTracks[idx].preview_url);
                 return likedSongs[idx].track.preview_url;
             } else {
                 idx++;
@@ -81,7 +85,7 @@ const LikedSongs: FunctionComponent = () => {
                         <audio loop autoPlay>
                             <source src={getPlayableSong()}></source>
                         </audio>
-                        {likedSongs.length === 0 ? <p className="text-center w-full py-16">No items.</p> :likedSongs.map((recent: any, i: number) => (
+                        {likedSongs.length === 0 ? <p className="text-center w-full py-16">No items.</p> : likedSongs.map((recent: any, i: number) => (
                             <Track
                                 key={i}
                                 trackId={recent.track.id}

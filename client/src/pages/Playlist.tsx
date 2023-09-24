@@ -68,7 +68,9 @@ const Playlist: FunctionComponent = () => {
                         <div className="flex flex-col md:flex-row gap-7">
                             <div className="flex flex-col gap-3">
                                 <div className="flex lg:flex-row md:flex-row flex-col gap-4">
-                                    <img className="w-52 h-52 rounded-lg" src={data?.playlist.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : data?.playlist.images[0]?.url} alt={data?.playlist.name} />
+                                    <div className="w-fit bg-gray-950 rounded-md">
+                                        <img height={500} width={500} className="w-52 h-52 rounded-lg" src={data?.playlist.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : data?.playlist.images[0]?.url} alt={data?.playlist.name} />
+                                    </div>
                                     <div className="flex flex-col">
                                         <p className="lg:text-4xl md:text-3xl text-2xl font-semibold my-1">{data?.playlist.name}</p>
                                         <p className="text-gray-400 lg:text-base md:text-base text-sm mt-1 max-w-md">{data?.playlist.description}</p>

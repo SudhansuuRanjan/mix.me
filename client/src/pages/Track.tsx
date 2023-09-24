@@ -7,12 +7,13 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import ErrorFallback from '../components/ErrorFallback'
 
+
 const Track: FunctionComponent = () => {
     const { trackId }: any = useParams();
 
     const { data, isLoading, isError, refetch } = useQuery({
         queryKey: ['track', trackId],
-        staleTime: 1000 * 60 * 60 * 24,
+        staleTime: Infinity,
         queryFn: async () => {
             const res = await getTrackInfo(trackId);
             return { track: res.track, audioFeatures: res.audioFeatures, audioAnalysis: res.audioAnalysis };
@@ -148,8 +149,8 @@ const Track: FunctionComponent = () => {
                             </div>
                         </div>
                     </div>
-
                 </div>
+
             </div>}
         </div>
     );
