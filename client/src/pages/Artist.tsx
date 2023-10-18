@@ -3,7 +3,7 @@ import { getArtist, doesUserFollowArtist, followArtist, unfollowArtist, getArtis
 import Loader from "../components/Loader";
 import { formatWithCommas } from "../utils";
 import Track from "../components/Track";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import ErrorFallback from '../components/ErrorFallback'
 import AlbumCard from "../components/AlbumCard";
