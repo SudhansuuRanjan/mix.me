@@ -78,7 +78,7 @@ const Playlist: FunctionComponent = () => {
                                             <div>
                                                 {userData?.following ? <AiFillHeart onClick={handleUnfollowPlaylist} className="text-pink-500 cursor-pointer" size={24} /> : <AiOutlineHeart onClick={handleFollowPlaylist} className="text-pink-500 cursor-pointer" size={24} />}
                                             </div>&nbsp;·&nbsp;
-                                            <a href="" className="text-green-500 hover:underline text-sm">By {data?.playlist.owner.display_name}</a> &nbsp;·&nbsp;
+                                            <Link to={`/user?user_id=${data?.playlist.owner.display_name}`} className="text-green-500 hover:underline text-sm">By {data?.playlist.owner.display_name}</Link> &nbsp;·&nbsp;
                                             <p className="text-gray-200 hover:text-gray-400 text-sm font-medium">{formatWithCommas(data?.playlist.followers.total)} Likes</p> &nbsp;·&nbsp;
                                             <p className="text-gray-200 hover:text-gray-400 text-sm font-medium">{data?.playlist.tracks.total} Songs</p>
                                         </div>

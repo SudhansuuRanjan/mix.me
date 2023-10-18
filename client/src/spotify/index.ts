@@ -158,8 +158,8 @@ export const getArtist = (artistId: string) =>
  * https://developer.spotify.com/documentation/web-api/reference/follow/follow-artists-users/
  * @param artistId
  */
-export const followArtist = (artistId: string) => {
-    const url = `https://api.spotify.com/v1/me/following?type=artist&ids=${artistId}`;
+export const followUserOrArtist = (artistId: string, type: string) => {
+    const url = `https://api.spotify.com/v1/me/following?type=${type}&ids=${artistId}`;
     return axios({ method: 'put', url, headers });
 };
 
@@ -168,8 +168,8 @@ export const followArtist = (artistId: string) => {
  * https://developer.spotify.com/documentation/web-api/reference/follow/follow-artists-users/
  * @param artistId
 */
-export const unfollowArtist = (artistId: string) => {
-    const url = `https://api.spotify.com/v1/me/following?type=artist&ids=${artistId}`;
+export const unfollowUserOrArtist = (artistId: string, type: string) => {
+    const url = `https://api.spotify.com/v1/me/following?type=${type}&ids=${artistId}`;
     return axios({ method: 'delete', url, headers });
 };
 
@@ -177,8 +177,8 @@ export const unfollowArtist = (artistId: string) => {
  * Check if Current User Follows Artists
  * https://developer.spotify.com/documentation/web-api/reference/follow/follow-artists-users/
  */
-export const doesUserFollowArtist = (artistId: string) =>
-    axios.get(`https://api.spotify.com/v1/me/following/contains?type=artist&ids=${artistId}`, {
+export const doesUserFollowArtistorUser = (artistId: string, type: string) =>
+    axios.get(`https://api.spotify.com/v1/me/following/contains?type=${type}&ids=${artistId}`, {
         headers,
     });
 
@@ -324,3 +324,24 @@ export const getAlbumInfo = (albumId: string) =>
     axios
         .all([getAlbum(albumId), getAlbumTracks(albumId)])
         .then(axios.spread((album, tracks) => ({ album, tracks })));
+
+
+export const getUserProfile = (user_id: string) => {
+    return axios.get(`https://api.spotify.com/v1/users/${user_id}`, { headers });
+}
+
+export const getUserPlaylists = (user_id: string) => {
+    return axios.get(`https://api.spotify.com/v1/users/${user_id}/playlists`, { headers });
+}
+
+export const getUserDetails = (user_id: string) =>
+    axios.all([getUserProfile(user_id), getUserPlaylists(user_id)])
+        .then(axios.spread((profile, playlists) => ({ profile: profile.data, playlists: playlists.data })));
+
+export const search = (query: string, type: string) => {
+    const allowedTypes = ['album', 'artist', 'playlist', 'track'];
+    if (!allowedTypes.includes(type)) {
+        throw new Error('Invalid type');
+    }
+    return axios.get(`https://api.spotify.com/v1/search?q=${query}&type=${type}`, { headers });
+}

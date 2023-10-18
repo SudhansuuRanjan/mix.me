@@ -9,6 +9,8 @@ import Artist from "./Artist";
 import Recommendations from "./Recommendations";
 import Album from "./Album";
 import LikedSongs from "./LikedSongs";
+import User from "./User";
+import Search from "./Search";
 
 
-export { Artists, Profile, Playlists, Recent, Track, Playlist, Artist, Recommendations, Tracks, Album, LikedSongs };
+export { Artists, Profile, Playlists, Recent, Track, Playlist, Artist, Recommendations, Tracks, Album, LikedSongs, User, Search };

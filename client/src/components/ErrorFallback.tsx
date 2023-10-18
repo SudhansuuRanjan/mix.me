@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { QueryObserverResult } from '@tanstack/react-query';
 
 interface ErrorFallbackProps {
-    refetch: () => Promise<QueryObserverResult<any, unknown>>;
+    refetch: () => Promise<QueryObserverResult<any, unknown>> | void;
 }
 
 const ErrorFallback: FunctionComponent<ErrorFallbackProps> = ({ refetch }): React.ReactElement => {

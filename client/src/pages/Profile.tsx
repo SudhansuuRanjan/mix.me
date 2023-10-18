@@ -57,7 +57,7 @@ const Profile: FunctionComponent = () => {
                         <Title title="Top Tracks" subtitle="Your top tracks of all time" link="/tracks" />
 
                         <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
-                            {data?.topTracks && (data?.topTracks.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data?.topTracks.slice(0, 15).map((track: any, i: number) => (
+                            {data?.topTracks && (data?.topTracks.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data?.topTracks.slice(0, 10).map((track: any, i: number) => (
                                 <TrackCard key={i} track={track} i={i} />
                             )))}
                         </div>
@@ -70,7 +70,7 @@ const Profile: FunctionComponent = () => {
                         <Title title="Top Artists" subtitle="Your top artists of all time" link="/artists" />
 
                         <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
-                            {data?.topArtists && (data?.topArtists.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data?.topArtists.items.slice(0, 15).map((artist: any, i: number) => (
+                            {data?.topArtists && (data?.topArtists.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data?.topArtists.items.slice(0, 10).map((artist: any, i: number) => (
                                 <ArtistCard key={i} artist={artist} i={i} />
                             )))}
                         </div>

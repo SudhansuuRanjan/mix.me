@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Artists, Profile, Playlists, Recent, Track, Tracks, Playlist, Artist, Recommendations, Album, LikedSongs } from '../pages';
+import { Artists, Profile, Playlists, Recent, Track, Tracks, Playlist, Artist, Recommendations, Album, LikedSongs, User, Search } from '../pages';
 import NavBar from '../components/NavBar';
 import ScrollToTop from '../hooks/useScrollToTop';
 import ErrorBoundary from '../components/ErrorBoundary';
@@ -26,6 +26,8 @@ const AppRoutes: FunctionComponent = () => {
                             <Route path="/album/:albumId" element={<Album />} />
                             <Route path='/liked' element={<LikedSongs />} />
                             <Route path="/recommendations/:playlistId" element={<Recommendations />} />
+                            <Route path="/user" element={<User />} />
+                            <Route path="search" element={<Search />} />
                         </Routes>
                     </div>
                 </ErrorBoundary>

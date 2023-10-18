@@ -4,6 +4,8 @@ import { MdAudiotrack } from 'react-icons/md'
 import { TbPlaylist } from 'react-icons/tb'
 import { AiFillGithub, AiFillHeart } from 'react-icons/ai'
 import { NavLink } from 'react-router-dom'
+import { FiSearch } from 'react-icons/fi'
+
 
 const NavBar = () => {
 
@@ -12,37 +14,43 @@ const NavBar = () => {
             title: 'Profile',
             path: '/',
             id: 1,
-            icon: <FaUser />
+            icon: <FaUser size={18} />
         },
         {
             title: 'Top Artists',
             path: '/artists',
             id: 2,
-            icon: <IoMdMicrophone />
+            icon: <IoMdMicrophone size={18} />
         },
         {
             title: 'Top Tracks',
             path: '/tracks',
             id: 3,
-            icon: <MdAudiotrack />
+            icon: <MdAudiotrack size={18} />
         },
         {
             title: 'Recent',
             path: '/recent',
             id: 4,
-            icon: <FaHistory />
+            icon: <FaHistory size={18} />
         },
         {
             title: 'Playlists',
             path: '/playlists',
             id: 5,
-            icon: <TbPlaylist />
+            icon: <TbPlaylist size={18} />
         },
         {
             title: 'Liked',
             path: '/liked',
             id: 6,
-            icon: <AiFillHeart />
+            icon: <AiFillHeart size={18} />
+        },
+        {
+            title: 'Search',
+            path: '/search',
+            id: 7,
+            icon: <FiSearch size={18} />
         },
     ]
 
@@ -59,7 +67,7 @@ const NavBar = () => {
                         return (
                             <NavLink key={link.id} className="w-full" style={{ textDecoration: "none" }} to={link.path}>
                                 {({ isActive }: { isActive: boolean }) => (
-                                    <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-500 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
+                                    <div className={`flex flex-col lg:w-22 md:w-22 w-full lg:h-[4.2rem] md:h-[4.2rem] h-20 cursor-pointer text-gray-500 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
                                         {link.icon}
                                         <p className='lg:text-xs md:text-xs text-[0.6rem]'>{link.title}</p>
                                     </div>

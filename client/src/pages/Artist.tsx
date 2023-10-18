@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect } from "react";
-import { getArtist, doesUserFollowArtist, followArtist, unfollowArtist, getArtistTopTracks, getArtistAlbums } from "../spotify";
+import { getArtist, doesUserFollowArtistorUser, followUserOrArtist, unfollowUserOrArtist, getArtistTopTracks, getArtistAlbums } from "../spotify";
 import Loader from "../components/Loader";
 import { formatWithCommas } from "../utils";
 import Track from "../components/Track";
@@ -25,7 +25,7 @@ const Artist: FunctionComponent = () => {
         queryKey: ['user-follows', artistId],
         staleTime: 1000 * 60 * 60 * 24,
         queryFn: async () => {
-            const res = await doesUserFollowArtist(artistId);
+            const res = await doesUserFollowArtistorUser(artistId, "artist");
             return res.data[0];
         },
     });
@@ -53,7 +53,7 @@ const Artist: FunctionComponent = () => {
     }, [artist])
 
     const handleFollow = useMutation({
-        mutationFn: async () => userFollows ? await unfollowArtist(artistId) : await followArtist(artistId),
+        mutationFn: async () => userFollows ? await unfollowUserOrArtist(artistId, "artist") : await followUserOrArtist(artistId, "artist"),
         onSuccess: () => {
             userFollowsRefetch();
         }
