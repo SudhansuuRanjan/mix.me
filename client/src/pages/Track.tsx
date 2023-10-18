@@ -44,9 +44,9 @@ const Track: FunctionComponent = () => {
                         <source src={getPlayableSong()}></source>
                     </audio>
                     <div>
-                        <img className="lg:h-56 md:h-56 h-56 lg:w-56 md:w-56 w-56" src={data?.track.album.images[0].url} alt="Album Artwork" />
+                        <img data-aos="zoom-in" className="lg:h-56 md:h-56 h-56 lg:w-56 md:w-56 w-56" src={data?.track.album.images[0].url} alt="Album Artwork" />
                     </div>
-                    <div>
+                    <div data-aos="fade-left">
                         <p className="lg:text-4xl md:text-3xl text-2xl font-bold">{data?.track.name}</p>
                         <p className="lg:text-xl md:text-xl text-lg font-semibold text-gray-400 lg:my-3 md:my-2 my-1">By {data?.track.album.artists.map((artist: any, i: number) => (
                             <React.Fragment key={artist.id}>
@@ -71,15 +71,15 @@ const Track: FunctionComponent = () => {
                 <div className="my-16">
                     <div className="grid text-gray-300 w-full mb-0 text-center border border-t-gray-500 border-l-gray-500 border-b-0 border-r-0 lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)]">
 
-                        <div className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
                             <div className="text-3xl font-bold">{formatDuration(data?.audioFeatures.duration_ms)}</div>
                             <div>Duration</div>
                         </div>
-                        <div className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
                             <div className="text-3xl font-bold">{parsePitchClass(data?.audioFeatures.key)}</div>
                             <div>Key</div>
                         </div>
-                        <div className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
                             <div className="text-3xl font-bold">
                                 {data?.audioFeatures.mode === 1 ? 'Major' : 'Minor'}
                             </div>
@@ -87,7 +87,7 @@ const Track: FunctionComponent = () => {
                                 Modality
                             </div>
                         </div>
-                        <div className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
                             <div className="text-3xl font-bold">
                                 {data?.audioFeatures.time_signature}
                             </div>
@@ -95,7 +95,7 @@ const Track: FunctionComponent = () => {
                                 Time Signature
                             </div>
                         </div>
-                        <div className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
                             <div className="text-3xl font-bold">
                                 {Math.round(data?.audioFeatures.tempo)}
                             </div>
@@ -104,7 +104,7 @@ const Track: FunctionComponent = () => {
                             </div>
                         </div>
 
-                        <div className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
                             <div className="text-3xl font-bold">
                                 {data?.track.popularity}%
                             </div>
@@ -113,7 +113,7 @@ const Track: FunctionComponent = () => {
                             </div>
                         </div>
 
-                        <div className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
                             <div className="text-3xl font-bold">
                                 {data?.audioAnalysis.bars.length}
                             </div>
@@ -122,7 +122,7 @@ const Track: FunctionComponent = () => {
                             </div>
                         </div>
 
-                        <div className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
                             <div className="text-3xl font-bold">
                                 {data?.audioAnalysis.beats.length}
                             </div>
@@ -131,7 +131,7 @@ const Track: FunctionComponent = () => {
                             </div>
                         </div>
 
-                        <div className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
                             <div className="text-3xl font-bold">
                                 {data?.audioAnalysis.sections.length}
                             </div>
@@ -140,7 +140,7 @@ const Track: FunctionComponent = () => {
                             </div>
                         </div>
 
-                        <div className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
                             <div className="text-3xl font-bold">
                                 {data?.audioAnalysis.segments.length}
                             </div>
@@ -150,7 +150,6 @@ const Track: FunctionComponent = () => {
                         </div>
                     </div>
                 </div>
-
             </div>}
         </div>
     );

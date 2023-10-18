@@ -3,9 +3,50 @@ import { IoMdMicrophone } from 'react-icons/io'
 import { MdAudiotrack } from 'react-icons/md'
 import { TbPlaylist } from 'react-icons/tb'
 import { AiFillGithub, AiFillHeart } from 'react-icons/ai'
-import { NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const NavBar = () => {
+
+    let navLinks = [
+        {
+            title: 'Profile',
+            path: '/',
+            id: 1,
+            icon: <FaUser />
+        },
+        {
+            title: 'Top Artists',
+            path: '/artists',
+            id: 2,
+            icon: <IoMdMicrophone />
+        },
+        {
+            title: 'Top Tracks',
+            path: '/tracks',
+            id: 3,
+            icon: <MdAudiotrack />
+        },
+        {
+            title: 'Recent',
+            path: '/recent',
+            id: 4,
+            icon: <FaHistory />
+        },
+        {
+            title: 'Playlists',
+            path: '/playlists',
+            id: 5,
+            icon: <TbPlaylist />
+        },
+        {
+            title: 'Liked',
+            path: '/liked',
+            id: 6,
+            icon: <AiFillHeart />
+        },
+    ]
+
+
     return (
         <div className='lg:w-24 z-50 md:w-24 w-full bg-black flex lg:flex-col md:flex-col flex-row items-center justify-between lg:h-screen md:h-screen h-20 fixed bottom-0'>
             <NavLink to="/" className='lg:flex md:flex hidden'>
@@ -13,59 +54,20 @@ const NavBar = () => {
             </NavLink>
 
             <div className='flex lg:flex-col md:flex-col flex-row items-center justify-between my-5 w-full'>
-                <NavLink className="w-full" style={{ textDecoration: "none" }} to="/">
-                    {({ isActive }: { isActive: boolean }) => (
-                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
-                            <FaUser  />
-                            <p className='lg:text-xs md:text-xs text-[0.6rem]'>Profile</p>
-                        </div>
-                    )}
-                </NavLink>
-
-                <NavLink className="w-full" style={{ textDecoration: "none" }} to="/artists">
-                    {({ isActive }: { isActive: boolean }) => (
-                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
-                            <IoMdMicrophone  />
-                            <p className='lg:text-xs md:text-xs text-[0.6rem]'>Top Artists</p>
-                        </div>
-                    )}
-                </NavLink>
-
-                <NavLink className="w-full" style={{ textDecoration: "none" }} to="/tracks">
-                    {({ isActive }: { isActive: boolean }) => (
-                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl  ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
-                            <MdAudiotrack />
-                            <p className='lg:text-xs md:text-xs text-[0.6rem]'>Top Tracks</p>
-                        </div>
-                    )}
-                </NavLink>
-
-                <NavLink className="w-full" style={{ textDecoration: "none" }} to="/recent">
-                    {({ isActive }: { isActive: boolean }) => (
-                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl  ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
-                            <FaHistory />
-                            <p className='lg:text-xs md:text-xs text-[0.6rem]'>Recent</p>
-                        </div>
-                    )}
-                </NavLink>
-
-                <NavLink className="w-full" style={{ textDecoration: "none" }} to="/playlists">
-                    {({ isActive }: { isActive: boolean }) => (
-                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
-                            <TbPlaylist  />
-                            <p className='lg:text-xs md:text-xs text-[0.6rem]'>Playlists</p>
-                        </div>
-                    )}
-                </NavLink>
-
-                <NavLink className="w-full lg:block md:block hidden" style={{ textDecoration: "none" }} to="/liked">
-                    {({ isActive }: { isActive: boolean }) => (
-                        <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
-                            <AiFillHeart  />
-                            <p className='lg:text-xs md:text-xs text-[0.6rem]'>Liked</p>
-                        </div>
-                    )}
-                </NavLink>
+                {
+                    navLinks.map((link) => {
+                        return (
+                            <NavLink key={link.id} className="w-full" style={{ textDecoration: "none" }} to={link.path}>
+                                {({ isActive }: { isActive: boolean }) => (
+                                    <div className={`flex flex-col lg:w-24 md:w-24 w-full h-20 cursor-pointer text-gray-500 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
+                                        {link.icon}
+                                        <p className='lg:text-xs md:text-xs text-[0.6rem]'>{link.title}</p>
+                                    </div>
+                                )}
+                            </NavLink>
+                        )
+                    })
+                }
             </div>
 
             <div className='my-5 lg:flex md:flex hidden'>

@@ -37,7 +37,7 @@ const Recent: FunctionComponent = () => {
         <div>
             {isLoading ? <Loader /> : isError ? <ErrorFallback refetch={refetch} />
                 : <div className="m-auto w-full lg:px-24 md:px-12 px-6 mt-8 mb-16 text-white">
-                    <div className="flex justify-between">
+                    <div data-aos="fade-right" className="flex justify-between">
                         <div>
                             <p className="lg:text-2xl md:text-2xl text-xl font-semibold">Recent streams</p>
                             <p className="text-gray-500 lg:text-base md:text-base text-xs">Your recently played tracks</p>

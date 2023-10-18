@@ -44,7 +44,7 @@ const Tracks: FunctionComponent = (): React.ReactNode => {
     return (
         <div className="m-auto w-full lg:px-24 md:px-16 px-6 pt-8 py-12 pb-32 text-white">
             <div className="flex justify-between  items-center">
-                <div>
+                <div data-aos="fade-right">
                     <p className="lg:text-2xl md:text-2xl text-xl font-semibold">Top Tracks</p>
                     <p className="text-gray-500 lg:text-base md:text-base text-xs">Your top tracks</p>
                 </div>

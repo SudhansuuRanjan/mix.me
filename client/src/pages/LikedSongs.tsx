@@ -72,7 +72,7 @@ const LikedSongs: FunctionComponent = () => {
                 <Loader />
             ) : (
                 <div className="m-auto w-full lg:px-24 md:px-16 px-6 pt-8 py-12 pb-32 text-white">
-                    <div className="flex justify-between">
+                    <div data-aos="fade-right" className="flex justify-between">
                         <div>
                             <p className="lg:text-2xl md:text-2xl text-xl font-semibold">
                                 Liked Songs

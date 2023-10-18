@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 export default function Track({ trackId, trackImage, trackName, trackArtists, trackAlbum, trackDuration, trackPlayedAt, tractAlbumId }: { trackId: string, trackImage: string, trackName: string, trackArtists: any, trackAlbum: string, trackDuration: number, trackPlayedAt: string, tractAlbumId: string }) {
 
     return (
-        <div className="w-[100%] flex items-center justify-between">
+        <div data-aos="fade-up" className="w-[100%] flex items-center justify-between">
             <div className="flex items-center lg:gap-5 md:gap-4 gap-2">
                 <Link to={trackAlbum !== "" ? `/track/${trackId}` : ""} className='lg:h-16 md:h-16 h-12 lg:w-16 md:w-16 w-12 bg-gray-900'>
                     <img loading='lazy' className="lg:h-16 md:h-16 h-12 lg:w-16 md:w-16 w-12" src={trackImage ? trackImage : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} alt={trackName} />

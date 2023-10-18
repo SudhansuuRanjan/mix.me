@@ -29,8 +29,8 @@ export default function Album(): React.ReactNode {
                 {
                     isLoading ? <Loader /> : isError ? <ErrorFallback refetch={refetch} /> :
                         <div className="flex flex-col md:flex-row gap-7">
-                            <img className="w-52 h-52 rounded-lg" src={data?.album.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : data?.album.images[0]?.url} alt={data?.album.name} />
-                            <div className="flex flex-col">
+                            <img data-aos="zoom-in" className="w-52 h-52 rounded-lg" src={data?.album.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : data?.album.images[0]?.url} alt={data?.album.name} />
+                            <div  data-aos="fade-left" className="flex flex-col">
                                 <p className="lg:text-4xl md:text-3xl text-2xl font-semibold my-1">{data?.album.name}</p>
                                 <p className="text-gray-400 text-medium text-lg mt-1 max-w-md">{data?.album.label}</p>
                                 <div className='text-green-500 mt-1 lg:text-base md:text-base text-sm'>
@@ -57,7 +57,7 @@ export default function Album(): React.ReactNode {
                         </div>
                 }
 
-                <div>
+                <div data-aos="fade-up">
                     <p className='lg:text-3xl md:text-2xl text-xl font-semibold mt-20'>Tracks</p>
                 </div>
 
@@ -70,7 +70,7 @@ export default function Album(): React.ReactNode {
                         </div>
                 }
 
-                <div className='mt-12'>
+                <div data-aos="fade-up" className='mt-12'>
                     {
                         !isLoading && data?.album.copyrights.map((cpy: { text: string, type: string }, id: number) => (
                             <p key={id}>{cpy.text}</p>
