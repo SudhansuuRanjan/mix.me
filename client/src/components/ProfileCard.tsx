@@ -11,17 +11,17 @@ const ProfileCard = ({ data, logout, totalPlaylists }: any) => {
                 <div className="flex justify-center gap-6 items-center mt-3">
                     <div>
                         <p className="text-xl font-semibold text-green-500">{data?.user.followers.total}</p>
-                        <p className="text-sm text-gray-500">FOLLOWERS</p>
+                        <p className="text-sm text-gray-400">FOLLOWERS</p>
                     </div>
 
                     <div>
                         <p className="text-xl font-semibold text-green-500">{data?.followedArtists && data?.followedArtists.artists.items.length}</p>
-                        <p className="text-sm text-gray-500">FOLLOWING</p>
+                        <p className="text-sm text-gray-400">FOLLOWING</p>
                     </div>
 
                     <div>
                         <p className="text-xl font-semibold text-green-500">{totalPlaylists}</p>
-                        <p className="text-sm text-gray-500">PLAYLISTS</p>
+                        <p className="text-sm text-gray-400">PLAYLISTS</p>
                     </div>
                 </div>
 

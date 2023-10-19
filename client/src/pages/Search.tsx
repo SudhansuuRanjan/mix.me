@@ -58,9 +58,9 @@ const Search = () => {
         <div className="w-full">
             <div className="m-auto w-full flex flex-col items-center justify-center">
                 <form onSubmit={handleSubmit} className="lg:pt-14 md:pt-14 pt-8 flex flex-col lg:w-[40rem] md:w-[32rem] w-[90%] gap-6">
-                    <div className="flex lg:gap-6 md:gap-6 gap-3">
-                        <input value={searchParams.get("search") as string} onChange={onChange} type="text" placeholder="Search" className="w-full h-12 px-5 shadow-lg rounded-2xl text-sm bg-gray-900 focus:outline-none border-gray-700 border" />
-                        <button className="text-white bg-green-600 hover:bg-green-700 lg:px-8 md:px-7 px-6 h-12 rounded-2xl">
+                    <div className="flex lg:gap-6 md:gap-6 gap-2">
+                        <input value={searchParams.get("search") as string} onChange={onChange} type="search" placeholder="Search" className="w-full h-12 px-5 shadow-lg rounded-2xl text-sm bg-gray-900 focus:outline-none border-gray-700 border" />
+                        <button className="text-white bg-green-600 hover:bg-green-700 lg:px-8 md:px-7 px-4 h-12 rounded-2xl">
                             Search
                         </button>
                     </div>
@@ -87,7 +87,7 @@ const Search = () => {
                     {
                         error ? <ErrorFallback refetch={() => { }} /> :
                             loading ? <Loader /> :
-                                <div className="flex flex-col gap-6 mt-16 pb-20">
+                                <div className="flex flex-col gap-6 lg:mt-16 md:mt-16 mt-12 pb-20">
                                     {
                                         type === "track" &&
                                         <div className="flex flex-wrap gap-5"> {data?.tracks?.items.map((track: any) => (

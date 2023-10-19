@@ -5,7 +5,7 @@ const AlbumCard = ({ album }: any) => {
         <div data-aos="fade-up">
             <Link to={`/album/${album.id}`}>
                 <div className="track-card">
-                    <img height={400} width={400} src={album.images[1].url ? album.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />
+                    <img loading="lazy" height={400} width={400} src={album.images[1].url ? album.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />
                 </div>
             </Link>
             <p className="text-base font-semibold mt-2">{(album.name ? album.name : 'Playlist Unavailable')}</p>
@@ -19,7 +19,7 @@ const AlbumCard = ({ album }: any) => {
                     </span>
                 ))
             }</p>
-            <p className="text-sm text-gray-500">{album.total_tracks} {
+            <p className="text-sm text-slate-400">{album.total_tracks} {
                 album.total_tracks > 1 ? 'SONGS' : 'SONG'
             }</p>
         </div>

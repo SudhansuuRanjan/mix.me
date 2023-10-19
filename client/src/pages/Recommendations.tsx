@@ -49,11 +49,11 @@ const Recommendations: FunctionComponent = () => {
 
     return (
         <div>
-            <div className="m-auto w-full lg:px-24 md:px-12 px-6 my-16 text-white">
+            <div className="m-auto w-full lg:px-24 md:px-16 px-6 pt-8 py-12 pb-32 text-white">
                 {
                     isLoading ? <Loader /> : isError ? <ErrorFallback refetch={refetch} /> :
                         <div>
-                            <div className="flex justify-between items-center gap-6">
+                            <div className="flex justify-between items-start lg:flex-row md:flex-row flex-col gap-6">
                                 <p className="text-2xl font-semibold">Recommendations based on <Link to={`/playlist/${data?.playlist.id}`} className="text-green-500 hover:underline">{data?.playlist.name}</Link></p>
                                 <button onClick={() => createPlaylistMutation()} className="text-white bg-green-600 hover:bg-white hover:text-black rounded-full px-4 py-2 text-xs font-light">SAVE TO SPOTIFY</button>
                             </div>

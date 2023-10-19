@@ -10,7 +10,7 @@ const PlaylistCard = ({ i, playlist }: any) => {
             </Link>
             <p className="text-base font-semibold mt-2">{(playlist.name ? playlist.name : 'Playlist Unavailable')}</p>
             <p className="text-xs text-green-500 my-1">By <Link className="underline hover:text-blue-400" to={`/user?user_id=${playlist.owner.id}`}>{playlist.owner.display_name.length > 16 ? playlist.owner.display_name.substring(0, 16) + ".." : playlist.owner.display_name}</Link></p>
-            <p className="text-sm text-gray-500">{playlist.tracks.total} TRACKS</p>
+            <p className="text-sm text-slate-400">{playlist.tracks.total} TRACKS</p>
         </div>
     )
 }

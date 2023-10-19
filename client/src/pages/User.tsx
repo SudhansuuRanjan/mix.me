@@ -49,7 +49,7 @@ const User = () => {
             {
                 isLoading ? <Loader /> :
                     isError ? <ErrorFallback refetch={refetch} /> :
-                        <div className="m-auto w-full lg:px-24 md:px-12 px-6 my-16 text-white">
+                        <div className="m-auto w-full lg:px-24 md:px-12 px-6 pb-10 my-16 text-white">
                             <div className="flex items-center justify-center flex-col">
                                 <img data-aos="zoom-in" src={data.profile.images.length !== 0 ? data.profile.images[1].url : "https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg"} alt={data.profile.display_name} className="lg:h-52 md:h-48 w-36 lg:w-52 md:w-48 h-36 rounded-full" />
                                 <a data-aos="fade-up" href={data.profile.external_urls.spotify} target="_blank" className="lg:text-5xl md:text-4xl text-3xl font-bold my-7 hover:text-green-500">{data.profile.display_name}</a>

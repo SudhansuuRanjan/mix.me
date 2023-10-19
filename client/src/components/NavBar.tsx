@@ -87,7 +87,7 @@ const NavBar = () => {
                         return (
                             <NavLink key={link.id} className="w-full" style={{ textDecoration: "none" }} to={link.path}>
                                 {({ isActive }: { isActive: boolean }) => (
-                                    <div className={`flex flex-col lg:w-22 md:w-22 w-full lg:h-[4.2rem] md:h-[4.2rem] h-20 cursor-pointer text-gray-500 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
+                                    <div className={`flex flex-col lg:w-22 md:w-22 w-full lg:h-[4.2rem] md:h-[4.2rem] h-20 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center gap-2 lg:text-2xl md:text-2xl text-xl ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
                                         {link.icon}
                                         <p className='lg:text-xs md:text-xs text-[0.6rem]'>{link.title}</p>
                                     </div>
