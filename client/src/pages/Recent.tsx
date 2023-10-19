@@ -49,7 +49,7 @@ const Recent: FunctionComponent = () => {
                             <source src={getPlayableSong()}></source>
                         </audio>
                         {data.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data.items.map((recent: any, i: number) => (
-                            <Track key={i} trackId={recent.track.id} trackAlbum={recent.track.album.name} trackArtists={recent.track.album.artists} trackDuration={recent.track.duration_ms} trackPlayedAt={recent.played_at} trackImage={recent.track.album.images[2].url} trackName={recent.track.name} tractAlbumId={recent.track.album.id} />
+                            <Track key={i} trackId={recent.track.id} trackAlbum={recent.track.album.name} trackArtists={recent.track.album.artists} trackDuration={recent.track.duration_ms} trackPlayedAt={recent.played_at} trackImage={recent.track.album.images[1].url} trackName={recent.track.name} tractAlbumId={recent.track.album.id} />
                         ))}
                     </div>
                 </div>}

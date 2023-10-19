@@ -65,7 +65,7 @@ const Tracks: FunctionComponent = (): React.ReactNode => {
 
                     <div className="flex flex-wrap gap-7 my-10">
                         {data.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data.map((track: any, i: number) => (
-                            <Track key={i} trackId={track.id} trackAlbum={track.album.name} trackArtists={track.album.artists} trackDuration={track.duration_ms} trackPlayedAt={""} trackImage={track.album.images[2]?.url} trackName={'#' + (i + 1) + " " + track.name} tractAlbumId={track.album.id} />
+                            <Track key={i} trackId={track.id} trackAlbum={track.album.name} trackArtists={track.album.artists} trackDuration={track.duration_ms} trackPlayedAt={""} trackImage={track.album.images[1]?.url} trackName={'#' + (i + 1) + " " + track.name} tractAlbumId={track.album.id} />
                         ))}
                     </div>
                 </div>

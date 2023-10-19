@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { getUserInfo, logout, getLikedSongs } from "../spotify";
 import Loader from "../components/Loader";
 import Track from "../components/Track";
@@ -26,11 +26,30 @@ const Profile: FunctionComponent = () => {
                 topTracks: res.topTracks.items
             };
         }
-    })
+    });
+
+    const [topGenres, setTopGenres] = useState(null);
 
     useEffect(() => {
         document.title = `${isLoading ? "Profile" : data?.user.display_name} • SpotiStat`;
-    }, [data?.user]);
+        if (data?.topArtists) {
+            getTopGenres(data?.topArtists.items);
+        }
+    }, [data]);
+
+    const getTopGenres = (artists: any) => {
+        // get all genres freq in an array in sorted order
+        const genres = artists.map((artist: any) => artist.genres).flat();
+        const genresFreq = genres.reduce((acc: any, curr: any) => {
+            acc[curr] ? acc[curr]++ : acc[curr] = 1;
+            return acc;
+        }, {});
+
+        // sort genres based on freq
+        const sortedGenres = Object.entries(genresFreq).sort((a: any, b: any) => b[1] - a[1]);
+        setTopGenres(sortedGenres as any);
+        return sortedGenres;
+    }
 
     const { data: likedSongs, isLoading: likedSongsLoading, isError: likedSongsError, refetch: refetchLikedSongs } = useQuery({
         queryKey: ['liked-songs'],
@@ -48,7 +67,7 @@ const Profile: FunctionComponent = () => {
             {isLoading ? <Loader /> : isError ? <ErrorFallback refetch={refetch} /> : (
                 <div className="m-auto w-full flex flex-col items-center justify-center">
                     {/* profile */}
-                    <ProfileCard data={data} logout={logout} totalPlaylists={totalPlaylists} />
+                    <ProfileCard topGenres={topGenres} data={data} logout={logout} totalPlaylists={totalPlaylists} />
 
 
                     {/* Top Tracks */}
@@ -100,7 +119,7 @@ const Profile: FunctionComponent = () => {
                                 likedSongsError ?
                                     <ErrorFallback refetch={refetchLikedSongs} /> :
                                     (likedSongs.length === 0 ? <p className="text-center w-full py-16">No items.</p> : likedSongs.slice(0, 10).map((recent: any, i: number) => (
-                                        <Track key={i} trackId={recent.track.id} trackAlbum={recent.track.album.name} trackArtists={recent.track.album.artists} trackDuration={recent.track.duration_ms} trackPlayedAt={recent.played_at} trackImage={recent.track.album.images[2].url} trackName={recent.track.name} tractAlbumId={recent.track.album.id} />
+                                        <Track key={i} trackId={recent.track.id} trackAlbum={recent.track.album.name} trackArtists={recent.track.album.artists} trackDuration={recent.track.duration_ms} trackPlayedAt={recent.played_at} trackImage={recent.track.album.images[1].url} trackName={recent.track.name} tractAlbumId={recent.track.album.id} />
                                     )))}
                         </div>
 

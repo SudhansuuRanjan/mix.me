@@ -1,6 +1,6 @@
 
 
-const ProfileCard = ({ data, logout, totalPlaylists }: any) => {
+const ProfileCard = ({ data, logout, totalPlaylists, topGenres }: any) => {
     return (
         <div data-aos="zoom-in-up" className="m-auto mt-16 flex flex-col items-center justify-center">
             <div>
@@ -22,6 +22,15 @@ const ProfileCard = ({ data, logout, totalPlaylists }: any) => {
                     <div>
                         <p className="text-xl font-semibold text-green-500">{totalPlaylists}</p>
                         <p className="text-sm text-gray-400">PLAYLISTS</p>
+                    </div>
+                </div>
+
+                <div data-aos="fade-in" className="my-10">
+                    <div>
+                        <p className="text-blue-500 lg:text-2xl md:2xl text-xl text-center font-bold">{topGenres ? topGenres.slice(0, 3).map((genre: any, i: number) => (
+                            genre[0] + (i < topGenres.slice(0, 3).length - 1 ? ', ' : '')
+                        )) : 'Unavailable'}</p>
+                        <p className="text-gray-400 text-center">YOUR TOP GENRES</p>
                     </div>
                 </div>
 

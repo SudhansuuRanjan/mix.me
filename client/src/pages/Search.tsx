@@ -91,7 +91,7 @@ const Search = () => {
                                     {
                                         type === "track" &&
                                         <div className="flex flex-wrap gap-5"> {data?.tracks?.items.map((track: any) => (
-                                            <Track key={track.id} trackId={track.id} trackImage={track.album.images[0].url} trackName={track.name} trackArtists={track.artists} trackAlbum={track.album.name} trackDuration={track.duration_ms} trackPlayedAt={track.played_at} tractAlbumId={track.album.id} />
+                                            <Track key={track.id} trackId={track.id} trackImage={track.album.images[1].url} trackName={track.name} trackArtists={track.artists} trackAlbum={track.album.name} trackDuration={track.duration_ms} trackPlayedAt={track.played_at} tractAlbumId={track.album.id} />
                                         ))}
                                         </div>
                                     }

@@ -93,7 +93,7 @@ const LikedSongs: FunctionComponent = () => {
                                 trackArtists={recent.track.album.artists}
                                 trackDuration={recent.track.duration_ms}
                                 trackPlayedAt={recent.played_at}
-                                trackImage={recent.track.album.images.length !== 0 ? recent.track.album.images[2].url : "https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg"}
+                                trackImage={recent.track.album.images.length !== 0 ? recent.track.album.images[1].url : "https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg"}
                                 trackName={recent.track.name}
                                 tractAlbumId={recent.track.album.id}
                             />

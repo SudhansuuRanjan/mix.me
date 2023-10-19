@@ -113,7 +113,7 @@ const Playlist: FunctionComponent = () => {
                     playListLoading ? <Loader /> :
                         <div className="flex flex-wrap gap-4 my-10">
                             {data?.tracks.map((track: any, i: number) => (
-                                <Track key={i} trackId={track.track.id} trackAlbum={track.track.album.name} trackArtists={track.track.album.artists} trackDuration={track.track.duration_ms} trackPlayedAt={""} trackImage={track.track.album.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : track.track.album.images[2]?.url} trackName={track.track.name === "" ? "Unavailable" : track.track.name} tractAlbumId={track.track.album.id} />
+                                <Track key={i} trackId={track.track.id} trackAlbum={track.track.album.name} trackArtists={track.track.album.artists} trackDuration={track.track.duration_ms} trackPlayedAt={""} trackImage={track.track.album.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : track.track.album.images[1]?.url} trackName={track.track.name === "" ? "Unavailable" : track.track.name} tractAlbumId={track.track.album.id} />
                             ))}
                         </div>
                 }

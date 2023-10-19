@@ -120,7 +120,7 @@ const Artist: FunctionComponent = () => {
 
                             <div className="flex flex-wrap gap-7 my-10">
                                 {topTracks.map((track: any, i: number) => (
-                                    <Track key={i} trackId={track.id} trackAlbum={track.album.name} trackArtists={track.album.artists} trackDuration={track.duration_ms} trackPlayedAt={""} trackImage={track.album.images[2]?.url} trackName={'#' + (i + 1) + " " + track.name} tractAlbumId={track.album.id} />
+                                    <Track key={i} trackId={track.id} trackAlbum={track.album.name} trackArtists={track.album.artists} trackDuration={track.duration_ms} trackPlayedAt={""} trackImage={track.album.images[1]?.url} trackName={'#' + (i + 1) + " " + track.name} tractAlbumId={track.album.id} />
                                 ))}
                             </div>
                         </div>
