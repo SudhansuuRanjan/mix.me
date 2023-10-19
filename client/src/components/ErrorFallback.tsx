@@ -8,8 +8,9 @@ interface ErrorFallbackProps {
 const ErrorFallback: FunctionComponent<ErrorFallbackProps> = ({ refetch }): React.ReactElement => {
     return (
         <div className='flex flex-col justify-center min-h-[24rem] w-full items-center text-center px-5'>
+            <img src="./images/error.webp" className="w-52" alt="search" />
             <h1 className='text-white text-lg font-medium'>Something went wrong.</h1>
-            <p className='text-gray-500 text-sm'>Please try again later.</p>
+            <p className='text-gray-400 text-sm'>Please try again later.</p>
             <div className='text-white text-sm font-medium mt-5'>
                 <button
                     onClick={refetch}

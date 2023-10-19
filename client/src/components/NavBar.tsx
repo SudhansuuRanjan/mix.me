@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { FaUser, FaHistory } from 'react-icons/fa'
 import { IoMdMicrophone } from 'react-icons/io'
 import { MdAudiotrack } from 'react-icons/md'
@@ -8,6 +9,7 @@ import { FiSearch } from 'react-icons/fi'
 
 
 const NavBar = () => {
+    const [windowSize, setWindowSize] = useState(getWindowSize());
 
     let navLinks = [
         {
@@ -41,18 +43,36 @@ const NavBar = () => {
             icon: <TbPlaylist size={18} />
         },
         {
-            title: 'Liked',
-            path: '/liked',
-            id: 6,
-            icon: <AiFillHeart size={18} />
-        },
-        {
             title: 'Search',
             path: '/search',
             id: 7,
             icon: <FiSearch size={18} />
         },
+        {
+            title: 'Liked',
+            path: '/liked',
+            id: 6,
+            icon: <AiFillHeart size={18} />
+        },
     ]
+
+    function getWindowSize() {
+        const { innerWidth, innerHeight } = window;
+        return { innerWidth, innerHeight };
+    }
+
+    useEffect(() => {
+        function handleWindowResize() {
+            setWindowSize(getWindowSize());
+        }
+
+        window.addEventListener('resize', handleWindowResize);
+
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
+
 
 
     return (
@@ -63,7 +83,7 @@ const NavBar = () => {
 
             <div className='flex lg:flex-col md:flex-col flex-row items-center justify-between my-5 w-full'>
                 {
-                    navLinks.map((link) => {
+                    navLinks.slice(0, windowSize.innerWidth > 700 ? 7 : 6).map((link) => {
                         return (
                             <NavLink key={link.id} className="w-full" style={{ textDecoration: "none" }} to={link.path}>
                                 {({ isActive }: { isActive: boolean }) => (

@@ -11,6 +11,7 @@ import Album from "./Album";
 import LikedSongs from "./LikedSongs";
 import User from "./User";
 import Search from "./Search";
+import Error from "./Error";
 
 
-export { Artists, Profile, Playlists, Recent, Track, Playlist, Artist, Recommendations, Tracks, Album, LikedSongs, User, Search };
+export { Artists, Profile, Playlists, Recent, Track, Playlist, Artist, Recommendations, Tracks, Album, LikedSongs, User, Search, Error };

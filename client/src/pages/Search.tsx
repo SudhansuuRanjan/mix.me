@@ -57,27 +57,27 @@ const Search = () => {
     return (
         <div className="w-full">
             <div className="m-auto w-full flex flex-col items-center justify-center">
-                <form onSubmit={handleSubmit} className="lg:pt-16 md:pt-16 pt-14 flex flex-col lg:w-[38rem] md:w-[32rem] w-[90%] gap-6">
-                    <div className="flex gap-6">
-                        <input value={searchParams.get("search") as string} onChange={onChange} type="text" placeholder="Search" className="w-full h-12 px-5 pr-10 shadow-lg rounded-2xl text-sm bg-gray-800 focus:outline-none border-gray-700 border" />
-                        <button className="text-white bg-green-600 hover:bg-green-700 px-8 h-12 rounded-2xl">
+                <form onSubmit={handleSubmit} className="lg:pt-14 md:pt-14 pt-8 flex flex-col lg:w-[40rem] md:w-[32rem] w-[90%] gap-6">
+                    <div className="flex lg:gap-6 md:gap-6 gap-3">
+                        <input value={searchParams.get("search") as string} onChange={onChange} type="text" placeholder="Search" className="w-full h-12 px-5 shadow-lg rounded-2xl text-sm bg-gray-900 focus:outline-none border-gray-700 border" />
+                        <button className="text-white bg-green-600 hover:bg-green-700 lg:px-8 md:px-7 px-6 h-12 rounded-2xl">
                             Search
                         </button>
                     </div>
-                    <div className="flex items-center justify-center lg:gap-6 md:gap-5 gap-2 mt-3">
-                        <button onClick={() => changeType("track")} className={`border rounded-full text-white px-5 py-1.5 lg:text-base md:text-base text-sm ${type === "track" ? "bg-green-500 bg-opacity-70 border-green-500" : "border-gray-500"}`}>
+                    <div className="flex items-center justify-center lg:gap-5 md:gap-5 gap-1 mt-2">
+                        <button onClick={() => changeType("track")} className={`border rounded-full text-white lg:px-5 md:px-5 px-3 py-1.5 lg:text-base md:text-base text-sm ${type === "track" ? "bg-green-500 bg-opacity-70 border-green-500" : "border-gray-500"}`}>
                             Songs
                         </button>
 
-                        <button onClick={() => changeType("playlist")} className={`border rounded-full text-white px-5 py-1.5 lg:text-base md:text-base text-sm ${type === "playlist" ? "bg-green-500 bg-opacity-70 border-green-500" : "border-gray-500"}`}>
+                        <button onClick={() => changeType("playlist")} className={`border rounded-full text-white lg:px-5 md:px-5 px-3 py-1.5 lg:text-base md:text-base text-sm ${type === "playlist" ? "bg-green-500 bg-opacity-70 border-green-500" : "border-gray-500"}`}>
                             Playlists
                         </button>
 
-                        <button onClick={() => changeType("artist")} className={`border rounded-full text-white px-5 py-1.5 lg:text-base md:text-base text-sm  ${type === "artist" ? "bg-green-500 bg-opacity-70 border-green-500" : "border-gray-500"}`}>
+                        <button onClick={() => changeType("artist")} className={`border rounded-full text-white lg:px-5 md:px-5 px-3 py-1.5 lg:text-base md:text-base text-sm  ${type === "artist" ? "bg-green-500 bg-opacity-70 border-green-500" : "border-gray-500"}`}>
                             Artists
                         </button>
 
-                        <button onClick={() => changeType("album")} className={`border rounded-full text-white px-5 py-1.5 lg:text-base md:text-base text-sm ${type === "album" ? "bg-green-500 bg-opacity-70 border-green-500" : "border-gray-500"}`}>
+                        <button onClick={() => changeType("album")} className={`border rounded-full text-white lg:px-5 md:px-5 px-3 py-1.5 lg:text-base md:text-base text-sm ${type === "album" ? "bg-green-500 bg-opacity-70 border-green-500" : "border-gray-500"}`}>
                             Albums
                         </button>
                     </div>
@@ -114,6 +114,13 @@ const Search = () => {
                                             {data?.albums?.items.map((album: any) => (
                                                 <AlbumCard key={album.id} album={album} />
                                             ))}
+                                        </div>
+                                    }
+
+                                    {
+                                        query.length === 0 && <div className="flex flex-col items-center justify-center gap-2">
+                                            <img src="./images/search.png" className="w-52" alt="search" />
+                                            <p className="text-gray-500 text-lg">Start typing to search...</p>
                                         </div>
                                     }
                                 </div>
