@@ -75,21 +75,21 @@ If you would like to contribute to SpotiStat, please open an issue or pull reque
 Clone the project into local.
 
 Install all the npm packages. 
- - Go into the root folder and type the following command to install all npm packages
+ - Go into the `root folder` and type the following command to install all npm packages
 
     ```bash
     npm install
     ```
-- Go to client folder and type the following command to install all npm packages
+- Go to `client folder` and type the following command to install all npm packages
 
     ```bash
     npm install
     ```
-- In client folder, Change the `.env.example` file to `.env` and add the required credentials.
+- In `client folder`, Change the `.env.example` file to `.env` and add the required credentials.
     ```bash
     VITE_API_URL=http://localhost:8080
     ```
-- Go to folder and type the following command to install all npm packages
+- Go to `server folder` and type the following command to install all npm packages
 
     ```bash
     npm install
