@@ -1,7 +1,8 @@
-# SpotiStat
+<h1 align="center"> SpotiStat 📊</h1>
+  
+  [![GitHub license](https://img.shields.io/github/license/SudhansuuRanjan/SpotiStat?style=for-the-badge)](LICENSE)  [![GitHub stars](https://img.shields.io/github/stars/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub forks](https://img.shields.io/github/forks/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub issues](https://img.shields.io/github/issues/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub pull requests](https://img.shields.io/github/issues-pr/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub last commit](https://img.shields.io/github/last-commit/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()
 
-## Description
-
+Why wait for Spotify wrapped to see your spotify stats?
 SpotiStat is a web application that allows users to view their Spotify listening history and statistics. Users can view their top artists and tracks, as well as their listening history over the past 4 weeks, 6 months, and several years. Users can also view their top artists and tracks for each of these time periods. User can also view their top genres and the audio features of their top tracks. Users can also search for any artist, album, or track and view information about them. Users can also view their recently played tracks and their saved tracks and albums.
 
 ## Usage
@@ -11,9 +12,10 @@ To use SpotiStat, you must have a Spotify account. You can login to SpotiStat us
 ### Live WebSite URL
 
 The WebSite is deployed in https://tesla-nitp.vercel.app/
+> [!IMPORTANT]  
+> The project is currently invite only so for now you can't login to the website. But you can still clone the project and run it locally. If you want to log in to deployed project, I will need your `Spotify Name` and `Spotify EmailID` to invite you.
 
-Click on the link to see the website.
-
+<br/>
 
 ![ScreenShot](client/public/og.png)
 
@@ -44,6 +46,9 @@ Click on the link to see the website.
 
 ### Install Node JS
 Refer to https://nodejs.org/en/ to install nodejs
+
+### Install TypeScript
+Refer to https://www.typescriptlang.org/ to install typescript
 
 ### Install vite
 Install Vite npm package globally. This will help to easily run the project and also build the source files easily. Use the following command to install vite
@@ -97,7 +102,7 @@ Install all the npm packages.
     ```
   You can get the `CLIENT_ID` and `CLIENT_SECRET` from [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/) by creating an app.
 
-  In spotify developer dashboard, in newly created app and add `http://localhost:8080/callback` as the redirect uri.
+  In spotify developer dashboard, in newly created app, add `http://localhost:8080/callback` as the redirect uri.
 
 In order to run the application Type the following command in the **root directory** only.
 
