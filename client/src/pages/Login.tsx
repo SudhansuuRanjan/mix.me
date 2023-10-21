@@ -7,7 +7,7 @@ const Login: FunctionComponent = () => {
                 <img className="lg:h-12 h-10" height={100} width={200} src="/images/logo.svg" alt="logo" />
                 <a className="inline-block bg-green-500 rounded-full px-6 py-2.5 mx-3 min-w-min font-semibold text-green-500 bg-opacity-20 tracking-wider uppercase text-sm text-center hover:bg-opacity-30 focus:bg-opacity-40" href={`${import.meta.env.VITE_API_URL}/login`}>Login</a>
             </div>
-            <div className="flex lg:flex-row md:flex-row flex-col-reverse items-center w-full h-[80vh] justify-evenly">
+            <div className="flex lg:flex-row md:flex-row flex-col-reverse items-center w-full h-[80vh] justify-evenly lg:mt-16 md:mt-12">
                 <div className="lg:max-w-md md:max-w-lg max-w-[85%]">
                     <h1 className=" text-green-500 lg:text-5xl md:text-4xl text-4xl font-bold pb-3"><span className="text-white">From</span> Beats <br /> <span className="text-white">to</span> Insights</h1>
                     <h3 className="text-gray-400 text-lg font-medium">Your Music, Your Universe.</h3>
