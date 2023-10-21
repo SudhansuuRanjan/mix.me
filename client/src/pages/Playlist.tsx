@@ -38,7 +38,7 @@ const Playlist: FunctionComponent = () => {
         })
 
     useEffect(() => {
-        document.title = `${playListLoading ? "Playlist" : data?.playlist.name} • SpotiStat`;
+        document.title = `${playListLoading ? "Playlist" : data?.playlist.name} • mix.me`;
     },[data?.playlist])
 
     const handleFollowPlaylist = async () => {

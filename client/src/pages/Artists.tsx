@@ -26,7 +26,7 @@ const Artists: FunctionComponent = (): React.ReactNode => {
     }
 
     useEffect(() => {
-        document.title = `Top Artists • SpotiStat`;
+        document.title = `Top Artists • mix.me`;
     }, [])
 
     return (

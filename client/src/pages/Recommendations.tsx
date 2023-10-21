@@ -44,7 +44,7 @@ const Recommendations: FunctionComponent = () => {
     });
 
     useEffect(() => {
-        document.title = `${isLoading ? "Recommendations" : data?.playlist.name} • SpotiStat`;
+        document.title = `${isLoading ? "Recommendations" : data?.playlist.name} • mix.me`;
     }, [data?.playlist])
 
     return (

@@ -57,3 +57,21 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+::-webkit-scrollbar {
+  width: .5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background: #1b4f32;
+  transition: all 0.5s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #35473e;
+}
+
+::-webkit-scrollbar-track {
+  background: #252424;
+}

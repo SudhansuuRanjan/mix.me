@@ -19,7 +19,7 @@ const Recent: FunctionComponent = () => {
     });
 
     useEffect(() => {
-        document.title = `Recent • SpotiStat`;
+        document.title = `Recent • mix.me`;
     }, []);
 
     const getPlayableSong = () => {

@@ -20,12 +20,12 @@ export default function Album(): React.ReactNode {
     })
 
     useEffect(() => {
-        document.title = `${isLoading ? "Album" : data?.album.name} • SpotiStat`;
+        document.title = `${isLoading ? "Album" : data?.album.name} • mix.me`;
     }, [data?.album])
 
     return (
         <div>
-            <div className="m-auto w-full lg:px-24 md:px-12 px-6 my-16 text-white">
+            <div className="m-auto w-full lg:px-24 md:px-12 px-6 my-16 mb-24 text-white">
                 {
                     isLoading ? <Loader /> : isError ? <ErrorFallback refetch={refetch} /> :
                         <div className="flex flex-col md:flex-row gap-7">

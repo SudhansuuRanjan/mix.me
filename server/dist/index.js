@@ -84,9 +84,9 @@ app.get('/callback', (req, res) => {
                     headers: { 'Authorization': 'Bearer ' + access_token },
                     json: true
                 };
-                request_1.default.get(options, (error, response, body) => {
-                    console.log(body);
-                });
+                // request.get(options, (error, response, body) => {
+                //     console.log(body);
+                // });
                 // The access token allows you to make requests to the Spotify API’s endpoints on the user’s behalf.
                 res.redirect(`${process.env.FRONTEND_URL}/#` +
                     querystring_1.default.stringify({

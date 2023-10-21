@@ -10,7 +10,7 @@ const AppRoutes: FunctionComponent = () => {
     return (
         <Router>
             <ScrollToTop />
-            <div className='flex lg:flex-row md:flex-row flex-col-reverse'>
+            <div className='flex lg:flex-row md:flex-row flex-col-reverse lg:pb-6 md:pb-10 pb-24 '>
                 <ErrorBoundary>
                     <div className='w-24'>
                         <NavBar />

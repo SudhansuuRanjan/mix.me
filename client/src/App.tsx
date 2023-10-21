@@ -17,7 +17,7 @@ function App() {
 
 
   return (
-    <div className='min-h-screen lg:pb-6 md:pb-10 pb-24 h-full'>
+    <div className='min-h-screen h-full'>
       {accessToken ? <AppRoutes /> : <Login />}
     </div>
   )

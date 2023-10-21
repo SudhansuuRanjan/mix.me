@@ -49,7 +49,7 @@ const Artist: FunctionComponent = () => {
     })
 
     useEffect(() => {
-        document.title = `${artistLoading ? "Artist" : artist.name} • SpotiStat`;
+        document.title = `${artistLoading ? "Artist" : artist.name} • mix.me`;
     }, [artist])
 
     const handleFollow = useMutation({

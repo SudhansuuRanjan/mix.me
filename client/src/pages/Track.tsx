@@ -21,7 +21,7 @@ const Track: FunctionComponent = () => {
     })
 
     useEffect(() => {
-        document.title = `${isLoading ? "Track" : data?.track.name} • SpotiStat`;
+        document.title = `${isLoading ? "Track" : data?.track.name} • mix.me`;
     }, [data?.track]);
 
     const getPlayableSong = () => {

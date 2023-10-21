@@ -33,6 +33,7 @@ const Search = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (query.length === 0) return;
         setLoading(true);
         setError(false);
         try {
@@ -48,7 +49,7 @@ const Search = () => {
     }
 
     useEffect(() => {
-        document.title = `Search • SpotiStat`;
+        document.title = `Search • mix.me`;
         if (query) {
             handleSubmit(new Event('submit') as any);
         }
@@ -87,30 +88,29 @@ const Search = () => {
                     {
                         error ? <ErrorFallback refetch={() => { }} /> :
                             loading ? <Loader /> :
-                                <div className="flex flex-col gap-6 lg:mt-16 md:mt-16 mt-12 pb-20">
+                                <div className="">
                                     {
-                                        type === "track" &&
-                                        <div className="flex flex-wrap gap-5"> {data?.tracks?.items.map((track: any) => (
+                                        type === "track" && data?.tracks?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="flex flex-wrap gap-5"> {data?.tracks?.items.map((track: any) => (
                                             <Track key={track.id} trackId={track.id} trackImage={track.album.images[1].url} trackName={track.name} trackArtists={track.artists} trackAlbum={track.album.name} trackDuration={track.duration_ms} trackPlayedAt={track.played_at} tractAlbumId={track.album.id} />
                                         ))}
                                         </div>
                                     }
                                     {
-                                        type === "playlist" && <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
+                                        type === "playlist" && data?.playlists?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
                                             {data?.playlists?.items.map((playlist: any, i: number) => (
                                                 <PlaylistCard key={playlist.id} i={i} playlist={playlist} />
                                             ))}
                                         </div>
                                     }
                                     {
-                                        type === "artist" && <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
+                                        type === "artist" && data?.artists?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
                                             {data?.artists?.items.map((artist: any, i: number) => (
                                                 <ArtistCard key={artist.id} artist={artist} i={i} />
                                             ))}
                                         </div>
                                     }
                                     {
-                                        type === "album" && <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
+                                        type === "album" && data?.albums?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
                                             {data?.albums?.items.map((album: any) => (
                                                 <AlbumCard key={album.id} album={album} />
                                             ))}
@@ -118,7 +118,7 @@ const Search = () => {
                                     }
 
                                     {
-                                        query.length === 0 && <div className="flex flex-col items-center justify-center gap-2">
+                                        query.length === 0 && !data && <div className="flex flex-col items-center justify-center gap-2">
                                             <img src="./images/search.png" className="w-52" alt="search" />
                                             <p className="text-gray-500 text-lg">Start typing to search...</p>
                                         </div>

@@ -31,7 +31,7 @@ const Profile: FunctionComponent = () => {
     const [topGenres, setTopGenres] = useState(null);
 
     useEffect(() => {
-        document.title = `${isLoading ? "Profile" : data?.user.display_name} • SpotiStat`;
+        document.title = `${isLoading ? "Profile" : data?.user.display_name} • mix.me`;
         if (data?.topArtists) {
             getTopGenres(data?.topArtists.items);
         }

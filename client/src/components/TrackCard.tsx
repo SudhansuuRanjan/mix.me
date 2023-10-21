@@ -11,7 +11,7 @@ const TrackCard = ({ track, i }: any) => {
             <Link to={track.name ? `/track/${track.id}` : ''} className="text-base font-semibold pt-2">
                 <p className="pt-2">{i + 1 + ". " + (track.name ? track.name : 'Track Unavailable')}</p>
             </Link>
-            <p className="text-sm">{track.artists.length > 0 ? track.artists.map((artist: any, i: number) => (
+            <p className="text-sm font-medium">{track.artists.length > 0 ? track.artists.map((artist: any, i: number) => (
                 <span key={i}>
                     <Link className="text-gray-400 hover:text-green-500 hover:underline" to={`/artist/${artist.id}`}>
                         {artist.name}

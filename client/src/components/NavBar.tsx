@@ -78,7 +78,7 @@ const NavBar = () => {
     return (
         <div className='lg:w-24 z-50 md:w-24 w-full bg-black flex lg:flex-col md:flex-col flex-row items-center justify-between lg:h-screen md:h-screen h-20 fixed bottom-0'>
             <NavLink to="/" className='lg:flex md:flex hidden'>
-                <img src="./images/logo.png" className='w-16 px-2 my-4' alt="spotify logo" />
+                <img src="./images/mini-logo.svg" className='w-[4.5rem] px-2 my-4' alt="spotify logo" />
             </NavLink>
 
             <div className='flex lg:flex-col md:flex-col flex-row items-center justify-between my-5 w-full'>
@@ -99,7 +99,7 @@ const NavBar = () => {
             </div>
 
             <div className='my-5 lg:flex md:flex hidden'>
-                <a target='_blank' href="https://github.com/SudhansuuRanjan/SpotiStat">
+                <a target='_blank' href="https://github.com/SudhansuuRanjan/mix.me">
                     <AiFillGithub size={32} className='text-gray-400 hover:text-white' />
                 </a>
             </div>

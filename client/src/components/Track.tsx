@@ -12,7 +12,7 @@ export default function Track({ trackId, trackImage, trackName, trackArtists, tr
                 </Link>
 
                 <div>
-                    <Link to={trackAlbum !== "" ? `/track/${trackId}` : ""}><p className="lg:text-base md:text-base text-sm font-semibold lg:w-[27rem] md:w-[24rem] w-[13rem] truncat mb-1">{trackAlbum ? trackName : "Not Available"}</p></Link>
+                    <Link to={trackAlbum !== "" ? `/track/${trackId}` : ""}><p className="lg:text-base md:text-base text-sm font-semibold lg:w-[27rem] md:w-[24rem] w-[13rem] truncate">{trackAlbum ? trackName : "Not Available"}</p></Link>
                     <div className='flex flex-col lg:w-[27rem] md:w-[24rem] w-[13rem] truncat'>
                         <span className="text-sm text-gray-400">By {trackArtists.map((artist: any, i: number) => (
                             <React.Fragment key={artist.id}>

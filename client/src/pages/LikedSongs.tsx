@@ -6,7 +6,7 @@ import Track from "../components/Track";
 import '../App.css'
 
 const LikedSongs: FunctionComponent = () => {
-    document.title = "Liked Songs • SpotiStat";
+    document.title = "Liked Songs • mix.me";
     const [likedSongs, setLikedSongs] = useState<any>(null);
     const [total, setTotal] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState(0);

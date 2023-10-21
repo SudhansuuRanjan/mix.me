@@ -16,7 +16,7 @@ const Playlists: FunctionComponent = () => {
     });
 
     useEffect(() => {
-        document.title = `Playlists • SpotiStat`;
+        document.title = `Playlists • mix.me`;
     }, [])
 
     return (

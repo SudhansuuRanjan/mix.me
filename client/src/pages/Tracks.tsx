@@ -37,7 +37,7 @@ const Tracks: FunctionComponent = (): React.ReactNode => {
     }
 
     useEffect(() => {
-        document.title = `Top Tracks • SpotiStat`;
+        document.title = `Top Tracks • mix.me`;
     }, [])
 
 
