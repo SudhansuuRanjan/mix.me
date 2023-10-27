@@ -90,7 +90,7 @@ const Search = () => {
                             loading ? <Loader /> :
                                 <div className="mb-24 mt-8">
                                     {
-                                     <h2 className="text-xl font-semibold my-8">Search results for "{query}"</h2>
+                                        query.length !== 0 && <h2 className="text-xl font-semibold my-8">Search results for "{query}"</h2>
                                     }
                                     {
                                         type === "track" && data?.tracks?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="flex flex-wrap gap-5"> {data?.tracks?.items.map((track: any) => (
@@ -122,7 +122,7 @@ const Search = () => {
 
                                     {
                                         query.length === 0 && !data && <div className="flex flex-col items-center justify-center gap-2">
-                                            <img src="./images/search.png" className="w-52" alt="search" />
+                                            <img height={300} width={300} loading="eager" src="./images/search.png" className="w-52" alt="search" />
                                             <p className="text-gray-500 text-lg">Start typing to search...</p>
                                         </div>
                                     }
