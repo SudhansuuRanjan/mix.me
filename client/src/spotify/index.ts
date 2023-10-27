@@ -345,3 +345,19 @@ export const search = (query: string, type: string) => {
     }
     return axios.get(`https://api.spotify.com/v1/search?q=${query}&type=${type}`, { headers });
 }
+
+export const getLikedAlbums = (limit: number, offset: number) => {
+    return axios.get(`https://api.spotify.com/v1/me/albums?limit=${limit}&offset=${offset}`, { headers });
+}
+
+export const doesUserSavedAlbums = (albumIds: string[]) => {
+    return axios.get(`https://api.spotify.com/v1/me/albums/contains?ids=${albumIds.join(",")}`, { headers });
+}
+
+export const saveAlbums = (albumIds: string[]) => {
+    return axios.put(`https://api.spotify.com/v1/me/albums?ids=${albumIds}`, { headers });
+}
+
+export const removeAlbums = (albumIds: string[]) => {
+    return axios.delete(`https://api.spotify.com/v1/me/albums?ids=${albumIds}`, { headers });
+}

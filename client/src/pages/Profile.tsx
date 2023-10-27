@@ -9,6 +9,7 @@ import ProfileCard from "../components/ProfileCard";
 import ArtistCard from "../components/ArtistCard";
 import PlaylistCard from "../components/PlaylistCard";
 import Title from "../components/Title";
+import Albums from "./Albums";
 
 
 const Profile: FunctionComponent = () => {
@@ -106,6 +107,13 @@ const Profile: FunctionComponent = () => {
                                 <PlaylistCard key={i} playlist={playlist} i={i} />
                             )))}
                         </div>
+                    </div>
+
+                    {/* Playlists */}
+
+                    <div className="m-auto w-full lg:px-16 md:px-16 px-5 my-16">
+                        <Title title="Albums" subtitle="Your saved albums" link="/albums" />
+                            <Albums/>
                     </div>
 
                     {/* Liked Songs */}

@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import { getAlbumInfo } from '../spotify'
+import { getAlbumInfo, doesUserSavedAlbums, saveAlbums, removeAlbums } from '../spotify'
 import Loader from '../components/Loader'
 import { Link, useParams } from 'react-router-dom'
 import Track from '../components/Track'
 import { useQuery } from "@tanstack/react-query";
 import ErrorFallback from '../components/ErrorFallback'
 import { dateToYMD } from '../utils'
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 
 export default function Album(): React.ReactNode {
     const { albumId }: any = useParams();
@@ -19,9 +20,40 @@ export default function Album(): React.ReactNode {
         }
     })
 
+    const { data: userSavedAlbum, refetch: refetchFollowing } =
+        useQuery({
+            queryKey: ["user", albumId],
+            staleTime: 1000 * 60 * 60 * 24,
+            queryFn: async () => {
+                const res2 = await doesUserSavedAlbums([albumId]);
+                return res2.data[0];
+            }
+        })
+
+
     useEffect(() => {
         document.title = `${isLoading ? "Album" : data?.album.name} • mix.me`;
     }, [data?.album])
+
+    const handleSaveAlbum = async () => {
+        try {
+            await saveAlbums(albumId);
+            refetchFollowing();
+            // refetchAlbums();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleRemoveAlbum = async () => {
+        try {
+            await removeAlbums(albumId);
+            refetchFollowing()
+            // refetchAlbums();
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <div>
@@ -30,7 +62,7 @@ export default function Album(): React.ReactNode {
                     isLoading ? <Loader /> : isError ? <ErrorFallback refetch={refetch} /> :
                         <div className="flex flex-col md:flex-row gap-7">
                             <img data-aos="zoom-in" className="w-52 h-52 rounded-lg" src={data?.album.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : data?.album.images[0]?.url} alt={data?.album.name} />
-                            <div  data-aos="fade-left" className="flex flex-col">
+                            <div data-aos="fade-left" className="flex flex-col">
                                 <p className="lg:text-4xl md:text-3xl text-2xl font-semibold my-1">{data?.album.name}</p>
                                 <p className="text-gray-400 text-medium text-lg mt-1 max-w-md">{data?.album.label}</p>
                                 <div className='text-green-500 mt-1 lg:text-base md:text-base text-sm'>
@@ -46,6 +78,9 @@ export default function Album(): React.ReactNode {
                                     }
                                 </div>
                                 <div className='flex items-center'>
+                                    <div>
+                                        {userSavedAlbum ? <AiFillHeart onClick={handleRemoveAlbum} className="text-pink-500 cursor-pointer" size={24} /> : <AiOutlineHeart onClick={handleSaveAlbum} className="text-pink-500 cursor-pointer" size={24} />}
+                                    </div>&nbsp;·&nbsp;
                                     <div className='text-sm font-light text-gray-400'>
                                         {data?.album.total_tracks} songs
                                     </div> &nbsp;·&nbsp;
@@ -53,8 +88,10 @@ export default function Album(): React.ReactNode {
                                         {dateToYMD(new Date(data?.album.release_date))}
                                     </div>
                                 </div>
+                                <a target='_blank' href={data?.album.external_urls.spotify} className="lg:text-sm md:text-sm text-xs bg-[#1db954] hover:bg-[#197e3d] w-fit rounded-full px-5 py-1.5 text-white font-medium focus:outline-none mt-4">Play on Spotify</a>
                             </div>
                         </div>
+
                 }
 
                 <div data-aos="fade-up">

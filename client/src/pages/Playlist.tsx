@@ -39,7 +39,7 @@ const Playlist: FunctionComponent = () => {
 
     useEffect(() => {
         document.title = `${playListLoading ? "Playlist" : data?.playlist.name} • mix.me`;
-    },[data?.playlist])
+    }, [data?.playlist])
 
     const handleFollowPlaylist = async () => {
         try {
@@ -68,19 +68,21 @@ const Playlist: FunctionComponent = () => {
                         <div className="flex flex-col md:flex-row gap-7">
                             <div className="flex flex-col gap-3">
                                 <div className="flex lg:flex-row md:flex-row flex-col gap-4">
-                                    <div className="w-fit bg-gray-950 rounded-md">
+                                    <div className="w-fit h-fit bg-gray-950 rounded-md">
                                         <img data-aos="zoom-in" height={500} width={500} className="w-52 h-52 rounded-lg" src={data?.playlist.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : data?.playlist.images[0]?.url} alt={data?.playlist.name} />
                                     </div>
                                     <div data-aos="fade-left" className="flex flex-col">
                                         <p className="lg:text-4xl md:text-3xl text-2xl font-semibold my-1">{data?.playlist.name}</p>
-                                        <p className="text-gray-400 lg:text-base md:text-base text-sm mt-1 max-w-md">{data?.playlist.description}</p>
+                                        <p dangerouslySetInnerHTML={{__html:data?.playlist.description}} className="text-gray-400 lg:text-base md:text-base text-sm mt-1 max-w-md"></p>
                                         <div className="flex items-center text-white my-2">
                                             <div>
                                                 {userData?.following ? <AiFillHeart onClick={handleUnfollowPlaylist} className="text-pink-500 cursor-pointer" size={24} /> : <AiOutlineHeart onClick={handleFollowPlaylist} className="text-pink-500 cursor-pointer" size={24} />}
                                             </div>&nbsp;·&nbsp;
-                                            <Link to={`/user?user_id=${data?.playlist.owner.display_name}`} className="text-green-500 hover:underline text-sm">By {data?.playlist.owner.display_name}</Link> &nbsp;·&nbsp;
+                                            <Link to={`/user?user_id=${data?.playlist.owner.id}`} className="text-green-500 hover:underline text-sm">By {data?.playlist.owner.display_name}</Link> &nbsp;·&nbsp;
                                             <p className="text-gray-200 hover:text-gray-400 text-sm font-medium">{formatWithCommas(data?.playlist.followers.total)} Likes</p> &nbsp;·&nbsp;
                                             <p className="text-gray-200 hover:text-gray-400 text-sm font-medium">{data?.playlist.tracks.total} Songs</p>
+                                            &nbsp;·&nbsp;
+                                            <p className="text-blue-500 hover:text-gray-400 text-sm font-medium">({data?.playlist.public ? "public" : "private"})</p>
                                         </div>
                                         <div className="flex items-center gap-2 mt-3">
                                             <Link target="_blank" to={"https://open.spotify.com/playlist/" + data?.playlist.id}><button className="bg-green-500 hover:bg-green-600 text-white rounded-full text-xs px-4 py-1.5">Play on Spotify</button></Link>
@@ -104,18 +106,18 @@ const Playlist: FunctionComponent = () => {
                         </div>
                 }
 
-
-
-                <div data-aos="fade-up">
-                    <p className="lg:text-3xl text-2xl font-semibold mt-12">Tracks</p>
-                </div>
                 {
                     playListLoading ? <Loader /> :
-                        <div className="flex flex-wrap gap-4 my-10">
-                            {data?.tracks.map((track: any, i: number) => (
-                                <Track key={i} trackId={track.track.id} trackAlbum={track.track.album.name} trackArtists={track.track.album.artists} trackDuration={track.track.duration_ms} trackPlayedAt={""} trackImage={track.track.album.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : track.track.album.images[1]?.url} trackName={track.track.name === "" ? "Unavailable" : track.track.name} tractAlbumId={track.track.album.id} />
-                            ))}
-                        </div>
+                        <>
+                            <div data-aos="fade-up">
+                                <p className="lg:text-3xl text-2xl font-semibold mt-12">Tracks</p>
+                            </div>
+                            <div className="flex flex-wrap gap-4 my-10">
+                                {data?.tracks.map((track: any, i: number) => (
+                                    <Track key={i} trackId={track.track.id} trackAlbum={track.track.album.name} trackArtists={track.track.album.artists} trackDuration={track.track.duration_ms} trackPlayedAt={""} trackImage={track.track.album.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : track.track.album.images[1]?.url} trackName={track.track.name === "" ? "Unavailable" : track.track.name} tractAlbumId={track.track.album.id} />
+                                ))}
+                            </div>
+                        </>
                 }
             </div>
         </div>
