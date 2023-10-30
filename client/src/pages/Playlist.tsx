@@ -85,7 +85,7 @@ const Playlist: FunctionComponent = () => {
                                             <p className="text-blue-500 hover:text-gray-400 text-sm font-medium">({data?.playlist.public ? "public" : "private"})</p>
                                         </div>
                                         <div className="flex items-center gap-2 mt-3">
-                                            <Link target="_blank" to={"https://open.spotify.com/playlist/" + data?.playlist.id}><button className="bg-green-500 hover:bg-green-600 text-white rounded-full text-xs px-4 py-1.5">Play on Spotify</button></Link>
+                                            <Link target="_blank" to={"https://open.spotify.com/playlist/" + data?.playlist.id}><button className="bg-green-500 hover:bg-green-600 text-black rounded-full text-xs px-4 py-1.5">Play on Spotify</button></Link>
                                             <Link to={`/recommendations/${data?.playlist.id}`}>
                                                 <button className="bg-gray-800 hover:bg-gray-700 text-white rounded-full text-xs px-4 py-1.5">Get Recomendations</button>
                                             </Link>

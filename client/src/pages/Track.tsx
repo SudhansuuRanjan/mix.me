@@ -18,8 +18,8 @@ const Track: FunctionComponent = () => {
             const res = await getTrackInfo(trackId);
             return { track: res.track, audioFeatures: res.audioFeatures, audioAnalysis: res.audioAnalysis };
         },
-        onSuccess: function(data) {
-            console.log(data.audioFeatures);
+        onSuccess: function (data) {
+            console.log(data.track);
         },
     })
 
@@ -50,7 +50,7 @@ const Track: FunctionComponent = () => {
                         <img data-aos="zoom-in" className="lg:h-56 md:h-56 h-56 lg:w-56 md:w-56 w-56" src={data?.track.album.images[0].url} alt="Album Artwork" />
                     </div>
                     <div data-aos="fade-left">
-                        <p className="lg:text-4xl md:text-3xl text-2xl font-bold">{data?.track.name}</p>
+                        <p className="lg:text-4xl md:text-3xl text-2xl font-bold">{data?.track.name} {data?.track.explicit && <span className="text-blue-500 text-lg font-medium px-1.5 py-1 bg-blue-600 bg-opacity-30 rounded-md">E</span>}</p>
                         <p className="lg:text-xl md:text-xl text-lg font-semibold text-gray-400 lg:my-3 md:my-2 my-1">By {data?.track.album.artists.map((artist: any, i: number) => (
                             <React.Fragment key={artist.id}>
                                 {i > 0 && ', '}
@@ -63,7 +63,7 @@ const Track: FunctionComponent = () => {
                         <a href={data?.track.album.external_urls.spotify}
                             target="_blank"
                             rel="noopener noreferrer">
-                            <button className="px-6 py-2 bg-green-500 text-white text-sm rounded-full hover:bg-green-600">
+                            <button className="px-6 py-2 bg-green-500 text-black text-sm rounded-full hover:bg-green-600">
                                 PLAY ON SPOTIFY
                             </button>
                         </a>
@@ -71,7 +71,8 @@ const Track: FunctionComponent = () => {
                 </div>
 
 
-                <div className="my-16">
+                <div className="py-20">
+                    <h3 className="pb-3 text-left text-2xl font-semibold text-green-500">Audio Analysis</h3>
                     <div className="grid text-gray-300 w-full mb-0 text-center border border-t-gray-500 border-l-gray-500 border-b-0 border-r-0 lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)]">
 
                         <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
@@ -149,6 +150,100 @@ const Track: FunctionComponent = () => {
                             </div>
                             <div>
                                 Segments
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 className="pb-3 text-left text-2xl font-semibold text-green-500 mt-20">Audio Features</h3>
+
+                    <div className="grid text-gray-300 w-full mb-0 text-center border border-t-gray-500 border-l-gray-500 border-b-0 border-r-0 lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)]">
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                            <div className="text-3xl font-bold">
+                                {data?.audioFeatures.acousticness.toFixed(2)}
+                            </div>
+                            <div>
+                                Acousticness
+                            </div>
+                        </div>
+
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                            <div className="text-3xl font-bold">
+                                {data?.audioFeatures.danceability.toFixed(2)}
+                            </div>
+                            <div>
+                                Danceability
+                            </div>
+                        </div>
+
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                            <div className="text-3xl font-bold">
+                                {data?.audioFeatures.energy.toFixed(2)}
+                            </div>
+                            <div>
+                                Energy
+                            </div>
+                        </div>
+
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                            <div className="text-3xl font-bold">
+                                {data?.audioFeatures.loudness.toFixed(2)}
+                            </div>
+                            <div>
+                                Loudness
+                            </div>
+                        </div>
+
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                            <div className="text-3xl font-bold">
+                                {data?.audioFeatures.instrumentalness.toFixed(4)}
+                            </div>
+                            <div>
+                                Instrumentalnes
+                            </div>
+                        </div>
+
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                            <div className="text-3xl font-bold">
+                                {data?.audioFeatures.mode}
+                            </div>
+                            <div>
+                                Mode
+                            </div>
+                        </div>
+
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                            <div className="text-3xl font-bold">
+                                {data?.audioFeatures.liveness}
+                            </div>
+                            <div>
+                                Liveness
+                            </div>
+                        </div>
+
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                            <div className="text-3xl font-bold">
+                                {data?.audioFeatures.key}
+                            </div>
+                            <div>
+                                Key
+                            </div>
+                        </div>
+
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                            <div className="text-3xl font-bold">
+                                {data?.audioFeatures.speechiness.toFixed(3)}
+                            </div>
+                            <div>
+                                Speechiness
+                            </div>
+                        </div>
+
+                        <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
+                            <div className="text-3xl font-bold">
+                                {data?.audioFeatures.valence.toFixed(3)}
+                            </div>
+                            <div>
+                                Valence
                             </div>
                         </div>
                     </div>

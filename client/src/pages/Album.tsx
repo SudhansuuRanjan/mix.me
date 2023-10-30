@@ -88,7 +88,7 @@ export default function Album(): React.ReactNode {
                                         {dateToYMD(new Date(data?.album.release_date))}
                                     </div>
                                 </div>
-                                <a target='_blank' href={data?.album.external_urls.spotify} className="lg:text-sm md:text-sm text-xs bg-[#1db954] hover:bg-[#197e3d] w-fit rounded-full px-5 py-1.5 text-white font-medium focus:outline-none mt-4">Play on Spotify</a>
+                                <a target='_blank' href={data?.album.external_urls.spotify} className="lg:text-sm md:text-sm text-xs bg-[#1db954] hover:bg-[#197e3d] w-fit rounded-full px-5 py-1.5 text-black font-medium focus:outline-none mt-4">Play on Spotify</a>
                             </div>
                         </div>
 
