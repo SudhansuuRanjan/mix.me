@@ -20,7 +20,8 @@ const getLocalRefreshToken = () => window.localStorage.getItem('spotify_refresh_
 // Refresh the token
 const refreshAccessToken = async () => {
     try {
-        const { data } = await axios.get(`${API}/refresh_token?refresh_token=${getLocalRefreshToken()}`);
+        const res = await fetch(`${API}/refresh_token?refresh_token=${getLocalRefreshToken()}`);
+        const data = await res.json();
         const { access_token } = data;
         setLocalAccessToken(access_token);
         window.location.reload();
