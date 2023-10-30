@@ -88,7 +88,7 @@ const Artist: FunctionComponent = () => {
                         </div>
                         <div data-aos="fade-in" className="flex flex-wrap justify-center mt-4 gap-24">
                             <div className="flex flex-col items-center">
-                                <p className="text-blue-500 lg:text-3xl md:3xl text-2xl font-bold">{formatWithCommas(artist.followers.total)}</p>
+                                <p className="text-blue-500 lg:text-3xl md:3xl text-2xl font-black">{formatWithCommas(artist.followers.total)}</p>
                                 <p className="text-gray-500">FOLLOWERS</p>
                             </div>
                             <div className="flex flex-col items-center">

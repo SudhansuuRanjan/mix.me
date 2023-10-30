@@ -74,7 +74,7 @@ const Playlist: FunctionComponent = () => {
                                     <div data-aos="fade-left" className="flex flex-col">
                                         <p className="lg:text-4xl md:text-3xl text-2xl font-semibold my-1">{data?.playlist.name}</p>
                                         <p dangerouslySetInnerHTML={{__html:data?.playlist.description}} className="text-gray-400 lg:text-base md:text-base text-sm mt-1 max-w-md"></p>
-                                        <div className="flex items-center text-white my-2">
+                                        <div className="flex items-center text-white my-2 flex-wrap">
                                             <div>
                                                 {userData?.following ? <AiFillHeart onClick={handleUnfollowPlaylist} className="text-pink-500 cursor-pointer" size={24} /> : <AiOutlineHeart onClick={handleFollowPlaylist} className="text-pink-500 cursor-pointer" size={24} />}
                                             </div>&nbsp;·&nbsp;

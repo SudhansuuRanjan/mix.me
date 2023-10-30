@@ -3,8 +3,7 @@ import { useQuery } from "@tanstack/react-query"
 import AlbumCard from "../components/AlbumCard"
 import Loader from "../components/Loader"
 import ErrorFallback from "../components/ErrorFallback"
-
-let refetchAlbums : Function;
+import { useEffect } from "react"
 
 const LikedAlbums = () => {
 
@@ -16,7 +15,9 @@ const LikedAlbums = () => {
         },
     });
 
-    refetchAlbums = refetch;
+    useEffect(() => {
+        document.title = `My Albums • 🎧 mix.me`;
+    }, [data]);
 
     return (
         <div className="m-auto w-full flex flex-col items-center justify-center">
@@ -43,4 +44,3 @@ const LikedAlbums = () => {
 }
 
 export default LikedAlbums;
-export { refetchAlbums };

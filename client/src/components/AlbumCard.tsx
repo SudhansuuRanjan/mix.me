@@ -19,7 +19,7 @@ const AlbumCard = ({ album }: any) => {
                     </span>
                 ))
             }</p>
-            <p className="text-sm text-slate-400">{album.total_tracks} {
+            <p className="text-sm text-slate-500">{album.total_tracks} {
                 album.total_tracks > 1 ? 'SONGS' : 'SONG'
             }</p>
         </div>

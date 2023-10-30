@@ -77,7 +77,7 @@ export default function Album(): React.ReactNode {
                                         ))
                                     }
                                 </div>
-                                <div className='flex items-center'>
+                                <div className='flex items-center flex-wrap'>
                                     <div>
                                         {userSavedAlbum ? <AiFillHeart onClick={handleRemoveAlbum} className="text-pink-500 cursor-pointer" size={24} /> : <AiOutlineHeart onClick={handleSaveAlbum} className="text-pink-500 cursor-pointer" size={24} />}
                                     </div>&nbsp;·&nbsp;

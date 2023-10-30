@@ -7,6 +7,7 @@ import ArtistCard from "../components/ArtistCard";
 import AlbumCard from "../components/AlbumCard";
 import Loader from "../components/Loader";
 import ErrorFallback from "../components/ErrorFallback";
+import useDebounce from "../hooks/useDebounce";
 
 const Search = () => {
     const [searchParams, setSearchParams] = useSearchParams({ search: "", type: "track" });
@@ -16,6 +17,8 @@ const Search = () => {
 
     let type = searchParams.get("type") as string;
     let query = searchParams.get("search") as string;
+
+    const debouncedQuery = useDebounce(query, 500);
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchParams(prev => {
@@ -50,20 +53,17 @@ const Search = () => {
 
     useEffect(() => {
         document.title = `Search • mix.me`;
-        if (query) {
+        if (debouncedQuery) {
             handleSubmit(new Event('submit') as any);
         }
-    }, []);
+    }, [debouncedQuery]);
 
     return (
         <div className="w-full">
             <div className="m-auto w-full flex flex-col items-center justify-center">
                 <form onSubmit={handleSubmit} className="lg:pt-14 md:pt-14 pt-8 flex flex-col lg:w-[40rem] md:w-[32rem] w-[90%] gap-6">
                     <div className="flex lg:gap-6 md:gap-6 gap-2">
-                        <input value={searchParams.get("search") as string} onChange={onChange} type="search" placeholder="Search" className="w-full h-12 px-5 shadow-lg rounded-2xl text-sm bg-gray-900 focus:outline-none border-gray-700 border" />
-                        <button className="text-white bg-green-600 hover:bg-green-700 lg:px-8 md:px-7 px-4 h-12 rounded-2xl">
-                            Search
-                        </button>
+                        <input value={searchParams.get("search") as string} onChange={onChange} type="search" placeholder="Search" className="w-full lg:py-3.5 py-3 px-5 shadow-lg rounded-2xl lg:text-base text-sm bg-gray-900 focus:outline-none border-gray-700 border" />
                     </div>
                     <div className="flex items-center justify-center lg:gap-5 md:gap-5 gap-1 mt-2">
                         <button onClick={() => changeType("track")} className={`border rounded-full text-white lg:px-5 md:px-5 px-3 py-1.5 lg:text-base md:text-base text-sm ${type === "track" ? "bg-green-500 bg-opacity-70 border-green-500" : "border-gray-500"}`}>
@@ -85,13 +85,12 @@ const Search = () => {
                 </form>
 
                 <div className="m-auto w-full lg:px-16 md:px-16 px-5 pt-5">
+                    <h2 className="text-xl font-semibold my-8">Search results for "{query}"</h2>
+
                     {
                         error ? <ErrorFallback refetch={() => { }} /> :
                             loading ? <Loader /> :
                                 <div className="mb-24 mt-8">
-                                    {
-                                        query.length !== 0 && <h2 className="text-xl font-semibold my-8">Search results for "{query}"</h2>
-                                    }
                                     {
                                         type === "track" && data?.tracks?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="flex flex-wrap gap-5"> {data?.tracks?.items.map((track: any) => (
                                             <Track key={track.id} trackId={track.id} trackImage={track.album.images[1].url} trackName={track.name} trackArtists={track.artists} trackAlbum={track.album.name} trackDuration={track.duration_ms} trackPlayedAt={track.played_at} tractAlbumId={track.album.id} />

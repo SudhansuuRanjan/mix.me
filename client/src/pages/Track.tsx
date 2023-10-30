@@ -17,7 +17,10 @@ const Track: FunctionComponent = () => {
         queryFn: async () => {
             const res = await getTrackInfo(trackId);
             return { track: res.track, audioFeatures: res.audioFeatures, audioAnalysis: res.audioAnalysis };
-        }
+        },
+        onSuccess: function(data) {
+            console.log(data.audioFeatures);
+        },
     })
 
     useEffect(() => {

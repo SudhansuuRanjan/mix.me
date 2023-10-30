@@ -30,23 +30,17 @@ const refreshAccessToken = async () => {
 };
 
 // Get access token off of query params (called on application init)
-export const getAccessToken = async () => {
+export const getAccessToken = () => {
     const { error, access_token, refresh_token } = getHashParams();
 
     if (error) {
         console.error(error);
-        refreshAccessToken();
     }
 
     const localAccessToken = getLocalAccessToken();
 
     if (localAccessToken) {
-        if (Date.now() - Number(getTokenTimestamp()) > EXPIRATION_TIME) {
-            console.warn('Access token has expired, refreshing...');
-            await refreshAccessToken();
-        } else {
-            return localAccessToken;
-        }
+        return localAccessToken;
     }
 
     if (access_token) {
@@ -58,7 +52,7 @@ export const getAccessToken = async () => {
     return null;
 };
 
-export const token = await getAccessToken();
+export let token = getAccessToken();
 
 export const logout = () => {
     window.localStorage.removeItem('spotify_token_timestamp');
@@ -69,6 +63,19 @@ export const logout = () => {
 
 
 /* USER API CALLS */
+
+// Precheck if token is expired before making any request
+axios.interceptors.request.use(async function (config) {
+    if (Date.now() - Number(getTokenTimestamp()) > EXPIRATION_TIME) {
+        await refreshAccessToken();
+        token = getAccessToken();
+        console.log("refreshed token");
+    }
+    return config;
+}, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+});
 
 const headers = {
     Authorization: `Bearer ${token}`,

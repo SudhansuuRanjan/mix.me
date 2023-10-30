@@ -61,15 +61,15 @@ const Playlists: FunctionComponent = () => {
                     </div>
 
                     <div data-aos="fade-right" className="flex text-sm font-medium mt-5 gap-2">
-                        <button onClick={() => setFilter("all")} className={`text-green-500 px-4 py-1.5 rounded-full ${filter === "all" ? "bg-green-600 text-white" : "bg-green-600 bg-opacity-40"
+                        <button onClick={() => setFilter("all")} className={`px-4 py-1.5 rounded-full ${filter === "all" ? "bg-green-500 text-black" : "bg-gray-700 font-normal text-white bg-opacity-40"
                             }`}>
                             All
                         </button>
-                        <button onClick={() => setFilter("spotify")} className={`text-green-500 px-4 py-1.5 rounded-full ${filter === "spotify" ? "bg-green-600 text-white" : "bg-green-600 bg-opacity-40"
+                        <button onClick={() => setFilter("spotify")} className={`px-4 py-1.5 rounded-full ${filter === "spotify" ? "bg-green-500 text-black" : "bg-gray-700 font-normal text-white bg-opacity-40"
                             }`} >
                             By Spotify
                         </button>
-                        <button onClick={() => setFilter("user")} className={`text-green-500 px-4 py-1.5 rounded-full ${filter === "user" ? "bg-green-600 text-white" : "bg-green-600 bg-opacity-40"
+                        <button onClick={() => setFilter("user")} className={`px-4 py-1.5 rounded-full ${filter === "user" ? "bg-green-500 text-black" : "bg-gray-700 font-normal text-white bg-opacity-40"
                             }`}>
                             By You
                         </button>

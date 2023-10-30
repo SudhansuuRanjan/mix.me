@@ -32,7 +32,7 @@ const Profile: FunctionComponent = () => {
     const [topGenres, setTopGenres] = useState(null);
 
     useEffect(() => {
-        document.title = `${isLoading ? "Profile" : data?.user.display_name} • mix.me`;
+        document.title = `🎧 mix.me • ${isLoading ? "Profile" : data?.user.display_name}`;
         if (data?.topArtists) {
             getTopGenres(data?.topArtists.items);
         }
@@ -113,7 +113,7 @@ const Profile: FunctionComponent = () => {
 
                     <div className="m-auto w-full lg:px-16 md:px-16 px-5 my-16">
                         <Title title="Albums" subtitle="Your saved albums" link="/albums" />
-                            <Albums/>
+                        <Albums />
                     </div>
 
                     {/* Liked Songs */}
