@@ -13,12 +13,18 @@ function App() {
     AOS.init();
     AOS.refresh();
     setAccessToken(token);
+    if (token) {
+      // Remove hash parameters from the URL (if using hash-based routing)
+      if (window.location.hash) {
+        window.location.hash = '';
+      }
+    }
   }, []);
 
 
   return (
     <div className='min-h-screen h-full'>
-      {accessToken ? <AppRoutes /> : <Login />}
+        {accessToken ? <AppRoutes /> : <Login />}
     </div>
   )
 }

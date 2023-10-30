@@ -21,18 +21,16 @@ const getLocalRefreshToken = () => window.localStorage.getItem('spotify_refresh_
 const refreshAccessToken = async () => {
     try {
         const { data } = await axios.get(`${API}/refresh_token?refresh_token=${getLocalRefreshToken()}`);
-        console.log(`${API}/refresh_token?refresh_token=${getLocalRefreshToken()}`);
         const { access_token } = data;
         setLocalAccessToken(access_token);
         window.location.reload();
-        return;
-    } catch (e) {
-        console.error(e);
+    } catch (e: any) {
+        console.error(e.message);
     }
 };
 
 // Get access token off of query params (called on application init)
-export const getAccessToken = () => {
+export const getAccessToken = async () => {
     const { error, access_token, refresh_token } = getHashParams();
 
     if (error) {
@@ -40,25 +38,27 @@ export const getAccessToken = () => {
         refreshAccessToken();
     }
 
-    // If token has expired
-    if (Date.now() - Number(getTokenTimestamp()) > EXPIRATION_TIME) {
-        console.warn('Access token has expired, refreshing...');
-        refreshAccessToken();
-    }
-
     const localAccessToken = getLocalAccessToken();
 
-    // If there is no ACCESS token in local storage, set it and return `access_token` from params
-    if ((!localAccessToken || localAccessToken === 'undefined') && access_token) {
+    if (localAccessToken) {
+        if (Date.now() - Number(getTokenTimestamp()) > EXPIRATION_TIME) {
+            console.warn('Access token has expired, refreshing...');
+            await refreshAccessToken();
+        } else {
+            return localAccessToken;
+        }
+    }
+
+    if (access_token) {
         setLocalAccessToken(access_token);
         setLocalRefreshToken(refresh_token);
         return access_token;
     }
 
-    return localAccessToken;
+    return null;
 };
 
-export const token = getAccessToken();
+export const token = await getAccessToken();
 
 export const logout = () => {
     window.localStorage.removeItem('spotify_token_timestamp');

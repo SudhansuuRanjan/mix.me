@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 
 const Login: FunctionComponent = () => {
+
     return (
         <div className="h-screen w-full relative flex flex-col items-center">
             <div className="fixed flex items-center justify-between w-full py-5 lg:px-16 md:px-12 px-0">
