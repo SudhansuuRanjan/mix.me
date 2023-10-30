@@ -107,8 +107,7 @@ const Playlist: FunctionComponent = () => {
                 }
 
                 {
-                    playListLoading ? <Loader /> :
-                        <>
+                    !playListLoading && <>
                             <div data-aos="fade-up">
                                 <p className="lg:text-3xl text-2xl font-semibold mt-12">Tracks</p>
                             </div>

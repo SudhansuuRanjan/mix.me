@@ -99,12 +99,12 @@ export default function Album(): React.ReactNode {
                 </div>
 
                 {
-                    isLoading ? <Loader /> :
-                        <div className="flex flex-wrap gap-4 my-10">
-                            {data?.tracks.map((track: any, i: number) => (
-                                <Track key={i} trackId={track.id} trackAlbum={data.album.name} trackArtists={track.artists} trackDuration={track.duration_ms} trackPlayedAt={""} trackImage={data.album.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : data.album.images[0]?.url} trackName={track.name === "" ? "Unavailable" : track.name} tractAlbumId={data.album.id} />
-                            ))}
-                        </div>
+                    !isLoading &&
+                    <div className="flex flex-wrap gap-4 my-10">
+                        {data?.tracks.map((track: any, i: number) => (
+                            <Track key={i} trackId={track.id} trackAlbum={data.album.name} trackArtists={track.artists} trackDuration={track.duration_ms} trackPlayedAt={""} trackImage={data.album.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : data.album.images[0]?.url} trackName={track.name === "" ? "Unavailable" : track.name} tractAlbumId={data.album.id} />
+                        ))}
+                    </div>
                 }
 
                 <div data-aos="fade-up" className='mt-12'>
