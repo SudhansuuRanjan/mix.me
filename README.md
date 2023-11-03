@@ -1,4 +1,4 @@
-<h1 align="center"> SpotiStat 📊</h1>
+<h1 align="center"> 🎧 Mix.Me </h1>
   
   [![GitHub license](https://img.shields.io/github/license/SudhansuuRanjan/SpotiStat?style=for-the-badge)](LICENSE)  [![GitHub stars](https://img.shields.io/github/stars/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub forks](https://img.shields.io/github/forks/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub issues](https://img.shields.io/github/issues/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub pull requests](https://img.shields.io/github/issues-pr/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub last commit](https://img.shields.io/github/last-commit/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()
 
