@@ -21,15 +21,17 @@ The WebSite is deployed in https://tesla-nitp.vercel.app/
 
 ### Features
 
-- View your top artists and tracks
+- View your profile(name, image, followers, following, top genre)
+- View your top artists, tracks
 - View the audio features of your top tracks
-- Search for artists, albums, and tracks
-- View information about artists, albums, and tracks
+- Search for artists, albums, playlists and tracks
+- View information about artists, playlists, albums, and tracks
 - View your recently played tracks
-- View your saved tracks 
+- View your saved tracks, albums, playlists
 - View your created playlists, and view information about them
 - Follow and unfollow playlists/users/artists
 - Get recommendations based on your playlist and create a new playlist based on these recommendations
+- Install it in your computer/phone since it is a PWA.
 
 ## Tech Stack
 
