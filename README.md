@@ -11,7 +11,7 @@ To use SpotiStat, you must have a Spotify account. You can login to SpotiStat us
 
 ### Live WebSite URL
 
-The WebSite is deployed in https://tesla-nitp.vercel.app/
+The WebSite is deployed in https://mixme.vercel.app/
 > [!IMPORTANT]  
 > The project is currently invite only so for now you can't login to the website. But you can still clone the project and run it locally. If you want to log in to deployed project, I will need your `Spotify Name` and `Spotify EmailID` to invite you.
 
