@@ -46,44 +46,40 @@ The WebSite is deployed in https://mixme.vercel.app/
 
 ### Preqrequisites
 
-### Install Node JS
+#### Install Node JS
 Refer to https://nodejs.org/en/ to install nodejs
 
-### Install TypeScript
+#### Install TypeScript
 Refer to https://www.typescriptlang.org/ to install typescript
 
-### Install vite
+```bash
+npm install -g typescript
+```
+
+#### Install vite
 Install Vite npm package globally. This will help to easily run the project and also build the source files easily. Use the following command to install vite
 
 ```bash
 npm install -g vite
 ```
 
-### Learn Tailwind CSS
+#### Learn Tailwind CSS
 This project uses `Tailwind CSS` if you don't have any hands-on experience with tailwind css then you can refer to their [docs](https://tailwindcss.com/).
 
-### Learn React JS
+#### Learn React JS
 If you are new to React JS then you can refer to their [docs](https://react.dev/).
 
-### Learn React Query
+#### Learn React Query
 If you are new to React Query then you can refer to their [docs](https://appwrite.io/docs).
-
-## Contributing
-
-If you would like to contribute to SpotiStat, please open an issue or pull request on GitHub.
 
 ## Cloning and Running the Application in local
 
-Clone the project into local.
-
-Install all the npm packages. 
- - Go into the `root folder` and type the following command to install all npm packages
-
+- Clone the project into local.
+ - In the `root folder` and type the following command to install all npm packages
     ```bash
     npm install
     ```
 - Go to `client folder` and type the following command to install all npm packages
-
     ```bash
     npm install
     ```
@@ -92,7 +88,6 @@ Install all the npm packages.
     VITE_API_URL=http://localhost:8080
     ```
 - Go to `server folder` and type the following command to install all npm packages
-
     ```bash
     npm install
     ```
@@ -106,18 +101,20 @@ Install all the npm packages.
 
   In spotify developer dashboard, in newly created app, add `http://localhost:8080/callback` as the redirect uri.
 
-In order to run the application Type the following command in the **root directory** only.
-
-```bash
-npm run dev
-```
+- In order to run the application Type the following command in the **root directory** only.
+  ```bash
+   npm run dev
+  ```
 
 - The Frontend Runs on [http://localhost:5173/](http://localhost:5173/).
 - The Backend Runs on [http://localhost:8080/](http://localhost:8080/).
 
 `Contributions are welcome 🎉🎉`
+# Contributing
+If you would like to contribute to SpotiStat, please open an issue or pull request on GitHub
 
-# Ways to contribute:
+## Ways to contribute:
+
 1. Solve the issues which are listed.
 2. Create your own issue and then send PR.
 
