@@ -24,6 +24,7 @@ const refreshAccessToken = async () => {
         const data = await res.json();
         const { access_token } = data;
         setLocalAccessToken(access_token);
+        window.location.reload();
     } catch (e: any) {
         console.error(e.message);
     }
@@ -69,7 +70,6 @@ axios.interceptors.request.use(async function (config) {
     if (Date.now() - Number(getTokenTimestamp()) > EXPIRATION_TIME) {
         await refreshAccessToken();
         token = getAccessToken();
-        console.log("refreshed token");
     }
     return config;
 }, function (error) {
