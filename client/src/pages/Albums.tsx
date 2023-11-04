@@ -21,7 +21,7 @@ const Albums = () => {
                 isLoading ? <Loader /> : isError ? <ErrorFallback refetch={refetch} /> : (
                     <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
                         {
-                            data?.map((item: any) => (
+                            data.length === 0 ? <p className="text-center w-full text-green-500 py-16">No items.</p> : data?.map((item: any) => (
                                 <AlbumCard key={item.album.id} album={item.album} />
                             ))
                         }

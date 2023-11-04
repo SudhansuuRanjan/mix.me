@@ -90,6 +90,7 @@ If you are new to React Query then you can refer to their [docs](https://appwrit
 - Go to `server folder` and type the following command to install all npm packages
     ```bash
     npm install
+    npm run build
     ```
 - In server folder, Change the `.env.example` file to `.env` and add the required credentials.
     ```bash

@@ -77,17 +77,17 @@ const Track: FunctionComponent = () => {
 
                         <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
                             <div className="text-3xl font-bold">{formatDuration(data?.audioFeatures.duration_ms)}</div>
-                            <div>Duration</div>
+                            <div className="text-gray-400">Duration</div>
                         </div>
                         <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
                             <div className="text-3xl font-bold">{parsePitchClass(data?.audioFeatures.key)}</div>
-                            <div>Key</div>
+                            <div className="text-gray-400">Key</div>
                         </div>
                         <div data-aos="zoom-in" className="py-5 px-4 border border-b-gray-500 border-r-gray-500 border-t-0 border-l-0">
                             <div className="text-3xl font-bold">
                                 {data?.audioFeatures.mode === 1 ? 'Major' : 'Minor'}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Modality
                             </div>
                         </div>
@@ -95,7 +95,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.audioFeatures.time_signature}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Time Signature
                             </div>
                         </div>
@@ -103,7 +103,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {Math.round(data?.audioFeatures.tempo)}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Tempo (BPM)
                             </div>
                         </div>
@@ -112,7 +112,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.track.popularity}%
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Popularity
                             </div>
                         </div>
@@ -121,7 +121,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.audioAnalysis.bars.length}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Bars
                             </div>
                         </div>
@@ -130,7 +130,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.audioAnalysis.beats.length}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Beats
                             </div>
                         </div>
@@ -139,7 +139,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.audioAnalysis.sections.length}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Sections
                             </div>
                         </div>
@@ -148,7 +148,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.audioAnalysis.segments.length}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Segments
                             </div>
                         </div>
@@ -161,7 +161,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.audioFeatures.acousticness.toFixed(2)}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Acousticness
                             </div>
                         </div>
@@ -170,7 +170,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.audioFeatures.danceability.toFixed(2)}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Danceability
                             </div>
                         </div>
@@ -179,7 +179,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.audioFeatures.energy.toFixed(2)}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Energy
                             </div>
                         </div>
@@ -188,7 +188,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.audioFeatures.loudness.toFixed(2)}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Loudness
                             </div>
                         </div>
@@ -197,7 +197,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.audioFeatures.instrumentalness.toFixed(4)}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Instrumentalnes
                             </div>
                         </div>
@@ -206,7 +206,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.audioFeatures.mode}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Mode
                             </div>
                         </div>
@@ -215,7 +215,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.audioFeatures.liveness}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Liveness
                             </div>
                         </div>
@@ -224,7 +224,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.audioFeatures.key}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Key
                             </div>
                         </div>
@@ -233,7 +233,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.audioFeatures.speechiness.toFixed(3)}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Speechiness
                             </div>
                         </div>
@@ -242,7 +242,7 @@ const Track: FunctionComponent = () => {
                             <div className="text-3xl font-bold">
                                 {data?.audioFeatures.valence.toFixed(3)}
                             </div>
-                            <div>
+                            <div className="text-gray-400">
                                 Valence
                             </div>
                         </div>

@@ -7,7 +7,6 @@ import { getUser } from '../spotify'
 
 
 const NavBar2 = () => {
-
     const { navTitle } = useNavContext();
 
     // Go back to previous page
@@ -42,13 +41,13 @@ const NavBar2 = () => {
 
     return (
         <>
-            <div className={`fixed z-10 top-0 bg-[#220808] lg:pl-24 md:pl-24 pr-3 w-full py-3 flex items-center justify-between shadow-lg transition-all ease-in  ${!show && 'opacity-0'}`}>
-                <div className='flex lg:gap-3 md:gap-3 gap-2 items-center'>
-                    <div className='flex lg:gap-2 md:gap-2 gap-1 items-center ml-2'>
-                        <button onClick={goBack} className='bg-[#000] hover:bg-gray-950 text-white lg:p-2.5 md:p-2.5 p-2 rounded-full'>
+            <div className={`fixed z-10 top-0 bg-[#2c0b0b] lg:pl-24 md:pl-24 pr-3 w-full py-3 flex items-center justify-between shadow-lg transition-all ease-in  ${!show && 'opacity-0'}`}>
+                <div className='flex gap-3 items-center'>
+                    <div className='flex gap-2 items-center ml-2'>
+                        <button onClick={goBack} className='bg-[#000] hover:bg-gray-950 text-white p-2.5 rounded-full'>
                             <FiArrowLeft />
                         </button>
-                        <button onClick={goForward} className='bg-[#000] hover:bg-gray-950 text-white lg:p-2.5 md:p-2.5 p-2 rounded-full'>
+                        <button onClick={goForward} className='bg-[#000] hover:bg-gray-950 text-white p-2.5 lg:block md:block hidden rounded-full'>
                             <FiArrowRight />
                         </button>
                     </div>

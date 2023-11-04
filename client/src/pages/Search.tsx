@@ -39,7 +39,7 @@ const Search = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (query.length === 0) return;
+        if (debouncedQuery.length === 0) return setData(null);
         setLoading(true);
         setError(false);
         try {
@@ -56,10 +56,8 @@ const Search = () => {
 
     useEffect(() => {
         document.title = `Search • mix.me`;
-        setNavTitle(`Search`);
-        if (debouncedQuery) {
-            handleSubmit(new Event('submit') as any);
-        }
+        setNavTitle(`Search "${query}"`);
+        handleSubmit(new Event('submit') as any);
     }, [debouncedQuery]);
 
     return (
@@ -89,7 +87,7 @@ const Search = () => {
                 </form>
 
                 <div className="m-auto w-full lg:px-16 md:px-16 px-5 pt-5">
-                    <h2 className="text-xl font-semibold my-8">Search results for "{query}"</h2>
+                    {query && <h2 className="text-xl font-semibold my-8">Search results for "{query}"</h2>}
 
                     {
                         error ? <ErrorFallback refetch={() => { }} /> :
@@ -124,7 +122,7 @@ const Search = () => {
                                     }
 
                                     {
-                                        query.length === 0 && !data && <div className="flex flex-col items-center justify-center gap-2">
+                                        query.length === 0 && !data && <div className="flex mt-16 flex-col items-center justify-center gap-2">
                                             <img height={300} width={300} loading="eager" src="./images/search.png" className="w-52" alt="search" />
                                             <p className="text-gray-500 text-lg">Start typing to search...</p>
                                         </div>

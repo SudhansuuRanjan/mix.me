@@ -18,7 +18,11 @@ let stateKey: string = 'spotify_auth_state';
 
 const app: Express = express();
 
-app.use(cors())
+let corsOptions = {
+    origin: process.env.FRONTEND_URL,
+}
+
+app.use(cors(corsOptions))
     .use(cookieParser());
 
 app.get('/', (req: Request, res: Response) => {

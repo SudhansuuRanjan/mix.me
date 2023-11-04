@@ -57,7 +57,7 @@ export default defineConfig({
             "purpose": "any"
           },
           {
-            "src": "\/favicons/music.png",
+            "src": "\/favicons/android-icon-512x512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
@@ -66,7 +66,7 @@ export default defineConfig({
         "start_url": "/",
         "id":"/",
         "display": "standalone",
-        "theme_color": "#1DB954",
+        "theme_color": "#181818",
         "background_color": "#000000",
         "orientation": "portrait",
         "prefer_related_applications": true
