@@ -41,7 +41,7 @@ const NavBar2 = () => {
 
     return (
         <>
-            <div className={`fixed z-10 top-0 bg-[#2c0b0b] lg:pl-24 md:pl-24 pr-3 w-full py-3 flex items-center justify-between shadow-lg transition-all ease-in h-auto  ${!show && 'opacity-0 h-0'}`}>
+            <div className={`fixed z-10 top-0 bg-[#2c0b0b] lg:pl-24 md:pl-24 pr-3 w-full py-3 flex items-center justify-between shadow-lg transition-all ease-in ${!show && 'opacity-0 hidden'}`}>
                 <div className='flex gap-3 items-center'>
                     <div className='flex gap-2 items-center ml-2'>
                         <button onClick={goBack} className='bg-[#000] hover:bg-gray-950 text-white p-2.5 rounded-full'>
