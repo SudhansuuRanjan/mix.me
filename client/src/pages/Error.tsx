@@ -1,10 +1,13 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
+import { useNavContext } from "../context/NavContext"
 
 const Error = () => {
+    const { setNavTitle } = useNavContext();
     useEffect(() => {
         document.title = `Page not Found • mix.me`;
-    },[])
+        setNavTitle(`Not Found`);
+    }, [])
     return (
         <div className='flex flex-col justify-center min-h-screen w-full items-center text-center px-5'>
             <img src="./images/error.webp" className="w-64" alt="search" />

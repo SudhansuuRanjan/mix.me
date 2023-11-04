@@ -8,12 +8,15 @@ import AlbumCard from "../components/AlbumCard";
 import Loader from "../components/Loader";
 import ErrorFallback from "../components/ErrorFallback";
 import useDebounce from "../hooks/useDebounce";
+import { useNavContext } from "../context/NavContext";
 
 const Search = () => {
     const [searchParams, setSearchParams] = useSearchParams({ search: "", type: "track" });
     const [data, setData] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
+
+    const { setNavTitle } = useNavContext();
 
     let type = searchParams.get("type") as string;
     let query = searchParams.get("search") as string;
@@ -53,6 +56,7 @@ const Search = () => {
 
     useEffect(() => {
         document.title = `Search • mix.me`;
+        setNavTitle(`Search`);
         if (debouncedQuery) {
             handleSubmit(new Event('submit') as any);
         }

@@ -5,9 +5,11 @@ import Loader from "../components/Loader";
 import { useQuery } from "@tanstack/react-query";
 import ErrorFallback from '../components/ErrorFallback'
 import ArtistCard from "../components/ArtistCard";
+import { useNavContext } from "../context/NavContext";
 
 const Artists: FunctionComponent = (): React.ReactNode => {
     const [searchParams, setSearchParams] = useSearchParams({ duration: "short_term" });
+    const { setNavTitle } = useNavContext();
 
     const { data, isError, isLoading, refetch } = useQuery({
         staleTime: 1000 * 60 * 20,
@@ -27,6 +29,7 @@ const Artists: FunctionComponent = (): React.ReactNode => {
 
     useEffect(() => {
         document.title = `Top Artists • mix.me`;
+        setNavTitle(`Top Artists`);
     }, [])
 
     return (

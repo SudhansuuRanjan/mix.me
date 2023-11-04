@@ -8,7 +8,7 @@ import "aos/dist/aos.css";
 import { AiOutlineWarning } from "react-icons/ai"
 
 function App() {
-  const [accessToken, setAccessToken] = useState<string | null>('');
+  const [accessToken, setAccessToken] = useState<string | null>(null);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   useEffect(() => {

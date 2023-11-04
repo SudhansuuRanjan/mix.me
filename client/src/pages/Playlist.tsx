@@ -9,9 +9,11 @@ import { FaTrash } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import ErrorFallback from '../components/ErrorFallback'
 import { QueryClient } from "@tanstack/react-query";
+import { useNavContext } from "../context/NavContext";
 
 
 const Playlist: FunctionComponent = () => {
+    const { setNavTitle } = useNavContext();
     const navigate = useNavigate();
     const queryClient = new QueryClient();
     const { playlistId } = useParams() as { playlistId: string };
@@ -39,6 +41,7 @@ const Playlist: FunctionComponent = () => {
 
     useEffect(() => {
         document.title = `${playListLoading ? "Playlist" : data?.playlist.name} • mix.me`;
+        setNavTitle(`${playListLoading ? "Playlist" : data?.playlist.name}`);
     }, [data?.playlist])
 
     const handleFollowPlaylist = async () => {

@@ -4,9 +4,11 @@ import Loader from "../components/Loader";
 import { useQuery } from "@tanstack/react-query";
 import ErrorFallback from '../components/ErrorFallback'
 import PlaylistCard from "../components/PlaylistCard";
+import { useNavContext } from "../context/NavContext";
 
 const Playlists: FunctionComponent = () => {
     const [filter, setFilter] = useState("all");
+    const { setNavTitle } = useNavContext();
 
     const { data, isError, isLoading, refetch } = useQuery({
         queryKey: ['playlists'],
@@ -43,6 +45,7 @@ const Playlists: FunctionComponent = () => {
 
     useEffect(() => {
         document.title = `Playlists • mix.me`;
+        setNavTitle(`Playlists`);
     }, [])
 
     return (

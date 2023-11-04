@@ -6,9 +6,11 @@ import ErrorFallback from "../components/ErrorFallback";
 import { formatWithCommas } from "../utils";
 import PlaylistCard from "../components/PlaylistCard";
 import { useEffect } from "react";
+import { useNavContext } from "../context/NavContext";
 
 const User = () => {
     const [searchParams] = useSearchParams({ user_id: "" });
+    const { setNavTitle } = useNavContext();
 
     let userID = searchParams.get('user_id') as string;
 
@@ -42,6 +44,7 @@ const User = () => {
 
     useEffect(() => {
         document.title = `${isLoading ? "User" : data?.profile.display_name} • mix.me`;
+        setNavTitle(`${isLoading ? "User" : data?.profile.display_name}`);
     },[])
 
     return (

@@ -6,10 +6,12 @@ import { Link, useParams } from 'react-router-dom';
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import ErrorFallback from '../components/ErrorFallback'
+import { useNavContext } from "../context/NavContext";
 
 
 const Track: FunctionComponent = () => {
     const { trackId }: any = useParams();
+    const { setNavTitle } = useNavContext();
 
     const { data, isLoading, isError, refetch } = useQuery({
         queryKey: ['track', trackId],
@@ -17,14 +19,12 @@ const Track: FunctionComponent = () => {
         queryFn: async () => {
             const res = await getTrackInfo(trackId);
             return { track: res.track, audioFeatures: res.audioFeatures, audioAnalysis: res.audioAnalysis };
-        },
-        onSuccess: function (data) {
-            console.log(data.track);
-        },
+        }
     })
 
     useEffect(() => {
         document.title = `${isLoading ? "Track" : data?.track.name} • mix.me`;
+        setNavTitle(`${isLoading ? "Track" : data?.track.name}`);
     }, [data?.track]);
 
     const getPlayableSong = () => {

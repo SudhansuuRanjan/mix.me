@@ -10,9 +10,11 @@ import ArtistCard from "../components/ArtistCard";
 import PlaylistCard from "../components/PlaylistCard";
 import Title from "../components/Title";
 import Albums from "./Albums";
+import { useNavContext } from "../context/NavContext";
 
 
 const Profile: FunctionComponent = () => {
+    const { setNavTitle } = useNavContext();
 
     const { data, isLoading, isError, refetch } = useQuery({
         queryKey: ['profile'],
@@ -33,6 +35,7 @@ const Profile: FunctionComponent = () => {
 
     useEffect(() => {
         document.title = `🎧 mix.me • ${isLoading ? "Profile" : data?.user.display_name}`;
+        setNavTitle(isLoading ? "Profile" : "🎧 mix.me · " + data?.user.display_name);
         if (data?.topArtists) {
             getTopGenres(data?.topArtists.items);
         }

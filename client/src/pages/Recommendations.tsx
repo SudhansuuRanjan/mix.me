@@ -6,11 +6,13 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import ErrorFallback from '../components/ErrorFallback'
 import Loader from "../components/Loader";
 import { QueryClient } from "@tanstack/react-query";
+import { useNavContext } from "../context/NavContext";
 
 
 const Recommendations: FunctionComponent = () => {
     const queryClient = new QueryClient();
     const navigate = useNavigate();
+    const { setNavTitle } = useNavContext();
     const { playlistId } = useParams() as { playlistId: string };
 
 
@@ -45,6 +47,7 @@ const Recommendations: FunctionComponent = () => {
 
     useEffect(() => {
         document.title = `${isLoading ? "Recommendations" : data?.playlist.name} • mix.me`;
+        setNavTitle("Recommendations");
     }, [data?.playlist])
 
     return (

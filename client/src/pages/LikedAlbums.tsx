@@ -4,8 +4,10 @@ import AlbumCard from "../components/AlbumCard"
 import Loader from "../components/Loader"
 import ErrorFallback from "../components/ErrorFallback"
 import { useEffect } from "react"
+import { useNavContext } from "../context/NavContext"
 
 const LikedAlbums = () => {
+    const { setNavTitle } = useNavContext();
 
     const { data, isError, isLoading, refetch } = useQuery({
         queryKey: ['likedAlbums'],
@@ -17,6 +19,7 @@ const LikedAlbums = () => {
 
     useEffect(() => {
         document.title = `My Albums • 🎧 mix.me`;
+        setNavTitle(`My Albums`);
     }, [data]);
 
     return (

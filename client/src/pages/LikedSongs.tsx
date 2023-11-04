@@ -4,12 +4,18 @@ import { getLikedSongs } from "../spotify";
 import Loader from "../components/Loader";
 import Track from "../components/Track";
 import '../App.css'
+import { useNavContext } from "../context/NavContext";
 
 const LikedSongs: FunctionComponent = () => {
-    document.title = "Liked Songs • mix.me";
+    const { setNavTitle } = useNavContext();
     const [likedSongs, setLikedSongs] = useState<any>(null);
     const [total, setTotal] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState(0);
+
+    useEffect(() => {
+        document.title = "Liked Songs • mix.me";
+        setNavTitle(`Liked Songs`);
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {

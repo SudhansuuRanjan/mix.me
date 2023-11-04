@@ -7,9 +7,11 @@ import { useQuery } from "@tanstack/react-query";
 import ErrorFallback from '../components/ErrorFallback'
 import { dateToYMD } from '../utils'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { useNavContext } from '../context/NavContext'
 
 export default function Album(): React.ReactNode {
     const { albumId }: any = useParams();
+    const { setNavTitle } = useNavContext();
 
     const { data, isLoading, isError, refetch } = useQuery({
         queryKey: ['album', albumId],
@@ -33,6 +35,7 @@ export default function Album(): React.ReactNode {
 
     useEffect(() => {
         document.title = `${isLoading ? "Album" : data?.album.name} • mix.me`;
+        setNavTitle(`${isLoading ? "Album" : data?.album.name}`);
     }, [data?.album])
 
     const handleSaveAlbum = async () => {

@@ -1,5 +1,5 @@
-import { FunctionComponent, useEffect } from "react";
-import { getArtist, doesUserFollowArtistorUser, followUserOrArtist, unfollowUserOrArtist, getArtistTopTracks, getArtistAlbums } from "../spotify";
+import { FunctionComponent, useEffect, useState } from "react";
+import { getArtist, doesUserFollowArtistorUser, followUserOrArtist, unfollowUserOrArtist, getArtistTopTracks, search } from "../spotify";
 import Loader from "../components/Loader";
 import { formatWithCommas } from "../utils";
 import Track from "../components/Track";
@@ -7,10 +7,17 @@ import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import ErrorFallback from '../components/ErrorFallback'
 import AlbumCard from "../components/AlbumCard";
+import PlaylistCard from "../components/PlaylistCard";
+import { useNavContext } from "../context/NavContext";
 
 
 const Artist: FunctionComponent = () => {
     const { artistId }: any = useParams();
+    const { setNavTitle } = useNavContext();
+    const [filter, setFilter] = useState("album");
+    const [data, setData] = useState<any>(null);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
 
     const { data: artist, isLoading: artistLoading, isError: artistError, refetch: artistRefetch } = useQuery({
         queryKey: ['artist', artistId],
@@ -39,18 +46,26 @@ const Artist: FunctionComponent = () => {
         }
     })
 
-    const { data: albums, isLoading: artistAlbumsLoading, isError: artistAlbumsError, refetch: albumsRefetch } = useQuery({
-        queryKey: ['artist-albums', artistId],
-        staleTime: Infinity,
-        queryFn: async () => {
-            const res = await getArtistAlbums(artistId);
-            return res.data.items;
+    const getArtistItems = async (type: string, artistName: string) => {
+        setLoading(true);
+        try {
+            const res = await search(artistName, type);
+            setData(res.data);
+            // console.log(res.data);
+            setLoading(false);
+        } catch (error) {
+            // console.log(error);
+            setLoading(false);
+            setError(true);
         }
-    })
-
+    }
     useEffect(() => {
         document.title = `${artistLoading ? "Artist" : artist.name} • mix.me`;
-    }, [artist])
+        setNavTitle(artistLoading ? "Artist" : artist.name);
+        if (artist) {
+            getArtistItems(filter, artist.name);
+        }
+    }, [artist, filter]);
 
     const handleFollow = useMutation({
         mutationFn: async () => userFollows ? await unfollowUserOrArtist(artistId, "artist") : await followUserOrArtist(artistId, "artist"),
@@ -104,6 +119,8 @@ const Artist: FunctionComponent = () => {
                                 <p className="text-gray-500 text-center">GENRES</p>
                             </div>
                         </div>
+
+                        {/* <iframe data-aos="fade-up" className="my-16" style={{ borderRadius: "1rem" }} src={`https://open.spotify.com/embed/artist/${artistId}?utm_source=generator&theme=0`} width="100%" height="352" allowFullScreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> */}
                     </div>
 
                     <div className="pt-8">
@@ -127,14 +144,54 @@ const Artist: FunctionComponent = () => {
                     }
 
 
-                    <div className="pt-10">
-                        <p data-aos="fade-up" className="text-3xl font-extrabold">Albums</p>
+                    <div data-aos="fade-up" className="pt-10">
+                        <p className="text-3xl font-extrabold">Discography</p>
+
+                        <div className="flex text-sm font-medium mt-5 gap-2">
+                            <button onClick={() => setFilter("album")} className={`px-4 py-1.5 rounded-full ${filter === "album" ? "bg-green-500 text-black" : "bg-gray-700 font-normal text-white bg-opacity-40"
+                                }`}>
+                                Albums
+                            </button>
+                            <button onClick={() => setFilter("playlist")} className={`px-4 py-1.5 rounded-full ${filter === "playlist" ? "bg-green-500 text-black" : "bg-gray-700 font-normal text-white bg-opacity-40"
+                                }`} >
+                                Playlists
+                            </button>
+                            <button onClick={() => setFilter("track")} className={`px-4 py-1.5 rounded-full ${filter === "track" ? "bg-green-500 text-black" : "bg-gray-700 font-normal text-white bg-opacity-40"
+                                }`}>
+                                Tracks
+                            </button>
+                        </div>
                     </div>
-                    <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
-                        {artistAlbumsLoading ? <Loader /> : artistAlbumsError ? <ErrorFallback refetch={albumsRefetch} /> : albums.map((album: any, i: number) => (
-                            <AlbumCard key={i} album={album} i={i} />
-                        ))}
+
+                    <div className="m-auto w-full py-10">
+                        {
+                            error ? <ErrorFallback refetch={() => { }} /> :
+                                loading ? <Loader /> :
+                                    <div className="mb-24 mt-8">
+                                        {
+                                            filter === "track" && data?.tracks?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="flex flex-wrap gap-5"> {data?.tracks?.items.map((track: any) => (
+                                                <Track key={track.id} trackId={track.id} trackImage={track.album.images[1].url} trackName={track.name} trackArtists={track.artists} trackAlbum={track.album.name} trackDuration={track.duration_ms} trackPlayedAt={track.played_at} tractAlbumId={track.album.id} />
+                                            ))}
+                                            </div>
+                                        }
+                                        {
+                                            filter === "playlist" && data?.playlists?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6">
+                                                {data?.playlists?.items.slice(0, 20).map((playlist: any, i: number) => (
+                                                    <PlaylistCard key={playlist.id} i={i} playlist={playlist} />
+                                                ))}
+                                            </div>
+                                        }
+                                        {
+                                            filter === "album" && data?.albums?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6">
+                                                {data?.albums?.items.slice(0, 20).map((album: any) => (
+                                                    <AlbumCard key={album.id} album={album} />
+                                                ))}
+                                            </div>
+                                        }
+                                    </div>
+                        }
                     </div>
+
                 </div>
             }
         </div>

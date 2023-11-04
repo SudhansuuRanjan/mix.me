@@ -5,9 +5,11 @@ import Track from "../components/Track";
 import '../App.css'
 import { useQuery } from "@tanstack/react-query";
 import ErrorFallback from '../components/ErrorFallback'
+import { useNavContext } from "../context/NavContext";
 
 
 const Recent: FunctionComponent = () => {
+    const { setNavTitle } = useNavContext();
     
     const { data, isError, isLoading, refetch } = useQuery({
         staleTime: 1000 * 60 * 3,
@@ -20,6 +22,7 @@ const Recent: FunctionComponent = () => {
 
     useEffect(() => {
         document.title = `Recent • mix.me`;
+        setNavTitle(`Recently Played`);
     }, []);
 
     const getPlayableSong = () => {
