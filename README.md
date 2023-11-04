@@ -1,4 +1,4 @@
-<h1 align="center"> SpotiStat 📊</h1>
+<h1 align="center"> 🎧 Mix.Me </h1>
   
   [![GitHub license](https://img.shields.io/github/license/SudhansuuRanjan/SpotiStat?style=for-the-badge)](LICENSE)  [![GitHub stars](https://img.shields.io/github/stars/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub forks](https://img.shields.io/github/forks/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub issues](https://img.shields.io/github/issues/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub pull requests](https://img.shields.io/github/issues-pr/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub last commit](https://img.shields.io/github/last-commit/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()
 
@@ -11,7 +11,7 @@ To use SpotiStat, you must have a Spotify account. You can login to SpotiStat us
 
 ### Live WebSite URL
 
-The WebSite is deployed in https://tesla-nitp.vercel.app/
+The WebSite is deployed in https://mixme.vercel.app/
 > [!IMPORTANT]  
 > The project is currently invite only so for now you can't login to the website. But you can still clone the project and run it locally. If you want to log in to deployed project, I will need your `Spotify Name` and `Spotify EmailID` to invite you.
 
@@ -21,15 +21,17 @@ The WebSite is deployed in https://tesla-nitp.vercel.app/
 
 ### Features
 
-- View your top artists and tracks
+- View your profile(name, image, followers, following, top genre)
+- View your top artists, tracks
 - View the audio features of your top tracks
-- Search for artists, albums, and tracks
-- View information about artists, albums, and tracks
+- Search for artists, albums, playlists and tracks
+- View information about artists, playlists, albums, and tracks
 - View your recently played tracks
-- View your saved tracks 
+- View your saved tracks, albums, playlists
 - View your created playlists, and view information about them
 - Follow and unfollow playlists/users/artists
 - Get recommendations based on your playlist and create a new playlist based on these recommendations
+- Install it in your computer/phone since it is a PWA.
 
 ## Tech Stack
 
@@ -44,44 +46,40 @@ The WebSite is deployed in https://tesla-nitp.vercel.app/
 
 ### Preqrequisites
 
-### Install Node JS
+#### Install Node JS
 Refer to https://nodejs.org/en/ to install nodejs
 
-### Install TypeScript
+#### Install TypeScript
 Refer to https://www.typescriptlang.org/ to install typescript
 
-### Install vite
+```bash
+npm install -g typescript
+```
+
+#### Install vite
 Install Vite npm package globally. This will help to easily run the project and also build the source files easily. Use the following command to install vite
 
 ```bash
 npm install -g vite
 ```
 
-### Learn Tailwind CSS
+#### Learn Tailwind CSS
 This project uses `Tailwind CSS` if you don't have any hands-on experience with tailwind css then you can refer to their [docs](https://tailwindcss.com/).
 
-### Learn React JS
+#### Learn React JS
 If you are new to React JS then you can refer to their [docs](https://react.dev/).
 
-### Learn React Query
+#### Learn React Query
 If you are new to React Query then you can refer to their [docs](https://appwrite.io/docs).
-
-## Contributing
-
-If you would like to contribute to SpotiStat, please open an issue or pull request on GitHub.
 
 ## Cloning and Running the Application in local
 
-Clone the project into local.
-
-Install all the npm packages. 
- - Go into the `root folder` and type the following command to install all npm packages
-
+- Clone the project into local.
+ - In the `root folder` and type the following command to install all npm packages
     ```bash
     npm install
     ```
 - Go to `client folder` and type the following command to install all npm packages
-
     ```bash
     npm install
     ```
@@ -90,7 +88,6 @@ Install all the npm packages.
     VITE_API_URL=http://localhost:8080
     ```
 - Go to `server folder` and type the following command to install all npm packages
-
     ```bash
     npm install
     ```
@@ -104,18 +101,20 @@ Install all the npm packages.
 
   In spotify developer dashboard, in newly created app, add `http://localhost:8080/callback` as the redirect uri.
 
-In order to run the application Type the following command in the **root directory** only.
-
-```bash
-npm run dev
-```
+- In order to run the application Type the following command in the **root directory** only.
+  ```bash
+   npm run dev
+  ```
 
 - The Frontend Runs on [http://localhost:5173/](http://localhost:5173/).
 - The Backend Runs on [http://localhost:8080/](http://localhost:8080/).
 
 `Contributions are welcome 🎉🎉`
+# Contributing
+If you would like to contribute to SpotiStat, please open an issue or pull request on GitHub
 
-# Ways to contribute:
+## Ways to contribute:
+
 1. Solve the issues which are listed.
 2. Create your own issue and then send PR.
 
