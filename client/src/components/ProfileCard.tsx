@@ -35,7 +35,7 @@ const ProfileCard = ({ data, logout, totalPlaylists, topGenres }: any) => {
                 </div>
 
                 <div className="my-10">
-                    <button onClick={logout} className="text-white border px-9 py-2.5 rounded-full text-sm hover:text-black hover:bg-white">
+                    <button aria-label="Logout" onClick={logout} className="text-white border px-9 py-2.5 rounded-full text-sm hover:text-black hover:bg-white">
                         LOGOUT
                     </button>
                 </div>

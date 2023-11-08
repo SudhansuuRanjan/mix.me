@@ -30,6 +30,8 @@ function App() {
       }
     }
 
+    console.clear();
+
     // Clean up the event listeners when the component unmounts
     return () => {
       window.removeEventListener('online', onlineStatusHandler);
