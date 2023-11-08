@@ -82,7 +82,7 @@ const NavBar = () => {
     return (
         <div className='lg:w-24 z-50 md:w-24 w-full bg-black flex lg:flex-col md:flex-col flex-row items-center justify-between lg:h-screen md:h-screen h-16 fixed bottom-0'>
             <NavLink onClick={scrollToTop} to="/" className='lg:flex md:flex hidden'>
-                <img src="./images/mini-logo.svg" className='w-[4.5rem] px-2 my-4' alt="spotify logo" />
+                <img src="./images/mini-logo.svg" className='w-[4.2rem] px-2 my-4' alt="spotify logo" />
             </NavLink>
 
             <div className='flex lg:flex-col md:flex-col flex-row items-center justify-between my-5 w-full'>
