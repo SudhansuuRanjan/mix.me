@@ -90,22 +90,24 @@ If you are new to React Query then you can refer to their [docs](https://appwrit
 - Go to `server folder` and type the following command to install all npm packages
     ```bash
     npm install
-    npm run build
     ```
 - In server folder, Change the `.env.example` file to `.env` and add the required credentials.
     ```bash
     CLIENT_ID=<Spotify Client ID>
     CLIENT_SECRET=<Spotify Client Secret>
     FRONTEND_URL=http://localhost:5173
+    REDIRECT_URI=http://localhost:8080/callback
     ```
   You can get the `CLIENT_ID` and `CLIENT_SECRET` from [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/) by creating an app.
 
   In spotify developer dashboard, in newly created app, add `http://localhost:8080/callback` as the redirect uri.
 
-- In order to run the application Type the following command in the **root directory** only.
-  ```bash
-   npm run dev
-  ```
+> [!WARNING]  
+> In order to run the application, Run the following command in the **root directory** only.
+
+```bash
+ npm run dev
+```
 
 - The Frontend Runs on [http://localhost:5173/](http://localhost:5173/).
 - The Backend Runs on [http://localhost:8080/](http://localhost:8080/).
