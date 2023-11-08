@@ -65,7 +65,7 @@ const Search = () => {
             <div className="m-auto w-full flex flex-col items-center justify-center">
                 <form onSubmit={handleSubmit} className="lg:pt-14 md:pt-14 pt-8 flex flex-col lg:w-[40rem] md:w-[32rem] w-[90%] gap-6">
                     <div className="flex lg:gap-6 md:gap-6 gap-2">
-                        <input autoFocus value={searchParams.get("search") as string} onChange={onChange} type="search" placeholder="Search" className="w-full lg:py-3.5 py-3 px-5 shadow-lg rounded-2xl lg:text-base text-sm bg-gray-900 focus:outline-none border-gray-700 border" />
+                        <input autoFocus={true} value={searchParams.get("search") as string} onChange={onChange} type="search" placeholder="Search" className="w-full lg:py-3.5 py-3 px-5 shadow-lg rounded-2xl lg:text-base text-sm bg-gray-900 focus:outline-none border-gray-700 border" />
                     </div>
                     <div className="flex items-center justify-center lg:gap-5 md:gap-5 gap-1 mt-2">
                         <button onClick={() => changeType("track")} className={`border rounded-full text-white lg:px-5 md:px-5 px-3 py-1.5 lg:text-base md:text-base text-sm ${type === "track" ? "bg-green-500 bg-opacity-70 border-green-500" : "border-gray-500"}`}>
