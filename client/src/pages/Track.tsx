@@ -60,7 +60,7 @@ const Track: FunctionComponent = () => {
                         {/* <audio loop autoPlay>
                             <source src={getPlayableSong()}></source>
                         </audio> */}
-                        <div className="relative group">
+                        <div className="relative w-fit h-fit group">
                             <img data-aos="zoom-in" className="lg:h-56 md:h-56 h-56 lg:w-56 md:w-56 w-56" src={data?.track.album.images[0].url} alt="Album Artwork" />
                             <div className={`absolute group-hover:hidden inset-0 bg-black bg-opacity-30 ${isPlaying ? 'flex' : 'hidden'} items-center justify-center`}>
                                 <div className="flex items-end justify-center space-x-1.5 h-[3.5rem]">
