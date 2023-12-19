@@ -1,16 +1,29 @@
-import { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useState, useEffect, useRef } from "react";
 import { catchErrors } from "../utils";
 import { getLikedSongs } from "../spotify";
 import Loader from "../components/Loader";
-import Track from "../components/Track";
+import PlayableTrack from "../components/PlayableTrack";
 import '../App.css'
 import { useNavContext } from "../context/NavContext";
+import AudioPlayer from 'react-h5-audio-player';
 
 const LikedSongs: FunctionComponent = () => {
+    const playerRef = useRef<any>(null);
     const { setNavTitle } = useNavContext();
     const [likedSongs, setLikedSongs] = useState<any>(null);
     const [total, setTotal] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState(0);
+    const [currentTrack, setCurrentTrack] = useState(0);
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const togglePlay = () => {
+        const audio = playerRef.current.audio.current;
+        if (isPlaying) {
+            audio.pause();
+        } else {
+            audio.play();
+        }
+    };
 
     useEffect(() => {
         document.title = "Liked Songs • mix.me";
@@ -61,17 +74,6 @@ const LikedSongs: FunctionComponent = () => {
         }
     }, [currentPage]);
 
-    const getPlayableSong = () => {
-        let idx = 0;
-        while (idx < 10) {
-            if (likedSongs.length !== 0 && likedSongs[idx].track.preview_url) {
-                return likedSongs[idx].track.preview_url;
-            } else {
-                idx++;
-            }
-        }
-    }
-
     return (
         <div>
             {!likedSongs ? (
@@ -87,12 +89,34 @@ const LikedSongs: FunctionComponent = () => {
                         </div>
                     </div>
 
+                    <div>
+                        <AudioPlayer
+                            ref={playerRef}
+                            src={likedSongs[currentTrack].track.preview_url}
+                            onPlay={() => setIsPlaying(true)}
+                            onPause={() => setIsPlaying(false)}
+                            onEnded={() => {
+                                if (currentTrack < likedSongs.length - 1) {
+                                    setCurrentTrack(currentTrack + 1);
+                                } else {
+                                    setCurrentTrack(0);
+                                }
+                            }}
+                            className="hidden"
+                        />
+                    </div>
+
                     <div className="flex flex-wrap gap-5 my-10">
-                        <audio loop autoPlay>
-                            <source src={getPlayableSong()}></source>
-                        </audio>
                         {likedSongs.length === 0 ? <p className="text-center w-full py-16">No items.</p> : likedSongs.map((recent: any, i: number) => (
-                            <Track
+                            <PlayableTrack
+                                pauseTrack={togglePlay}
+                                currenltyPlaying={currentTrack === i}
+                                isPlaying={isPlaying}
+                                setCurrentlyPlaying={() => {
+                                    setCurrentTrack(i);
+                                    togglePlay();
+                                    setIsPlaying(true);
+                                }}
                                 key={i}
                                 trackId={recent.track.id}
                                 trackAlbum={recent.track.album.name}

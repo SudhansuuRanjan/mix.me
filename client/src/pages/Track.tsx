@@ -8,7 +8,6 @@ import { useQuery } from "@tanstack/react-query";
 import ErrorFallback from '../components/ErrorFallback'
 import { useNavContext } from "../context/NavContext";
 import AudioPlayer from 'react-h5-audio-player';
-import 'react-h5-audio-player/lib/styles.css';
 import { FaPlay, FaPause } from "react-icons/fa";
 
 const Track: FunctionComponent = () => {
@@ -63,7 +62,7 @@ const Track: FunctionComponent = () => {
                         </audio> */}
                         <div className="relative group">
                             <img data-aos="zoom-in" className="lg:h-56 md:h-56 h-56 lg:w-56 md:w-56 w-56" src={data?.track.album.images[0].url} alt="Album Artwork" />
-                            <div className={`absolute group-hover:hidden inset-0 bg-black bg-opacity-20 ${isPlaying ? 'flex' : 'hidden'} items-center justify-center`}>
+                            <div className={`absolute group-hover:hidden inset-0 bg-black bg-opacity-30 ${isPlaying ? 'flex' : 'hidden'} items-center justify-center`}>
                                 <div className="flex items-end justify-center space-x-1.5 h-[3.5rem]">
                                     <div className="music-bar-sm"></div>
                                     <div className="music-bar-sm"></div>

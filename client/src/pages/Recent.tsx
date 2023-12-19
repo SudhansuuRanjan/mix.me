@@ -1,16 +1,29 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent, useEffect, useState, useRef } from "react";
 import { getRecentlyPlayed } from "../spotify";
 import Loader from "../components/Loader";
-import Track from "../components/Track";
+import PlayableTrack from "../components/PlayableTrack";
 import '../App.css'
 import { useQuery } from "@tanstack/react-query";
 import ErrorFallback from '../components/ErrorFallback'
 import { useNavContext } from "../context/NavContext";
+import AudioPlayer from 'react-h5-audio-player';
 
 
 const Recent: FunctionComponent = () => {
+    const playerRef = useRef<any>(null);
     const { setNavTitle } = useNavContext();
-    
+    const [currentTrack, setCurrentTrack] = useState(0);
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const togglePlay = () => {
+        const audio = playerRef.current.audio.current;
+        if (isPlaying) {
+            audio.pause();
+        } else {
+            audio.play();
+        }
+    };
+
     const { data, isError, isLoading, refetch } = useQuery({
         staleTime: 1000 * 60 * 3,
         queryKey: ['recently-played'],
@@ -25,17 +38,6 @@ const Recent: FunctionComponent = () => {
         setNavTitle(`Recently Played`);
     }, []);
 
-    const getPlayableSong = () => {
-        let idx = 0;
-        while (idx < 10) {
-            if (data.items.length !== 0 && data.items[idx].track.preview_url) {
-                return data.items[idx].track.preview_url;
-            } else {
-                idx++;
-            }
-        }
-    }
-
     return (
         <div>
             {isLoading ? <Loader /> : isError ? <ErrorFallback refetch={refetch} />
@@ -48,11 +50,32 @@ const Recent: FunctionComponent = () => {
                     </div>
 
                     <div className="flex flex-wrap gap-5 my-10">
-                        <audio autoPlay loop>
-                            <source src={getPlayableSong()}></source>
-                        </audio>
+                        <div>
+                            <AudioPlayer
+                                ref={playerRef}
+                                src={data.items[currentTrack].track.preview_url}
+                                onPlay={() => setIsPlaying(true)}
+                                onPause={() => setIsPlaying(false)}
+                                onEnded={() => {
+                                    if (currentTrack < data.items.length - 1) {
+                                        setCurrentTrack(currentTrack + 1);
+                                    } else {
+                                        setCurrentTrack(0);
+                                    }
+                                }}
+                                className="hidden"
+                            />
+                        </div>
                         {data.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data.items.map((recent: any, i: number) => (
-                            <Track key={i} trackId={recent.track.id} trackAlbum={recent.track.album.name} trackArtists={recent.track.album.artists} trackDuration={recent.track.duration_ms} trackPlayedAt={recent.played_at} trackImage={recent.track.album.images[1].url} trackName={recent.track.name} tractAlbumId={recent.track.album.id} />
+                            <PlayableTrack
+                                pauseTrack={togglePlay}
+                                currenltyPlaying={currentTrack === i}
+                                isPlaying={isPlaying}
+                                setCurrentlyPlaying={() => {
+                                    setCurrentTrack(i);
+                                    togglePlay();
+                                    setIsPlaying(true);
+                                }} key={i} trackId={recent.track.id} trackAlbum={recent.track.album.name} trackArtists={recent.track.album.artists} trackDuration={recent.track.duration_ms} trackPlayedAt={recent.played_at} trackImage={recent.track.album.images[1].url} trackName={recent.track.name} tractAlbumId={recent.track.album.id} />
                         ))}
                     </div>
                 </div>}

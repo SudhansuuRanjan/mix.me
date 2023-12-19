@@ -1,23 +1,37 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useState, useRef } from "react";
 import { getArtist, doesUserFollowArtistorUser, followUserOrArtist, unfollowUserOrArtist, getArtistTopTracks, search } from "../spotify";
 import Loader from "../components/Loader";
 import { formatWithCommas } from "../utils";
 import Track from "../components/Track";
+import PlayableTrack from "../components/PlayableTrack";
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import ErrorFallback from '../components/ErrorFallback'
 import AlbumCard from "../components/AlbumCard";
 import PlaylistCard from "../components/PlaylistCard";
 import { useNavContext } from "../context/NavContext";
+import AudioPlayer from 'react-h5-audio-player';
 
 
 const Artist: FunctionComponent = () => {
+    const playerRef = useRef<any>(null);
     const { artistId }: any = useParams();
     const { setNavTitle } = useNavContext();
     const [filter, setFilter] = useState("album");
     const [data, setData] = useState<any>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
+    const [currentTrack, setCurrentTrack] = useState(0);
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const togglePlay = () => {
+        const audio = playerRef.current.audio.current;
+        if (isPlaying) {
+            audio.pause();
+        } else {
+            audio.play();
+        }
+    };
 
     const { data: artist, isLoading: artistLoading, isError: artistError, refetch: artistRefetch } = useQuery({
         queryKey: ['artist', artistId],
@@ -74,19 +88,6 @@ const Artist: FunctionComponent = () => {
         }
     })
 
-    const getPlayableSong = () => {
-        let idx = 0;
-        while (idx < 10) {
-            if (topTracks[idx].preview_url) {
-                // console.log(topTracks[idx].preview_url);
-                return topTracks[idx].preview_url;
-            } else {
-                idx++;
-            }
-        }
-    }
-
-
     return (
         <div>
             {artistLoading ? <Loader /> : artistError ? <ErrorFallback refetch={artistRefetch} /> :
@@ -119,8 +120,6 @@ const Artist: FunctionComponent = () => {
                                 <p className="text-gray-500 text-center">GENRES</p>
                             </div>
                         </div>
-
-                        {/* <iframe data-aos="fade-up" className="my-16" style={{ borderRadius: "1rem" }} src={`https://open.spotify.com/embed/artist/${artistId}?utm_source=generator&theme=0`} width="100%" height="352" allowFullScreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> */}
                     </div>
 
                     <div className="pt-8">
@@ -129,15 +128,34 @@ const Artist: FunctionComponent = () => {
 
                     {
                         artistTopTracksLoading ? <Loader /> : artistTopTracksError ? <ErrorFallback refetch={topTracksRefetch} /> : <div>
-                            <div className="my-5">
-                                <audio autoPlay loop>
-                                    <source src={getPlayableSong()}></source>
-                                </audio>
+                            <div>
+                                <AudioPlayer
+                                    ref={playerRef}
+                                    src={topTracks[currentTrack].preview_url}
+                                    onPlay={() => setIsPlaying(true)}
+                                    onPause={() => setIsPlaying(false)}
+                                    onEnded={() => {
+                                        if (currentTrack < topTracks.length - 1) {
+                                            setCurrentTrack(currentTrack + 1);
+                                        } else {
+                                            setCurrentTrack(0);
+                                        }
+                                    }}
+                                    className="hidden"
+                                />
                             </div>
 
                             <div className="flex flex-wrap gap-7 my-10">
                                 {topTracks.map((track: any, i: number) => (
-                                    <Track key={i} trackId={track.id} trackAlbum={track.album.name} trackArtists={track.album.artists} trackDuration={track.duration_ms} trackPlayedAt={""} trackImage={track.album.images[1]?.url} trackName={'#' + (i + 1) + " " + track.name} tractAlbumId={track.album.id} />
+                                    <PlayableTrack
+                                        pauseTrack={togglePlay}
+                                        currenltyPlaying={currentTrack === i}
+                                        isPlaying={isPlaying}
+                                        setCurrentlyPlaying={() => {
+                                            setCurrentTrack(i);
+                                            togglePlay();
+                                            setIsPlaying(true);
+                                        }} key={i} trackId={track.id} trackAlbum={track.album.name} trackArtists={track.album.artists} trackDuration={track.duration_ms} trackPlayedAt={""} trackImage={track.album.images[1]?.url} trackName={'#' + (i + 1) + " " + track.name} tractAlbumId={track.album.id} />
                                 ))}
                             </div>
                         </div>
