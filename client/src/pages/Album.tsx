@@ -150,7 +150,7 @@ export default function Album(): React.ReactNode {
 
                 {
                     !isLoading &&
-                    <div className="flex flex-wrap gap-4 my-10">
+                    <div className="flex flex-wrap my-10">
                         {data?.tracks.map((track: any, i: number) => (
                             <PlayableTrack key={i}
                                 pauseTrack={togglePlay}

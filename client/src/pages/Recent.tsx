@@ -49,7 +49,7 @@ const Recent: FunctionComponent = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-wrap gap-5 my-10">
+                    <div className="flex flex-wrap my-10">
                         <div>
                             <AudioPlayer
                                 ref={playerRef}

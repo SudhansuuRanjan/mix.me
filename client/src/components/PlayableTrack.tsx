@@ -21,12 +21,12 @@ type PlayableTrackProps = {
 export default function PlayableTrack({ trackId, trackImage, trackName, trackArtists, trackAlbum, trackDuration, trackPlayedAt, tractAlbumId, currenltyPlaying, setCurrentlyPlaying, pauseTrack, isPlaying }: PlayableTrackProps) {
 
     return (
-        <div data-aos="fade-up" className="w-[100%] flex items-center justify-between border-b border-gray-800 pb-5">
+        <div data-aos="fade-up" className="w-[100%] flex items-center justify-between border-b py-6 border-gray-800">
             <div className="flex items-center lg:gap-5 md:gap-4 gap-2">
                 <div className='relative lg:h-24 md:h-20 h-14 lg:w-24 md:w-20 w-14 bg-gray-900 group'>
                     <img loading='lazy' className="lg:h-24 md:h-20 h-14 lg:w-24 md:w-20 w-14" src={trackImage ? trackImage : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} alt={trackName} />
                     <div className={`absolute ${currenltyPlaying ? 'flex' : 'hidden group-hover:flex'} bg-black inset-0 bg-opacity-50 items-center justify-center`}>
-                        <button className='text-white'>{currenltyPlaying && isPlaying ? <FaPause className="lg:text-3xl md:text-2xl text-xl text-green-400"  onClick={pauseTrack} /> : <FaPlay onClick={setCurrentlyPlaying} className="lg:text-3xl md:text-2xl text-xl" />}</button>
+                        <button className='text-white'>{currenltyPlaying && isPlaying ? <FaPause className="lg:text-3xl md:text-2xl text-xl text-green-400" onClick={pauseTrack} /> : <FaPlay onClick={setCurrentlyPlaying} className="lg:text-3xl md:text-2xl text-xl" />}</button>
                     </div>
                 </div>
 

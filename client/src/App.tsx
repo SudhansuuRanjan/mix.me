@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 import './App.css'
-import { token } from './spotify';
+import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from './routes/Routes';
-import Login from './pages/Login';
 import AOS from 'aos';
 import "aos/dist/aos.css";
 import { AiOutlineWarning } from "react-icons/ai"
 
 function App() {
-  const [accessToken, setAccessToken] = useState<string | null>(null);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   useEffect(() => {
@@ -22,15 +20,6 @@ function App() {
 
     AOS.init();
     AOS.refresh();
-    setAccessToken(token);
-    if (token) {
-      // Remove hash parameters from the URL (if using hash-based routing)
-      if (window.location.hash) {
-        window.location.hash = '';
-      }
-    }
-
-    console.clear();
 
     // Clean up the event listeners when the component unmounts
     return () => {
@@ -47,10 +36,9 @@ function App() {
           <div className="flex gap-2 items-center"><AiOutlineWarning size={28} /> <p>You are currently offline. Please check your internet connection.</p></div>
         </div>
       </div>
-
-      {
-        accessToken ? <AppRoutes /> : <Login />
-      }
+      <Router>
+        <AppRoutes />
+      </Router>
     </div>
   )
 }

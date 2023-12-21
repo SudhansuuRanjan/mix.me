@@ -145,7 +145,7 @@ const Artist: FunctionComponent = () => {
                                 />
                             </div>
 
-                            <div className="flex flex-wrap gap-7 my-10">
+                            <div className="flex flex-wrap my-10">
                                 {topTracks.map((track: any, i: number) => (
                                     <PlayableTrack
                                         pauseTrack={togglePlay}

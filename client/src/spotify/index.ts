@@ -24,7 +24,6 @@ const refreshAccessToken = async () => {
         const data = await res.json();
         const { access_token } = data;
         setLocalAccessToken(access_token);
-        window.location.reload();
     } catch (e: any) {
         console.error(e.message);
     }

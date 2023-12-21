@@ -46,8 +46,10 @@ const Track: FunctionComponent = () => {
         const audio = playerRef.current.audio.current;
         if (isPlaying) {
             audio.pause();
+            localStorage.setItem('playerState', JSON.stringify({ isPlaying: false }));
         } else {
             audio.play();
+            localStorage.setItem('playerState', JSON.stringify({ isPlaying: true }));
         }
     };
 
@@ -99,7 +101,7 @@ const Track: FunctionComponent = () => {
                     <div>
                         <AudioPlayer
                             ref={playerRef}
-                            autoPlay={true}
+                            autoPlay={localStorage.getItem('playerState') ? JSON.parse(localStorage.getItem('playerState')!).isPlaying : false}
                             src={getPlayableSong()}
                             onPlay={() => setIsPlaying(true)}
                             onPause={() => setIsPlaying(false)}

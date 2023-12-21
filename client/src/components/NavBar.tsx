@@ -80,7 +80,7 @@ const NavBar = () => {
 
 
     return (
-        <div className='lg:w-24 z-50 md:w-24 w-full bg-black flex lg:flex-col md:flex-col flex-row items-center justify-between lg:h-screen md:h-screen h-16 fixed bottom-0'>
+        <nav className='lg:w-24 z-50 md:w-24 w-full bg-black flex lg:flex-col md:flex-col flex-row items-center justify-between lg:h-screen md:h-screen h-16 fixed bottom-0'>
             <NavLink aria-label='Logo' onClick={scrollToTop} to="/" className='lg:flex md:flex hidden'>
                 <img src="./images/mini-logo.svg" className='w-[4.2rem] px-2 my-4' alt="spotify logo" />
             </NavLink>
@@ -91,7 +91,7 @@ const NavBar = () => {
                         return (
                             <NavLink aria-label={link.title} key={link.id} className="w-full" style={{ textDecoration: "none" }} to={link.path}>
                                 {({ isActive }: { isActive: boolean }) => (
-                                    <div className={`flex flex-col lg:pt-0 md:pt-0 pt-2 lg:w-22 md:w-22 w-full lg:h-[4.2rem] md:h-[4.2rem] h-16 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4 hover:border-green-500 hover:bg-gray-900 items-center justify-center lg:gap-2 md:gap-2 gap-0 lg:text-2xl md:text-2xl text-xl ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
+                                    <div className={`flex flex-col lg:pt-0 md:pt-0 pt-2 lg:w-22 md:w-22 w-full lg:h-[4.2rem] md:h-[4.2rem] h-16 cursor-pointer text-gray-400 font-light hover:font-medium hover:text-white border-black lg:border-l-4 md:border-l-4 lg:border-b-0 md:border-b-0 border-b-4   items-center justify-center lg:gap-2 md:gap-2 gap-0 lg:text-2xl md:text-2xl text-xl ${isActive && 'border-green-500 bg-gray-900 text-white'}`}>
                                         {link.icon}
                                         <p className='lg:text-xs md:text-xs text-[0.6rem]'>{link.title}</p>
                                     </div>
@@ -107,7 +107,7 @@ const NavBar = () => {
                     <AiFillGithub size={32} className='text-gray-400 hover:text-white' />
                 </a>
             </div>
-        </div>
+        </nav>
     )
 }
 

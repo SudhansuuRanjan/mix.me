@@ -106,7 +106,7 @@ const LikedSongs: FunctionComponent = () => {
                         />
                     </div>
 
-                    <div className="flex flex-wrap gap-5 my-10">
+                    <div className="flex flex-wrap my-10">
                         {likedSongs.length === 0 ? <p className="text-center w-full py-16">No items.</p> : likedSongs.map((recent: any, i: number) => (
                             <PlayableTrack
                                 pauseTrack={togglePlay}
