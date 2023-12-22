@@ -30,7 +30,7 @@ const refreshAccessToken = async () => {
 };
 
 // Get access token off of query params (called on application init)
-export const getAccessToken = () => {
+export const getAccessToken = async () => {
     const { error, access_token, refresh_token } = getHashParams();
 
     if (error) {
@@ -40,7 +40,13 @@ export const getAccessToken = () => {
     const localAccessToken = getLocalAccessToken();
 
     if (localAccessToken) {
-        return localAccessToken;
+        const tokenTimeStamp = getTokenTimestamp();
+        if (tokenTimeStamp && Number(tokenTimeStamp) + EXPIRATION_TIME > Date.now()) {
+            return localAccessToken;
+        } else {
+            await refreshAccessToken();
+            return getLocalAccessToken();
+        }
     }
 
     if (access_token) {
@@ -52,7 +58,7 @@ export const getAccessToken = () => {
     return null;
 };
 
-export let token = getAccessToken();
+export let token: string = await getAccessToken() as string;
 
 export const logout = () => {
     window.localStorage.removeItem('spotify_token_timestamp');
@@ -68,7 +74,7 @@ export const logout = () => {
 axios.interceptors.request.use(async function (config) {
     if (Date.now() - Number(getTokenTimestamp()) > EXPIRATION_TIME) {
         await refreshAccessToken();
-        token = getAccessToken();
+        token = await getAccessToken() as string;
     }
     return config;
 }, function (error) {
