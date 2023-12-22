@@ -69,6 +69,10 @@ export const logout = () => {
 axios.interceptors.request.use(async function (config) {
     if (Date.now() - Number(getTokenTimestamp()) > EXPIRATION_TIME) {
         token = await refreshAccessToken();
+        headers = {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        }
     }
     return config;
 }, function (error) {
@@ -76,7 +80,7 @@ axios.interceptors.request.use(async function (config) {
     return Promise.reject(error);
 });
 
-const headers = {
+let headers = {
     Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json',
 };
