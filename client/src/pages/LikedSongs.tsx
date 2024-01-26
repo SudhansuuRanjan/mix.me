@@ -106,8 +106,8 @@ const LikedSongs: FunctionComponent = () => {
                         />
                     </div>
 
-                    <div className="flex flex-wrap my-10">
-                        {likedSongs.length === 0 ? <p className="text-center w-full py-16">No items.</p> : likedSongs.map((recent: any, i: number) => (
+                    {likedSongs.length === 0 ? <p className="text-center w-full py-16">No items.</p> : <div className="flex flex-wrap divide-y divide-gray-800 gap-5 my-10">
+                        {likedSongs.map((recent: any, i: number) => (
                             <PlayableTrack
                                 pauseTrack={togglePlay}
                                 currenltyPlaying={currentTrack === i}
@@ -128,7 +128,7 @@ const LikedSongs: FunctionComponent = () => {
                                 tractAlbumId={recent.track.album.id}
                             />
                         ))}
-                    </div>
+                    </div>}
                 </div>
             )}
         </div>

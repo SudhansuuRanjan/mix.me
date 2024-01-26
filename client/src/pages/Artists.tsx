@@ -39,7 +39,7 @@ const Artists: FunctionComponent = (): React.ReactNode => {
                     <p className="lg:text-2xl md:text-2xl text-xl font-semibold">Top Artists</p>
                     <p className="text-gray-500 lg:text-base md:text-base text-xs">Your top artists</p>
                 </div>
-                <select onChange={handleChange} value={searchParams.get("duration") as string} name="term" id="term" className="bg-transparent cursor-pointer text-green-500 border p-2 rounded-full border-green-500 outline-none">
+                <select onChange={handleChange} value={searchParams.get("duration") as string} name="term" id="term" className="bg-transparent cursor-pointer text-green-500 border px-2 py-1.5 rounded-full border-green-500 outline-none">
                     <option className="bg-gray-900 border-none p-1 text-white" value="short_term">Last 4 Weeks</option>
                     <option className="bg-gray-900 border-none p-1 text-white" value="medium_term">Last 6 Months</option>
                     <option className="bg-gray-900 border-none p-1 text-white" value="long_term">All Time</option>

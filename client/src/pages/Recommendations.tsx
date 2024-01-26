@@ -63,7 +63,7 @@ const Recommendations: FunctionComponent = () => {
                             <div>
                                 {newPlaylist && <p className="text-gray-200 mt-5">Playlist created successfully! <Link to={`/playlist/${newPlaylist}`} className="text-green-500 hover:underline">Open in Spotify</Link></p>}
                             </div>
-                            <div className="flex flex-wrap gap-4 my-10">
+                            <div className="flex flex-wrap divide-y divide-gray-900 gap-5 my-10">
                                 {data?.recommendations.map((track: any, i: number) => (
                                     <Track key={i} trackId={track.id} trackAlbum={track.album.name} trackArtists={track.album.artists} trackDuration={track.duration_ms} trackPlayedAt={""} trackImage={track.album.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : track.album.images[2]?.url} trackName={track.name === "" ? "Unavailable" : track.name} tractAlbumId={track.id} />
                                 ))}

@@ -145,7 +145,7 @@ const Artist: FunctionComponent = () => {
                                 />
                             </div>
 
-                            <div className="flex flex-wrap my-10">
+                            <div className="flex flex-wrap divide-y divide-gray-800 gap-5 my-10">
                                 {topTracks.map((track: any, i: number) => (
                                     <PlayableTrack
                                         pauseTrack={togglePlay}
@@ -187,20 +187,20 @@ const Artist: FunctionComponent = () => {
                                 loading ? <Loader /> :
                                     <div className="mb-24 mt-8">
                                         {
-                                            filter === "track" && data?.tracks?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="flex flex-wrap gap-5"> {data?.tracks?.items.map((track: any) => (
+                                            filter === "track" && data?.tracks?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="flex flex-wrap divide-y divide-gray-800 gap-5"> {data?.tracks?.items.map((track: any) => (
                                                 <Track key={track.id} trackId={track.id} trackImage={track.album.images[1].url} trackName={track.name} trackArtists={track.artists} trackAlbum={track.album.name} trackDuration={track.duration_ms} trackPlayedAt={track.played_at} tractAlbumId={track.album.id} />
                                             ))}
                                             </div>
                                         }
                                         {
-                                            filter === "playlist" && data?.playlists?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6">
+                                            filter === "playlist" && data?.playlists?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] md:gap-7 gap-4">
                                                 {data?.playlists?.items.slice(0, 20).map((playlist: any, i: number) => (
                                                     <PlaylistCard key={playlist.id} i={i} playlist={playlist} />
                                                 ))}
                                             </div>
                                         }
                                         {
-                                            filter === "album" && data?.albums?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6">
+                                            filter === "album" && data?.albums?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] md:gap-7 gap-4">
                                                 {data?.albums?.items.slice(0, 20).map((album: any) => (
                                                     <AlbumCard key={album.id} album={album} />
                                                 ))}

@@ -55,7 +55,7 @@ const NavBar2 = () => {
                 </div>
                 <div className='w-auto'>
                     <Link onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} to="/">
-                        <img width={40} height={40} src={isLoading ? "https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg" : data.images.length !== 0 ? data.images[0].url : "https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg"} alt="Profile" className="w-9 h-19 rounded-full border-2 border-gray-900" />
+                        <img width={40} height={40} src={isLoading ? "https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg" : data.images.length !== 0 ? data.images[0].url : "https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg"} alt="Profile" className="w-10 h-10 hover:scale-105 transition rounded-full border-2 border-gray-900" />
                     </Link>
                 </div>
             </div>

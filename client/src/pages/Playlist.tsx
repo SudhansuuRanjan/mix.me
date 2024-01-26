@@ -115,7 +115,7 @@ const Playlist: FunctionComponent = () => {
                                             </div>
                                         </div>
                                         <div className={`absolute ${isPlaying && `hidden group-hover:flex`} flex bg-black inset-0 bg-opacity-40 items-center justify-center`}>
-                                            <button className="p-6 text-white" onClick={togglePlay}>{isPlaying ? <FaPause size={32} /> : <FaPlay size={32} />}</button>
+                                            <button className="p-6 flex justify-center items-center h-full m-auto w-full text-white" onClick={togglePlay}>{isPlaying ? <FaPause size={32} /> : <FaPlay size={32} />}</button>
                                         </div>
                                     </div>
                                     <div data-aos="fade-left" className="flex flex-col">
@@ -161,7 +161,7 @@ const Playlist: FunctionComponent = () => {
                         <div data-aos="fade-up">
                             <p className="lg:text-3xl text-2xl font-semibold mt-12">Tracks</p>
                         </div>
-                        <div className="flex flex-wrap my-10">
+                        <div className="flex flex-wrap divide-y divide-gray-800 gap-5 my-10">
                             {data?.tracks.map((track: any, i: number) => (
                                 <PlayableTrack setCurrentlyPlaying={() => {
                                     setCurrentTrack(i);

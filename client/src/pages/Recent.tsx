@@ -49,24 +49,25 @@ const Recent: FunctionComponent = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-wrap my-10">
-                        <div>
-                            <AudioPlayer
-                                ref={playerRef}
-                                src={data.items[currentTrack].track.preview_url}
-                                onPlay={() => setIsPlaying(true)}
-                                onPause={() => setIsPlaying(false)}
-                                onEnded={() => {
-                                    if (currentTrack < data.items.length - 1) {
-                                        setCurrentTrack(currentTrack + 1);
-                                    } else {
-                                        setCurrentTrack(0);
-                                    }
-                                }}
-                                className="hidden"
-                            />
-                        </div>
-                        {data.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data.items.map((recent: any, i: number) => (
+                    <div>
+                        <AudioPlayer
+                            ref={playerRef}
+                            src={data.items[currentTrack].track.preview_url}
+                            onPlay={() => setIsPlaying(true)}
+                            onPause={() => setIsPlaying(false)}
+                            onEnded={() => {
+                                if (currentTrack < data.items.length - 1) {
+                                    setCurrentTrack(currentTrack + 1);
+                                } else {
+                                    setCurrentTrack(0);
+                                }
+                            }}
+                            className="hidden"
+                        />
+                    </div>
+
+                    {data.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : <div className="flex flex-wrap divide-y divide-gray-800 gap-5 my-10">
+                        {data.items.map((recent: any, i: number) => (
                             <PlayableTrack
                                 pauseTrack={togglePlay}
                                 currenltyPlaying={currentTrack === i}
@@ -77,7 +78,7 @@ const Recent: FunctionComponent = () => {
                                     setIsPlaying(true);
                                 }} key={i} trackId={recent.track.id} trackAlbum={recent.track.album.name} trackArtists={recent.track.album.artists} trackDuration={recent.track.duration_ms} trackPlayedAt={recent.played_at} trackImage={recent.track.album.images[1].url} trackName={recent.track.name} tractAlbumId={recent.track.album.id} />
                         ))}
-                    </div>
+                    </div>}
                 </div>}
         </div>
     );

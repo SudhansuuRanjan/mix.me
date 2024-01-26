@@ -9,6 +9,7 @@ import Loader from "../components/Loader";
 import ErrorFallback from "../components/ErrorFallback";
 import useDebounce from "../hooks/useDebounce";
 import { useNavContext } from "../context/NavContext";
+import { LuSearch } from "react-icons/lu";
 
 const Search = () => {
     const [searchParams, setSearchParams] = useSearchParams({ search: "", type: "track" });
@@ -64,8 +65,9 @@ const Search = () => {
         <div className="w-full">
             <div className="m-auto w-full flex flex-col items-center justify-center">
                 <form onSubmit={handleSubmit} className="lg:pt-14 md:pt-14 pt-8 flex flex-col lg:w-[40rem] md:w-[32rem] w-[90%] gap-6">
-                    <div className="flex lg:gap-6 md:gap-6 gap-2">
-                        <input autoFocus={true} value={searchParams.get("search") as string} onChange={onChange} type="search" placeholder="Search" className="w-full lg:py-3.5 py-3 px-5 shadow-lg rounded-2xl lg:text-base text-sm bg-gray-900 focus:outline-none border-gray-700 border" />
+                    <div className="relative flex lg:gap-6 md:gap-6 gap-2">
+                        <input autoFocus={true} value={searchParams.get("search") as string} onChange={onChange} type="search" placeholder="Search" className="w-full lg:py-3.5 pl-11 py-3 px-5 shadow-lg rounded-2xl lg:text-base text-sm bg-gray-950 focus:outline-none border-gray-700 border" />
+                        <LuSearch className="absolute lg:top-4 md:top-3.5 top-3 text-gray-400 left-3.5" size={20} />
                     </div>
                     <div className="flex items-center justify-center lg:gap-5 md:gap-5 gap-1 mt-2">
                         <button onClick={() => changeType("track")} className={`border rounded-full text-white lg:px-5 md:px-5 px-3 py-1.5 lg:text-base md:text-base text-sm ${type === "track" ? "bg-green-500 bg-opacity-70 border-green-500" : "border-gray-500"}`}>
@@ -94,27 +96,27 @@ const Search = () => {
                             loading ? <Loader /> :
                                 <div className="mb-24 mt-8">
                                     {
-                                        type === "track" && data?.tracks?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="flex flex-wrap gap-5"> {data?.tracks?.items.map((track: any) => (
+                                        type === "track" && data?.tracks?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="flex flex-wrap divide-y divide-gray-800 gap-5"> {data?.tracks?.items.map((track: any) => (
                                             <Track key={track.id} trackId={track.id} trackImage={track.album.images[1].url} trackName={track.name} trackArtists={track.artists} trackAlbum={track.album.name} trackDuration={track.duration_ms} trackPlayedAt={track.played_at} tractAlbumId={track.album.id} />
                                         ))}
                                         </div>
                                     }
                                     {
-                                        type === "playlist" && data?.playlists?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6">
+                                        type === "playlist" && data?.playlists?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-6 md:gap-7 gap-4">
                                             {data?.playlists?.items.map((playlist: any, i: number) => (
                                                 <PlaylistCard key={playlist.id} i={i} playlist={playlist} />
                                             ))}
                                         </div>
                                     }
                                     {
-                                        type === "artist" && data?.artists?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6">
+                                        type === "artist" && data?.artists?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-6 md:gap-7 gap-4">
                                             {data?.artists?.items.map((artist: any, i: number) => (
                                                 <ArtistCard key={artist.id} artist={artist} i={i} />
                                             ))}
                                         </div>
                                     }
                                     {
-                                        type === "album" && data?.albums?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6">
+                                        type === "album" && data?.albums?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-6 md:gap-7 gap-4">
                                             {data?.albums?.items.map((album: any) => (
                                                 <AlbumCard key={album.id} album={album} />
                                             ))}
