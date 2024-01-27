@@ -79,7 +79,7 @@ const Profile: FunctionComponent = () => {
                     <div className="m-auto w-full lg:px-16 md:px-16 px-5 my-16">
                         <Title title="Top Tracks" subtitle="Your top tracks of all time" link="/tracks" />
 
-                        <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-6 md:gap-7 gap-4 my-10">
+                        <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-6 md:gap-7 gap-3 my-10">
                             {data?.topTracks && (data?.topTracks.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data?.topTracks.slice(0, 10).map((track: any, i: number) => (
                                 <TrackCard key={i} track={track} i={i} />
                             )))}
@@ -92,7 +92,7 @@ const Profile: FunctionComponent = () => {
                     <div className="m-auto w-full lg:px-16 md:px-16 px-5 my-16">
                         <Title title="Top Artists" subtitle="Your top artists of all time" link="/artists" />
 
-                        <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-6 md:gap-7 gap-4 my-10">
+                        <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-6 md:gap-7 gap-3 my-10">
                             {data?.topArtists && (data?.topArtists.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data?.topArtists.items.slice(0, 10).map((artist: any, i: number) => (
                                 <ArtistCard key={i} artist={artist} i={i} />
                             )))}
@@ -105,7 +105,7 @@ const Profile: FunctionComponent = () => {
                     <div className="m-auto w-full lg:px-16 md:px-16 px-5 my-16">
                         <Title title="Playlists" subtitle="Your playlists" link="/playlists" />
 
-                        <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-6 md:gap-7 gap-4 my-10">
+                        <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-6 md:gap-7 gap-3 my-10">
                             {data?.playlists && (data?.playlists.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data?.playlists.items.slice(0, 10).map((playlist: any, i: number) => (
                                 <PlaylistCard key={i} playlist={playlist} i={i} />
                             )))}

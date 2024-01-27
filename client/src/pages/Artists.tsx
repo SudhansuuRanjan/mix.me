@@ -48,7 +48,7 @@ const Artists: FunctionComponent = (): React.ReactNode => {
 
             {isLoading ? <Loader />
                 : isError ? <ErrorFallback refetch={refetch} />
-                    : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-6 my-10">
+                    : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-8 md:gap-7 gap-4 my-10">
                         {data.items.length === 0 ? <p className="text-center w-full py-16">No items.</p> : data.items.map((artist: any, i: number) => (
                             <ArtistCard i={i} key={i} artist={artist} />
                         ))}

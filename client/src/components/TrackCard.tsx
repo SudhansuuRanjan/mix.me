@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const TrackCard = ({ track, i }: any) => {
     return (
         <div className='bg-[#0e0e0e] hover:bg-[#141414] rounded-xl' data-aos="fade-up" key={track.id}>
-            <div className='transition hover:scale-[98%] lg:p-4 md:p-3 p-4'>
+            <div className='transition hover:scale-[98%] lg:p-4 md:p-3 p-2'>
                 <Link to={track.name ? `/track/${track.id}` : ''}>
                     <div className="track-card aspect-square overflow-hidden bg-gray-950 rounded-md">
                         <img height={400} width={400} loading='lazy' src={track.album.images[1] ? track.album.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md" alt="Album Cover" />

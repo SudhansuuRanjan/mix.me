@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 const ArtistCard = ({ artist, i }: any) => {
     return (
         <Link className='bg-[#0e0e0e] hover:bg-[#141414] rounded-xl' data-aos="fade-up" to={`/artist/${artist.id}`}>
-            <div className='transition hover:scale-[98%] lg:p-4 md:p-3 p-4'>
+            <div className='transition hover:scale-[98%] lg:p-4 md:p-3 p-2'>
                 <div className="artist-card aspect-square overflow-hidden rounded-full">
                     <img height={500} width={500} loading='lazy' src={artist.images[1] ? artist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-full" alt="Album Cover" />
                 </div>
