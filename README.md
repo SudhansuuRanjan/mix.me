@@ -2,6 +2,7 @@
   
   [![GitHub license](https://img.shields.io/github/license/SudhansuuRanjan/SpotiStat?style=for-the-badge)](LICENSE)  [![GitHub stars](https://img.shields.io/github/stars/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub forks](https://img.shields.io/github/forks/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub issues](https://img.shields.io/github/issues/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub pull requests](https://img.shields.io/github/issues-pr/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()  [![GitHub last commit](https://img.shields.io/github/last-commit/SudhansuuRanjan/SpotiStat?style=for-the-badge)]()
 
+
 Why wait for Spotify wrapped to see your spotify stats?
 SpotiStat is a web application that allows users to view their Spotify listening history and statistics. Users can view their top artists and tracks, as well as their listening history over the past 4 weeks, 6 months, and several years. Users can also view their top artists and tracks for each of these time periods. User can also view their top genres and the audio features of their top tracks. Users can also search for any artist, album, or track and view information about them. Users can also view their recently played tracks and their saved tracks and albums.
 
