@@ -1,7 +1,7 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 
 const Login: FunctionComponent = () => {
-
+    const [buttonText, setButtonText] = useState("Login with Spotify");
     return (
         <div className="h-screen w-full relative flex flex-col items-center">
             <div className="fixed flex items-center justify-between w-full py-5 lg:px-16 md:px-12 px-0">
@@ -13,7 +13,11 @@ const Login: FunctionComponent = () => {
                     <h1 className=" text-green-500 lg:text-5xl md:text-4xl text-4xl font-bold pb-3"><span className="text-white">From</span> Beats <br /> <span className="text-white">to</span> Insights</h1>
                     <h3 className="text-gray-400 text-lg font-medium">Your Music, Your Universe.</h3>
                     <p className="lg:max-w-md md:max-w-sm text-sm text-gray-500 font-medium pt-3 pb-8">Unveil the treasure trove of your music choices, and gain a profound appreciation for the melodies that have accompanied you through life's journey.</p>
-                    <a className="inline-block bg-green-600 rounded-full px-6 py-2.5 mx-3 min-w-min font-semibold text-white tracking-wider uppercase text-sm text-center hover:bg-green-700 focus:bg-green-600" href={`${import.meta.env.VITE_API_URL}/login`}>Login with Spotify</a>
+                    <a onClick={()=>{
+                        setButtonText("Redirecting...");
+                    }} className="inline-block bg-green-600 rounded-full px-6 py-2.5 mx-3 min-w-min font-semibold text-white tracking-wider uppercase text-sm text-center hover:bg-green-700 focus:bg-green-600" href={`${import.meta.env.VITE_API_URL}/login`}>{
+                        buttonText
+                    }</a>
                 </div>
                 <div>
                     <img className="lg:h-[16rem] md:h-[12rem] lg:block md:block hidden rounded-xl shadow-2xl border border-gray-900" src="/images/app.png" alt="Spotify" />

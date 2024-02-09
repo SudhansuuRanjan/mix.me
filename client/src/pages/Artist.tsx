@@ -93,7 +93,9 @@ const Artist: FunctionComponent = () => {
             {artistLoading ? <Loader /> : artistError ? <ErrorFallback refetch={artistRefetch} /> :
                 <div className="m-auto w-full lg:px-24 md:px-12 px-6 my-16 text-white">
                     <div className="flex items-center justify-center flex-col">
-                        <img data-aos="zoom-in" src={artist.images[0].url} alt={artist.name} className="lg:h-64 md:h-52 w-48 lg:w-64 md:w-52 h-48 rounded-full" />
+                        <div className="lg:h-64 md:h-52 w-48 lg:w-64 md:w-52 h-48 flex items-center justify-center bg-cover rounded-full overflow-hidden hover:scale-105 transition">
+                            <img data-aos="zoom-in" src={artist.images[0].url} alt={artist.name} className="lg:h-64 md:h-52 w-48 lg:w-64 object-cover md:w-52 h-48 rounded-full" />
+                        </div>
                         <a data-aos="fade-up" href={artist.external_urls.spotify} target="_blank" className="lg:text-6xl md:text-5xl text-4xl font-bold my-7 hover:text-green-500">{artist.name}</a>
                         <div data-aos="fade-up" className="mb-7">
                             <button onClick={() => handleFollow.mutate()} className="text-white border px-9 py-2.5 rounded-full text-sm hover:text-black hover:bg-white">

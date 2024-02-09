@@ -2,8 +2,8 @@ import { Link } from "react-router-dom"
 
 const PlaylistCard = ({ i, playlist }: any) => {
     return (
-        <div className='bg-[#0e0e0e] hover:bg-[#141414] rounded-xl' data-aos="fade-up" key={i}>
-            <div className='transition hover:scale-[98%] lg:p-4 md:p-3 p-2'>
+        <div className='lg:bg-[#0e0e0e] md:hover:bg-[#141414] rounded-xl' data-aos="fade-up" key={i}>
+            <div className='transition hover:scale-[98%] lg:p-4 md:p-3 p-1.5'>
                 <Link to={`/playlist/${playlist.id}`}>
                     <div className="track-card bg-gray-950 rounded-md">
                         <img height={400} width={400} loading='lazy' src={playlist.images.length !== 0 ? playlist.images[0].url : 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg'} className="rounded-md aspect-square" alt="Album Cover" />
