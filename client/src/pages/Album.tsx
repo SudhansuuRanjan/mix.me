@@ -9,7 +9,6 @@ import { dateToYMD } from '../utils'
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { useNavContext } from '../context/NavContext'
 import AudioPlayer from 'react-h5-audio-player';
-import { FaPlay, FaPause } from "react-icons/fa";
 
 export default function Album(): React.ReactNode {
     const playerRef = useRef<any>(null);

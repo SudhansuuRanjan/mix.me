@@ -1,7 +1,6 @@
 import React from 'react'
 import { formatDuration, getRelativeTime } from '../utils'
 import { Link } from 'react-router-dom'
-import { FaPlay, FaPause } from "react-icons/fa";
 
 type PlayableTrackProps = {
     trackId: string,
