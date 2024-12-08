@@ -21,6 +21,7 @@ const Profile: FunctionComponent = () => {
         staleTime: 1000 * 60 * 60 * 24,
         queryFn: async () => {
             const res = await getUserInfo();
+            res.playlists.items = res.playlists.items.filter((playlist: any) => playlist != null);
             return {
                 user: res.user,
                 followedArtists: res.followedArtists,
@@ -112,7 +113,7 @@ const Profile: FunctionComponent = () => {
                         </div>
                     </div>
 
-                    {/* Playlists */}
+                    {/* Albums */}
 
                     <div className="m-auto w-full lg:px-16 md:px-16 px-5 my-16">
                         <Title title="Albums" subtitle="Your saved albums" link="/albums" />

@@ -20,9 +20,6 @@ const User = () => {
         queryFn: async () => {
             const res = await getUserDetails(userID);
             return res;
-        },
-        onSuccess: (data) => {
-            console.log(data);
         }
     });
 

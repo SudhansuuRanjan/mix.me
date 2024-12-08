@@ -85,7 +85,7 @@ const Playlist: FunctionComponent = () => {
                 {
                     playListLoading ? <Loader /> : isError ? <ErrorFallback refetch={refetch} /> :
                         <div className="flex flex-col md:flex-row gap-7">
-                            <AudioPlayer
+                            {data.tracks.length > 0 && <AudioPlayer
                                 ref={playerRef}
                                 src={data?.tracks[currentTrack].track.preview_url}
                                 onPlay={() => setIsPlaying(true)}
@@ -98,13 +98,13 @@ const Playlist: FunctionComponent = () => {
                                     }
                                 }}
                                 className="hidden"
-                            />
+                            />}
 
 
                             <div className="flex flex-col gap-3">
                                 <div className="flex lg:flex-row md:flex-row flex-col gap-4">
                                     <div className="w-fit h-fit bg-gray-950 rounded-md relative group">
-                                        <img data-aos="zoom-in" height={500} width={500} className="w-52 h-52 rounded-lg" src={data?.playlist.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : data?.playlist.images[0]?.url} alt={data?.playlist.name} />
+                                        {data?.playlist.images && <img data-aos="zoom-in" height={500} width={500} className="w-52 h-52 rounded-lg" src={ data?.playlist.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : data?.playlist.images[0]?.url} alt={data?.playlist.name} />}
                                         <div className={`absolute group-hover:hidden inset-0 bg-black bg-opacity-30 ${isPlaying ? 'flex' : 'hidden'} items-center justify-center`}>
                                             <div className="flex items-end justify-center space-x-1 h-[3.5rem]">
                                                 <div className="music-bar-sm"></div>

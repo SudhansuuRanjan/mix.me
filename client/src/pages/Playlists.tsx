@@ -28,9 +28,10 @@ const Playlists: FunctionComponent = () => {
             }
         })
 
-    const filteredPlaylists =
-        !isLoading && data && data.items && data.items.length > 0
-            ? data.items.filter((playlist: any) => {
+    const filteredPlaylists = !isLoading && data?.items?.length > 0
+        ? data.items
+            .filter((playlist: any) => playlist !== null && playlist !== undefined) // Remove invalid entries
+            .filter((playlist: any) => {
                 if (filter === "all") {
                     return true;
                 } else if (filter === "spotify") {
@@ -38,10 +39,10 @@ const Playlists: FunctionComponent = () => {
                     return playlist.owner.display_name === "Spotify";
                 } else if (filter === "user") {
                     // Apply the filter logic for user-created playlists
-                    return playlist.owner.id === userData.id;
+                    return playlist.owner.id === userData?.id;
                 }
             })
-            : [];
+        : [];
 
     useEffect(() => {
         document.title = `Playlists • mix.me`;
