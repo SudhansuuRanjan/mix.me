@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import ErrorFallback from '../components/ErrorFallback'
 import { useNavContext } from "../context/NavContext";
-import AudioPlayer from 'react-h5-audio-player';
+// import AudioPlayer from 'react-h5-audio-player';
 
 const Tracks: FunctionComponent = (): React.ReactNode => {
     const playerRef = useRef<any>(null);
@@ -64,7 +64,7 @@ const Tracks: FunctionComponent = (): React.ReactNode => {
             {isLoading ? <Loader /> : isError ? <ErrorFallback refetch={refetch} />
                 : <div>
                     <div>
-                        <AudioPlayer
+                        {/* <AudioPlayer
                             ref={playerRef}
                             src={data[currentTrack].preview_url}
                             onPlay={() => setIsPlaying(true)}
@@ -77,7 +77,7 @@ const Tracks: FunctionComponent = (): React.ReactNode => {
                                 }
                             }}
                             className="hidden"
-                        />
+                        /> */}
                     </div>
 
 

@@ -321,12 +321,10 @@ export const getUserInfo = () =>
 
 export const getTrackInfo = (trackId: string) =>
     axios
-        .all([getTrack(trackId), getTrackAudioAnalysis(trackId), getTrackAudioFeatures(trackId)])
+        .all([getTrack(trackId)])
         .then(
-            axios.spread((track, audioAnalysis, audioFeatures) => ({
+            axios.spread((track) => ({
                 track: track.data,
-                audioAnalysis: audioAnalysis.data,
-                audioFeatures: audioFeatures.data,
             })),
         );
 

@@ -97,7 +97,7 @@ export default function Album(): React.ReactNode {
                             <div className='w-52 h-52 relative bg-gray-950 group'>
                                 <img data-aos="zoom-in" height={500} width={500} className="w-52 h-52 rounded-lg" src={data?.album.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : data?.album.images[0]?.url} alt={data?.album.name} />
 
-                                <div className={`absolute group-hover:hidden inset-0 bg-black bg-opacity-30 ${isPlaying ? 'flex' : 'hidden'} items-center justify-center`}>
+                                {/* <div className={`absolute group-hover:hidden inset-0 bg-black bg-opacity-30 ${isPlaying ? 'flex' : 'hidden'} items-center justify-center`}>
                                     <div className="flex items-end justify-center space-x-1 h-[3.5rem]">
                                         <div className="music-bar-sm"></div>
                                         <div className="music-bar-sm"></div>
@@ -109,7 +109,7 @@ export default function Album(): React.ReactNode {
 
                                 <div className={`absolute ${isPlaying && `hidden group-hover:flex`} flex bg-black inset-0 bg-opacity-40 items-center justify-center`}>
                                     <button className="p-6 flex justify-center items-center h-full w-full m-auto text-white" onClick={togglePlay}>{isPlaying ? <FaPause size={32} /> : <FaPlay size={32} />}</button>
-                                </div>
+                                </div> */}
                             </div>
 
                             <div data-aos="fade-left" className="flex flex-col">

@@ -10,8 +10,6 @@ import { useQuery } from "@tanstack/react-query";
 import ErrorFallback from '../components/ErrorFallback'
 import { QueryClient } from "@tanstack/react-query";
 import { useNavContext } from "../context/NavContext";
-import AudioPlayer from 'react-h5-audio-player';
-import { FaPlay, FaPause } from "react-icons/fa";
 
 
 const Playlist: FunctionComponent = () => {
@@ -85,7 +83,7 @@ const Playlist: FunctionComponent = () => {
                 {
                     playListLoading ? <Loader /> : isError ? <ErrorFallback refetch={refetch} /> :
                         <div className="flex flex-col md:flex-row gap-7">
-                            {data.tracks.length > 0 && <AudioPlayer
+                            {/* {data.tracks.length > 0 && <AudioPlayer
                                 ref={playerRef}
                                 src={data?.tracks[currentTrack].track.preview_url}
                                 onPlay={() => setIsPlaying(true)}
@@ -98,14 +96,14 @@ const Playlist: FunctionComponent = () => {
                                     }
                                 }}
                                 className="hidden"
-                            />}
+                            />} */}
 
 
                             <div className="flex flex-col gap-3">
                                 <div className="flex lg:flex-row md:flex-row flex-col gap-4">
                                     <div className="w-fit h-fit bg-gray-950 rounded-md relative group">
                                         {data?.playlist.images && <img data-aos="zoom-in" height={500} width={500} className="w-52 h-52 rounded-lg" src={ data?.playlist.images.length === 0 ? 'https://maheshwaricollege.ac.in/publicimages/thumb/members/400x400/mgps_file_d11584807164.jpg' : data?.playlist.images[0]?.url} alt={data?.playlist.name} />}
-                                        <div className={`absolute group-hover:hidden inset-0 bg-black bg-opacity-30 ${isPlaying ? 'flex' : 'hidden'} items-center justify-center`}>
+                                        {/* <div className={`absolute group-hover:hidden inset-0 bg-black bg-opacity-30 ${isPlaying ? 'flex' : 'hidden'} items-center justify-center`}>
                                             <div className="flex items-end justify-center space-x-1 h-[3.5rem]">
                                                 <div className="music-bar-sm"></div>
                                                 <div className="music-bar-sm"></div>
@@ -116,7 +114,7 @@ const Playlist: FunctionComponent = () => {
                                         </div>
                                         <div className={`absolute ${isPlaying && `hidden group-hover:flex`} flex bg-black inset-0 bg-opacity-40 items-center justify-center`}>
                                             <button className="p-6 flex justify-center items-center h-full m-auto w-full text-white" onClick={togglePlay}>{isPlaying ? <FaPause size={32} /> : <FaPlay size={32} />}</button>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div data-aos="fade-left" className="flex flex-col">
                                         <p className="lg:text-4xl md:text-3xl text-2xl font-semibold my-1">{data?.playlist.name}</p>
