@@ -103,7 +103,7 @@ const Search = () => {
                                     }
                                     {
                                         type === "playlist" && data?.playlists?.items.length === 0 ? <div className="text-center text-green-500 w-full py-16">No items.</div> : <div className="grid lg:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] md:grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr),minmax(100px,_1fr)] grid-cols-[minmax(100px,_1fr),minmax(100px,_1fr)] lg:gap-6 md:gap-7 gap-3">
-                                            {data?.playlists?.items.map((playlist: any, i: number) => (
+                                            {data?.playlists?.items.filter((playlist: any) => playlist != null).map((playlist: any, i: number) => (
                                                 <PlaylistCard key={playlist.id} i={i} playlist={playlist} />
                                             ))}
                                         </div>
